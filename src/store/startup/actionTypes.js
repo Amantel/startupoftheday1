@@ -1,0 +1,1 @@
+export const LAST_ARTICLE_FETCHED = 'startup.LAST_ARTICLE_FETCHED';
