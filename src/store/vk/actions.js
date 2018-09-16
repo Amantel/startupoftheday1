@@ -5,7 +5,7 @@ const API_VERSION = '5.80';
 
 export function fetchAccessToken() {
     return async () => {
-        let appId = process.env.NODE_ENV === 'production' ? 6693315 : 6693315;
+        let appId = process.env.NODE_ENV === 'production' ? 6694513 : 6694513;
         VKConnect.send('VKWebAppGetAuthToken', {'app_id': appId});
     }
 }
