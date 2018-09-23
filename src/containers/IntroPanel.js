@@ -2,53 +2,52 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
-import {goBack} from 'react-router-redux';
+import {push} from 'react-router-redux';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Footer from './Footer';
 import PhotoImg from '../gorniy.jpg';
 
-class AboutPanel extends Component {
+
+const styles = {
+  photo_image: {
+   float: 'left',
+   padding: '10px'
+  }
+}
+
+class IntroPanel extends Component {
 
     render() {
         const osname = UI.platform();
 
         return (
             <UI.Panel id={this.props.id}>
-                <UI.PanelHeader
-                    left={<UI.HeaderButton onClick={this.navigationBack.bind(this)}>{osname === UI.IOS ?
-                        <Icon28ChevronBack/> : <Icon24Back/>}</UI.HeaderButton>}
-                >
-                    О Сервисе
-                </UI.PanelHeader>
+            <UI.PanelHeader>
+                Startup of the day
+            </UI.PanelHeader>
+
                 <UI.Group title="Описание">
                     <UI.Div>
-                    <img width={96} height={96} src={PhotoImg} alt="Александр Горный"/>
+                    <img width={96} height={96} style={styles.photo_image} src={PhotoImg} alt="Александр Горный"/>
 
                     Меня зовут Александр Горный, я директор по стратегии и анализу в Mail.Ru Group.
                     </UI.Div>
                     <UI.Div>
                     Я пишу каждый день про один новый малоизвестный стартап и иногда свои мысли и новости про рынок.
                     </UI.Div>
+                    <UI.Div style={{display: 'flex'}}>
+                      <UI.Button size="l" stretched level="2" onClick={this.navigationRead.bind(this)}>Читать</UI.Button>
+                    </UI.Div>
 
-                </UI.Group>
-                <UI.Group title="Этот блог на других площадках">
-                    <UI.List>
-                        <UI.ListItem multiline>
-                          <UI.Link href="https://t.me/startupoftheday/">Telegram</UI.Link>
-                        </UI.ListItem>
-                        <UI.ListItem multiline>
-                        <UI.Link href="https://www.facebook.com/gornal/">Facebook</UI.Link>
-                        </UI.ListItem>
-                    </UI.List>
                 </UI.Group>
                 <Footer/>
             </UI.Panel>
         );
     }
 
-    navigationBack() {
-        this.props.dispatch(goBack());
+    navigationRead() {
+        this.props.dispatch(push('/'));
     }
 }
 
@@ -56,4 +55,4 @@ function mapStateToProps(state) {
     return {};
 }
 
-export default connect(mapStateToProps)(AboutPanel);
+export default connect(mapStateToProps)(IntroPanel);

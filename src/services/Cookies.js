@@ -26,6 +26,15 @@ class Cookies {
   	}
   	return(setStr);
   }
+
+
+  deleteCookie(name) {
+    this.setCookie(name, "", {
+      expires: -1
+    })
+  }
+
 }
+
 
 export default new Cookies();

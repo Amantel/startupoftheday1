@@ -37,15 +37,10 @@ class MainPanel extends Component {
                 <UI.PanelHeader>
                     Startup of the day
                 </UI.PanelHeader>
-                <UI.Div style={{textAlign: 'center', marginTop: 10}}>
-                    <img width={96} height={96} src={logo} alt="logo"/>
-                </UI.Div>
-                <UI.Group title="Свежий выпуск">
                     <StartupDashboard/>
                     {
                   //  this.renderNotificationButton()
                   }
-                </UI.Group>                
                 <Footer/>
                 {logger}
             </UI.Panel>

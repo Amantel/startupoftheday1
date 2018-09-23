@@ -27,11 +27,14 @@ class StartupDashboard extends Component {
         if (!this.props.articles) {
             //here will be the loader
             return (
-              <UI.Div>
-                <UI.InfoRow title="Загрузка...">
-                  <UI.Progress value={40} />
-                </UI.InfoRow>
-              </UI.Div>
+              <UI.Group title="Свежий выпуск">
+
+                <UI.Div>
+                  <UI.InfoRow title="Загрузка...">
+                    <UI.Progress value={40} />
+                  </UI.InfoRow>
+                </UI.Div>
+              </UI.Group>
             );
         }
 
@@ -41,27 +44,33 @@ class StartupDashboard extends Component {
 
         let last = articleNumber == articles.length-1;
         let first = articleNumber == 0;
-        //let date = this.getPrettyDate(article.isoDate);
+
+        let date = this.getPrettyDate(article.isoDate);
+        let title = "Свежий выпуск";
+        if(!first) title = "Выпуск от "+date;
+        //
         //maybe we should use https://stackoverflow.com/a/47159227/2863227
-        console.log("article",article);
         let content = article.content;
         return (
-          <UI.Div>
+          <UI.Group title={title}>
+
             <UI.Div>
+              <UI.Div className="startup_article_content_div">
+                <div  dangerouslySetInnerHTML={{ __html: content }} />
+              </UI.Div>
 
-              {!last &&
-              <UI.Button level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
-              }
-              {!first &&
-              <UI.Button level="2" onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
-              }
+              <UI.Div>
+                {!last &&
+                <UI.Button level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
+                }
+                {!first &&
+                <UI.Button level="2" onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+                }
+              </UI.Div>
+
             </UI.Div>
 
-            <UI.Div className="startup_article_content_div">
-              <div  dangerouslySetInnerHTML={{ __html: content }} />
-            </UI.Div>
-          </UI.Div>
-
+          </UI.Group>
 
         );
     }
