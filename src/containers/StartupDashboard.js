@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import './StartupDashboard.css';
 import * as startupSelectors from '../store/startup/reducer';
+import Swipe from 'react-easy-swipe';
+
 //import { colors } from '@vkontakte/vkui';
 
 class StartupDashboard extends Component {
@@ -19,6 +21,16 @@ class StartupDashboard extends Component {
 
         return ('0' + day).slice(-2) + '.' + ('0' + (month + 1)).slice(-2) + '.' + year.toString().substr(-2);
     }
+
+
+    onSwipeLeft(event) {
+      this.props.dispatch({ type: 'NEXT' });
+    }
+    onSwipeRight(event) {
+      this.props.dispatch({ type: 'PREV' });
+    }
+
+
 
     render() {
 
@@ -55,16 +67,20 @@ class StartupDashboard extends Component {
           <UI.Group title={title}>
 
             <UI.Div>
+            <Swipe
+               onSwipeLeft={this.onSwipeLeft.bind(this)}
+               onSwipeRight={this.onSwipeRight.bind(this)}>
               <UI.Div className="startup_article_content_div">
                 <div  dangerouslySetInnerHTML={{ __html: content }} />
               </UI.Div>
+              </Swipe>
 
               <UI.Div>
                 {!last &&
                 <UI.Button level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
                 }
                 {!first &&
-                <UI.Button level="2" onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+                <UI.Button level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
                 }
               </UI.Div>
 
