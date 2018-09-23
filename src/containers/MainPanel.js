@@ -16,7 +16,7 @@ import Logger from './Logger';
 class MainPanel extends Component {
 
     componentWillMount() {
-      this.props.dispatch(startupActions.fetchArticle());
+      this.props.dispatch(startupActions.fetchArticles());
     }
 
     componentDidUpdate() {
@@ -43,9 +43,9 @@ class MainPanel extends Component {
                 <UI.Group title="Свежий выпуск">
                     <StartupDashboard/>
                     {
-                    this.renderNotificationButton()
+                  //  this.renderNotificationButton()
                   }
-                </UI.Group>
+                </UI.Group>                
                 <Footer/>
                 {logger}
             </UI.Panel>

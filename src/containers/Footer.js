@@ -14,7 +14,7 @@ class Footer extends Component {
                 <UI.Button level="3" component="a"
                            href="http://startupoftheday.ru/">Сайт</UI.Button>
                 <UI.Button level="3" component="a" onClick={this.openAbout.bind(this)}>О
-                    приложении</UI.Button>
+                    сервисе</UI.Button>
             </UI.Div>
         );
     }

@@ -20,34 +20,65 @@ class StartupDashboard extends Component {
         return ('0' + day).slice(-2) + '.' + ('0' + (month + 1)).slice(-2) + '.' + year.toString().substr(-2);
     }
 
-
-
     render() {
-      console.log('props',this.props);
 
-        if (!this.props.lastArticle) {
-            return (<UI.Div/>);
+
+
+        if (!this.props.articles) {
+            //here will be the loader
+            return (
+              <UI.Div>
+                <UI.InfoRow title="Загрузка...">
+                  <UI.Progress value={40} />
+                </UI.InfoRow>
+              </UI.Div>
+            );
         }
-        if (!this.props.lastArticle.article) {
-            return (<UI.Div/>);
-        }
-        let article = this.props.lastArticle.article;
+
+        let articles = this.props.articles;
+        let article = this.props.currArticle;
+        let articleNumber = this.props.articleNumber;
+
+        let last = articleNumber == articles.length-1;
+        let first = articleNumber == 0;
         //let date = this.getPrettyDate(article.isoDate);
         //maybe we should use https://stackoverflow.com/a/47159227/2863227
+        console.log("article",article);
         let content = article.content;
         return (
-          <UI.Div className="startup_article_content_div">
-          <div  dangerouslySetInnerHTML={{ __html: content }} />
+          <UI.Div>
+            <UI.Div>
+
+              {!last &&
+              <UI.Button level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
+              }
+              {!first &&
+              <UI.Button level="2" onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+              }
+            </UI.Div>
+
+            <UI.Div className="startup_article_content_div">
+              <div  dangerouslySetInnerHTML={{ __html: content }} />
+            </UI.Div>
           </UI.Div>
 
 
         );
     }
+
+    goPrev() {
+      this.props.dispatch({ type: 'PREV' });
+    }
+    goNext() {
+      this.props.dispatch({ type: 'NEXT' });
+    }
 }
 
 function mapStateToProps(state) {
     return {
-        lastArticle: startupSelectors.getLastArticleContent(state),
+        articles: startupSelectors.getArticlesContent(state),
+        currArticle: startupSelectors.getCurrArticleContent(state),
+        articleNumber:startupSelectors.getCurrArticleNumber(state),
     };
 }
 

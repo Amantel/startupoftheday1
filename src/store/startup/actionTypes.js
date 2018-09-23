@@ -1,1 +1,1 @@
-export const LAST_ARTICLE_FETCHED = 'startup.LAST_ARTICLE_FETCHED';
+export const ARTICLES_FETCHED = 'startup.ARTICLES_FETCHED';
