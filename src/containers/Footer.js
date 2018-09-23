@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import './Footer.css'
-import Icon24Message from '@vkontakte/icons/dist/24/message';
 import Cookies from '../services/Cookies';
 
 class Footer extends Component {

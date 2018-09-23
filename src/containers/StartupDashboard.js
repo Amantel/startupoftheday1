@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import './StartupDashboard.css';
 import * as startupSelectors from '../store/startup/reducer';
-import { colors } from '@vkontakte/vkui';
+//import { colors } from '@vkontakte/vkui';
 
 class StartupDashboard extends Component {
-
+/*
     constructor(props) {
         super(props);
     }
-
+*/
     getPrettyDate(dateString) {
         let date = new Date(dateString);
         let day = date.getDate();
@@ -42,8 +42,8 @@ class StartupDashboard extends Component {
         let article = this.props.currArticle;
         let articleNumber = this.props.articleNumber;
 
-        let last = articleNumber == articles.length-1;
-        let first = articleNumber == 0;
+        let last = articleNumber === articles.length-1;
+        let first = articleNumber === 0;
 
         let date = this.getPrettyDate(article.isoDate);
         let title = "Свежий выпуск";

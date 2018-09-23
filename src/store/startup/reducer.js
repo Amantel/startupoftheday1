@@ -1,5 +1,4 @@
 import Immutable from 'seamless-immutable';
-import _ from 'lodash';
 import * as types from './actionTypes';
 
 const initialState = Immutable({
@@ -8,7 +7,7 @@ const initialState = Immutable({
 });
 
 export default function reduce(state = initialState, action = {}) {
-  console.log("action",action);
+
     switch (action.type) {
         case types.ARTICLES_FETCHED:
             return state.merge({

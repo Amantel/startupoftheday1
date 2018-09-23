@@ -3,8 +3,6 @@ import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
-import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
-import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Footer from './Footer';
 import PhotoImg from '../gorniy.jpg';
 
@@ -19,7 +17,6 @@ const styles = {
 class IntroPanel extends Component {
 
     render() {
-        const osname = UI.platform();
 
         return (
             <UI.Panel id={this.props.id}>

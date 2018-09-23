@@ -5,7 +5,6 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Notification from '@vkontakte/icons/dist/24/notification';
 import Icon24NotificationDisable from '@vkontakte/icons/dist/24/notification_disable';
 import Icon24User from '@vkontakte/icons/dist/24/user';
-import logo from '../file_857783.jpg';
 import StartupDashboard from './StartupDashboard';
 import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
