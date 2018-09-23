@@ -17,6 +17,8 @@ class Footer extends Component {
                     сервисе</UI.Button>
                 <UI.Button level="danger" component="a" onClick={this.clearCookie}>
                         DELETE COOKIES</UI.Button>
+                                                  
+
             </UI.Div>
         );
     }
@@ -27,6 +29,11 @@ class Footer extends Component {
     clearCookie() {
       Cookies.deleteCookie('isFirstOpen');
     }
+    testIntro() {
+        this.props.dispatch(push('/intro'));
+    }
+
+
 }
 
 function mapStateToProps(state) {

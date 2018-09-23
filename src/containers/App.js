@@ -9,37 +9,43 @@ import AboutPanel from './AboutPanel';
 import IntroPanel from './IntroPanel';
 import MainPanel from './MainPanel';
 import Cookies from '../services/Cookies';
-import {push} from 'react-router-redux';
 
 
 class App extends Component {
-
+    constructor(props) {
+      super(props);
+      this.state = { isFirst: undefined } ;
+    }
     componentWillMount() {
         this.props.dispatch(vkActions.initApp());
         //this.props.dispatch(vkActions.fetchAccessToken()); //this will ask for profile
+        let cookie = Cookies.getCookie('isFirstOpen');
+        let isFirst = false;
+        if(!cookie) {
+            cookie = 1;
+            isFirst = true;
+            Cookies.setCookie('isFirstOpen',cookie,3600000);
+            this.setState({ isFirst });
+            //this.props.dispatch(push('/intro'));
+        }
     }
 
 
 
     render() {
-      let cookie = Cookies.getCookie('isFirstOpen');
-      let isFirst = false;
-      console.log('cookie',cookie);
-      if(!cookie) {
-          isFirst = true;
-          cookie = 1;
-          Cookies.setCookie('isFirstOpen',cookie,3600000);
-          this.props.dispatch(push('/intro'));
-      }
+
 
         let activePanel =   'mainPanel';
         //first launch
-        if( isFirst ) {
+
+        if( this.state.isFirst ) {
           activePanel = 'introPanel';
         }
-        console.log('pageID',this.props.pageId);
+
+
         if(this.props.pageId === 'about') activePanel = 'aboutPanel';
         if(this.props.pageId === 'intro') activePanel = 'introPanel';
+        if(this.props.pageId === 'content') activePanel = 'mainPanel';
 
         return (
             <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>

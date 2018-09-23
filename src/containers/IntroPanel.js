@@ -44,7 +44,7 @@ class IntroPanel extends Component {
     }
 
     navigationRead() {
-        this.props.dispatch(push('/'));
+        this.props.dispatch(push('/content'));
     }
 }
 
