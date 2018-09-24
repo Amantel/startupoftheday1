@@ -4,6 +4,8 @@ import * as UI from '@vkontakte/vkui';
 import './StartupDashboard.css';
 import * as startupSelectors from '../store/startup/reducer';
 import Swipe from 'react-easy-swipe';
+import * as VKConnect from '@vkontakte/vkui-connect';
+
 
 //import { colors } from '@vkontakte/vkui';
 
@@ -67,12 +69,20 @@ class StartupDashboard extends Component {
           <UI.Group title={title}>
 
             <UI.Div>
+
+
             <Swipe
                onSwipeLeft={this.onSwipeLeft.bind(this)}
                onSwipeRight={this.onSwipeRight.bind(this)}>
-              <UI.Div className="startup_article_content_div">
-                <div  dangerouslySetInnerHTML={{ __html: content }} />
-              </UI.Div>
+                <UI.Div className="startup_article_content_div">
+                  <div  dangerouslySetInnerHTML={{ __html: content }} />
+                </UI.Div>
+
+                <UI.Div style={{display: 'flex'}}>
+                      <UI.Button level="1" stretched className="" onClick={this.goShare.bind(this)}>
+                      Отправить другу</UI.Button>
+                </UI.Div>
+
               </Swipe>
 
               <UI.Div>
@@ -97,6 +107,12 @@ class StartupDashboard extends Component {
     goNext() {
       this.props.dispatch({ type: 'NEXT' });
     }
+    goShare() {
+        let article = this.props.currArticle;
+        VKConnect.send("VKWebAppShare", {"link":article.guid});
+    }
+
+
 }
 
 function mapStateToProps(state) {
