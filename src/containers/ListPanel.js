@@ -41,7 +41,7 @@ class ListPanel extends Component {
         let articles = this.props.articles;
 
         //let date = this.getPrettyDate(article.isoDate);
-        let getPrettyDate = this.getPrettyDate;
+        let thisPanel = this;
 
         return (
             <UI.Panel id={this.props.id}>
@@ -52,11 +52,9 @@ class ListPanel extends Component {
                     Список свежих статей
                 </UI.PanelHeader>
                 {articles.map(function(article, index){
-                    console.log(article);
-                    let date = getPrettyDate(article.isoDate);
-                    if(date && article.title)
+                    let date = thisPanel.getPrettyDate(article.isoDate);
                       return <UI.Group title={date} key={date+index}>
-                        <UI.CellButton>{article.title}</UI.CellButton>
+                        <UI.CellButton onClick={thisPanel.goToArticle.bind(thisPanel,index)}>{article.title}</UI.CellButton>
                       </UI.Group>;
 
                 })}
@@ -66,7 +64,14 @@ class ListPanel extends Component {
             </UI.Panel>
         );
     }
+    goToArticle(index) {
+        this.props.dispatch(
+          {type:"GOTO",index:index}
+        );
 
+
+        this.props.dispatch(goBack());
+    }
     navigationBack() {
         this.props.dispatch(goBack());
     }

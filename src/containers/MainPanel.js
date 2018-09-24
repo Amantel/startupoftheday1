@@ -9,13 +9,17 @@ import StartupDashboard from './StartupDashboard';
 import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import * as startupActions from '../store/startup/actions';
+import * as startupSelectors from '../store/startup/reducer';
 import Footer from './Footer';
 import Logger from './Logger';
 
 class MainPanel extends Component {
 
     componentWillMount() {
-      this.props.dispatch(startupActions.fetchArticles());
+      if(!this.props.articles) {
+        this.props.dispatch(startupActions.fetchArticles());
+      }
+
     }
 
     componentDidUpdate() {
@@ -89,6 +93,7 @@ class MainPanel extends Component {
 function mapStateToProps(state) {
     return {
         notificationStatus: vkSelectors.getNotificationStatus(state),
+        articles: startupSelectors.getArticlesContent(state),
     };
 }
 

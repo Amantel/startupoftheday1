@@ -10,11 +10,11 @@ export default function reduce(state = initialState, action = {}) {
 
     switch (action.type) {
         case types.ARTICLES_FETCHED:
-            return state.merge({
+            return {
                 articles: action.articles,
                 currArticle:action.articles[0],
                 articleNumber:0,
-            });
+            };
             case "PREV": {
               let articleNumber = Math.min(state.articleNumber + 1,state.articles.length-1);
               let newState = {
@@ -33,7 +33,15 @@ export default function reduce(state = initialState, action = {}) {
               };
               return newState;
             }
-
+            case "GOTO": {
+              let articleNumber = action.index;
+              let newState = {
+                  articles: state.articles,
+                  currArticle:state.articles[articleNumber],
+                  articleNumber:articleNumber
+              };
+              return newState;
+            }
 
         default:
             return state;

@@ -35,8 +35,7 @@ class StartupDashboard extends Component {
 
 
     render() {
-
-
+        document.querySelector('body').scrollIntoView({ block: 'start', behavior: 'smooth' });
 
         if (!this.props.articles) {
             //here will be the loader
@@ -86,12 +85,11 @@ class StartupDashboard extends Component {
               </Swipe>
 
               <UI.Div>
-                {!last &&
-                <UI.Button level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
-                }
-                {!first &&
-                <UI.Button level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
-                }
+
+                <UI.Button  disabled={last} level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
+
+
+                <UI.Button disabled={first} level="2" style={{float:'right',margin:'0,10'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
               </UI.Div>
 
             </UI.Div>
