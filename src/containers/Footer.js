@@ -15,9 +15,11 @@ class Footer extends Component {
                            href="http://startupoftheday.ru/">Сайт</UI.Button>
                 <UI.Button level="3" component="a" onClick={this.openAbout.bind(this)}>О
                     сервисе</UI.Button>
-                <UI.Button level="danger" component="a" onClick={this.clearCookie}>
+                <UI.Button level="3" component="a" onClick={this.openList.bind(this)}>Список</UI.Button>
+
+                <UI.Button level="buy" component="a" onClick={this.clearCookie}>
                         DELETE COOKIES</UI.Button>
-                                                  
+
 
             </UI.Div>
         );
@@ -26,6 +28,11 @@ class Footer extends Component {
     openAbout() {
         this.props.dispatch(push('/about'));
     }
+
+    openList() {
+        this.props.dispatch(push('/list'));
+    }
+
     clearCookie() {
       Cookies.deleteCookie('isFirstOpen');
     }

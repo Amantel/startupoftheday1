@@ -7,6 +7,7 @@ import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import AboutPanel from './AboutPanel';
 import IntroPanel from './IntroPanel';
+import ListPanel from './ListPanel';
 import MainPanel from './MainPanel';
 import Cookies from '../services/Cookies';
 
@@ -46,6 +47,7 @@ class App extends Component {
         if(this.props.pageId === 'about') activePanel = 'aboutPanel';
         if(this.props.pageId === 'intro') activePanel = 'introPanel';
         if(this.props.pageId === 'content') activePanel = 'mainPanel';
+        if(this.props.pageId === 'list') activePanel = 'listPanel';
 
         return (
             <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>
@@ -54,6 +56,7 @@ class App extends Component {
                         <MainPanel id="mainPanel" accessToken={this.props.accessToken}/>
                         <AboutPanel id="aboutPanel"/>
                         <IntroPanel id="introPanel"/>
+                        <ListPanel id="listPanel"/>
 
                     </UI.View>
                 </UI.Root>

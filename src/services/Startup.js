@@ -11,7 +11,7 @@ class Startup {
             }).then(function (text) {
                 return parser.parseString(text)
             }).then(function(parsedText){
-              return parsedText.items
+              return parsedText.items.filter(a=>a.title);
             })
 
     }
