@@ -42,7 +42,7 @@ class MainPanel extends Component {
                 </UI.PanelHeader>
                     <StartupDashboard/>
                     {
-                  //  this.renderNotificationButton()
+                   this.renderNotificationButton()
                   }
                 <Footer/>
                 {logger}

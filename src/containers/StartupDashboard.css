@@ -7,3 +7,10 @@
 .pagen_button {
   margin: 0 4px;
 }
+.pagen_top_div {
+  line-height: 30px;
+  text-align: center;
+}
+.pagen_top_div__title {
+  color:#C4C8CC;
+}

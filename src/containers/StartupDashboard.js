@@ -63,16 +63,27 @@ class StartupDashboard extends Component {
         if(!first) title = "Выпуск от "+date;
         //
         //maybe we should use https://stackoverflow.com/a/47159227/2863227
-        let content = article.content;
-        return (
-          <UI.Group title={title}>
-
-            <UI.Div>
-
-
-            <Swipe
+/*            <Swipe
                onSwipeLeft={this.onSwipeLeft.bind(this)}
                onSwipeRight={this.onSwipeRight.bind(this)}>
+...
+</Swipe>
+*/
+
+
+
+        let content = article.content;
+        return (
+          <UI.Group>
+
+
+            <UI.Div>
+            <UI.Div className="pagen_top_div">
+              <UI.Button  disabled={last} level="2" style={{float:'left'}} className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
+              <span className="pagen_top_div__title">{title}</span>
+              <UI.Button disabled={first} level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+            </UI.Div>
+
                 <UI.Div className="startup_article_content_div">
                   <div  dangerouslySetInnerHTML={{ __html: content }} />
                 </UI.Div>
@@ -82,14 +93,10 @@ class StartupDashboard extends Component {
                       Отправить другу</UI.Button>
                 </UI.Div>
 
-              </Swipe>
 
               <UI.Div>
-
                 <UI.Button  disabled={last} level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
-
-
-                <UI.Button disabled={first} level="2" style={{float:'right',margin:'0,10'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+                <UI.Button disabled={first} level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
               </UI.Div>
 
             </UI.Div>
