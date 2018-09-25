@@ -53,10 +53,11 @@ class App extends Component {
             <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>
                 <UI.Root activeView="mainView">
                     <UI.View id="mainView" activePanel={activePanel}>
-                        <MainPanel id="mainPanel" accessToken={this.props.accessToken}/>
                         <AboutPanel id="aboutPanel"/>
                         <IntroPanel id="introPanel"/>
                         <ListPanel id="listPanel"/>
+                        <MainPanel id="mainPanel" accessToken={this.props.accessToken}/>
+                        
 
                     </UI.View>
                 </UI.Root>
