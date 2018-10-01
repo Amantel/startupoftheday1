@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import './StartupDashboard.css';
 import * as startupSelectors from '../store/startup/reducer';
-import Swipe from 'react-easy-swipe';
+//import Swipe from 'react-easy-swipe';
 import * as VKConnect from '@vkontakte/vkui-connect';
 
 
@@ -37,15 +37,13 @@ class StartupDashboard extends Component {
     render() {
         document.querySelector('body').scrollIntoView({ block: 'start', behavior: 'smooth' });
 
+
         if (!this.props.articles) {
             //here will be the loader
             return (
-              <UI.Group title="Свежий выпуск">
-
-                <UI.Div>
-                  <UI.InfoRow title="Загрузка...">
-                    <UI.Progress value={40} />
-                  </UI.InfoRow>
+              <UI.Group title="Загрузка...">
+                <UI.Div style={{ height: 100 }}>
+                  <UI.Spinner size={50} />
                 </UI.Div>
               </UI.Group>
             );
@@ -74,15 +72,16 @@ class StartupDashboard extends Component {
 
         let content = article.content;
         return (
-          <UI.Group>
+          <UI.Group title={title}>
+
 
 
             <UI.Div>
-            <UI.Div className="pagen_top_div">
-              <UI.Button  disabled={last} level="2" style={{float:'left'}} className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
-              <span className="pagen_top_div__title">{title}</span>
-              <UI.Button disabled={first} level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
-            </UI.Div>
+              <UI.Div className="pagen_top_div">
+                <UI.Button  disabled={last} level="2"  className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
+
+                <UI.Button disabled={first} level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+              </UI.Div>
 
                 <UI.Div className="startup_article_content_div">
                   <div  dangerouslySetInnerHTML={{ __html: content }} />

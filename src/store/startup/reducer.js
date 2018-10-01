@@ -6,15 +6,22 @@ const initialState = Immutable({
     currArticle: undefined
 });
 
+
+function saveArticlesToStorage(articles) {
+  localStorage.setItem('startupOfTheDayArticles', JSON.stringify(articles));
+}
+
 export default function reduce(state = initialState, action = {}) {
 
     switch (action.type) {
-        case types.ARTICLES_FETCHED:
-            return {
-                articles: action.articles,
-                currArticle:action.articles[0],
-                articleNumber:0,
-            };
+        case types.ARTICLES_FETCHED: {
+              saveArticlesToStorage(action.articles);
+              return {
+                  articles: action.articles,
+                  currArticle:action.articles[0],
+                  articleNumber:0,
+              };
+            }
             case "PREV": {
               let articleNumber = Math.min(state.articleNumber + 1,state.articles.length-1);
               let newState = {
