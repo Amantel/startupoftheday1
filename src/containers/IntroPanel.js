@@ -10,7 +10,10 @@ import PhotoImg from '../gorniy.jpg';
 const styles = {
   photo_image: {
    float: 'left',
-   padding: '10px'
+   padding: '20px',
+ },
+  intro_group: {
+    minHeight:'160px'
   }
 }
 
@@ -25,20 +28,21 @@ class IntroPanel extends Component {
             </UI.PanelHeader>
 
                 <UI.Group title="Описание">
-                    <UI.Div>
-                    <img width={96} height={96} style={styles.photo_image} src={PhotoImg} alt="Александр Горный"/>
+                    <UI.Div style={styles.intro_group}>
+                    <img width={100} style={styles.photo_image} height={100} src={PhotoImg} alt="Александр Горный"/>
 
-                    Меня зовут Александр Горный, я директор по стратегии и анализу в Mail.Ru Group.
-                    </UI.Div>
-                    <UI.Div>
-                    Я пишу каждый день про один новый малоизвестный стартап и иногда свои мысли и новости про рынок.
+                    <p>
+                        Я пишу каждый день про один новый малоизвестный стартап и иногда свои мысли и новости про рынок.
+                    </p>
+                    <p>
+                      Меня зовут Александр Горный, я директор по стратегии и анализу в Mail.Ru Group.
+                    </p>
                     </UI.Div>
                     <UI.Div style={{display: 'flex'}}>
                       <UI.Button size="l" stretched level="2" onClick={this.navigationRead.bind(this)}>Читать</UI.Button>
                     </UI.Div>
 
                 </UI.Group>
-                <Footer/>
             </UI.Panel>
         );
     }

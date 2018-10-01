@@ -5,9 +5,8 @@ import './StartupDashboard.css';
 import * as startupSelectors from '../store/startup/reducer';
 //import Swipe from 'react-easy-swipe';
 import * as VKConnect from '@vkontakte/vkui-connect';
-
-
-//import { colors } from '@vkontakte/vkui';
+import Icon24Share from '@vkontakte/icons/dist/24/share';
+import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
 
 class StartupDashboard extends Component {
 /*
@@ -59,6 +58,9 @@ class StartupDashboard extends Component {
         let date = this.getPrettyDate(article.isoDate);
         let title = "Свежий выпуск";
         if(!first) title = "Выпуск от "+date;
+        if(this.props.fromMemory) {
+          title = title + " < FROM LOCAL STORAGE >";
+        }
         //
         //maybe we should use https://stackoverflow.com/a/47159227/2863227
 /*            <Swipe
@@ -88,7 +90,8 @@ class StartupDashboard extends Component {
                 </UI.Div>
 
                 <UI.Div style={{display: 'flex'}}>
-                      <UI.Button level="1" stretched className="" onClick={this.goShare.bind(this)}>
+                      <UI.Button level="1" before={<Icon24Favorite/>} stretched className="">    Добавить в избранное</UI.Button>
+                      <UI.Button level="1" before={<Icon24Share/>} stretched className="" onClick={this.goShare.bind(this)}>
                       Отправить другу</UI.Button>
                 </UI.Div>
 
@@ -124,6 +127,8 @@ function mapStateToProps(state) {
         articles: startupSelectors.getArticlesContent(state),
         currArticle: startupSelectors.getCurrArticleContent(state),
         articleNumber:startupSelectors.getCurrArticleNumber(state),
+        fromMemory:startupSelectors.isFromMemory(state),
+
     };
 }
 

@@ -11,3 +11,14 @@ export function fetchArticles() {
         }
     };
 }
+export function fetchArticlesFromMemory() {
+  return async (dispatch, getState) => {
+      try {
+        const articles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
+        dispatch({type: types.ARTICLES_FETCHED_FROM_MEMORY, articles});
+      } catch (error) {
+          console.error(error);
+      }
+  };
+
+}

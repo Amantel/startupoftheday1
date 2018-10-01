@@ -17,7 +17,18 @@ class MainPanel extends Component {
 
     componentWillMount() {
       if(!this.props.articles) {
-        this.props.dispatch(startupActions.fetchArticles());
+        const hasChanged = false;
+        let storedArticles = [];
+        if(localStorage.getItem('startupOfTheDayArticles')!=null) {
+          storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
+        }
+
+        if(!hasChanged && storedArticles.length!==0) {
+          this.props.dispatch(startupActions.fetchArticlesFromMemory());
+        } else {
+          this.props.dispatch(startupActions.fetchArticles());
+        }
+
       }
 
     }
@@ -42,9 +53,8 @@ class MainPanel extends Component {
                 </UI.PanelHeader>
                     <StartupDashboard/>
                     {
-                   this.renderNotificationButton()
+                //   this.renderNotificationButton()
                   }
-                <Footer/>
                 {logger}
             </UI.Panel>
         );

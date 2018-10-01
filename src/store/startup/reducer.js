@@ -14,12 +14,21 @@ function saveArticlesToStorage(articles) {
 export default function reduce(state = initialState, action = {}) {
 
     switch (action.type) {
-        case types.ARTICLES_FETCHED: {
+            case types.ARTICLES_FETCHED: {
               saveArticlesToStorage(action.articles);
               return {
                   articles: action.articles,
                   currArticle:action.articles[0],
                   articleNumber:0,
+                  fromMemory:false,
+              };
+            }
+            case types.ARTICLES_FETCHED_FROM_MEMORY: {
+              return {
+                  articles: action.articles,
+                  currArticle:action.articles[0],
+                  articleNumber:0,
+                  fromMemory:true,
               };
             }
             case "PREV": {
@@ -27,7 +36,8 @@ export default function reduce(state = initialState, action = {}) {
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
-                  articleNumber:articleNumber
+                  articleNumber:articleNumber,
+                  fromMemory:state.fromMemory,
               };
               return newState;
             }
@@ -36,7 +46,8 @@ export default function reduce(state = initialState, action = {}) {
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
-                  articleNumber:articleNumber
+                  articleNumber:articleNumber,
+                  fromMemory:state.fromMemory,
               };
               return newState;
             }
@@ -45,7 +56,8 @@ export default function reduce(state = initialState, action = {}) {
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
-                  articleNumber:articleNumber
+                  articleNumber:articleNumber,
+                  fromMemory:state.fromMemory,
               };
               return newState;
             }
@@ -61,6 +73,10 @@ export function getArticlesContent(state) {
 export function getCurrArticleContent(state) {
     return state.startup.currArticle;
 }
+export function isFromMemory(state) {
+    return state.startup.fromMemory;
+}
+
 export function getCurrArticleNumber(state) {
     return state.startup.articleNumber;
 }

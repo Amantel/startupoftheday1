@@ -26,14 +26,14 @@ class ListPanel extends Component {
         if (!this.props.articles) {
             return (
                 <UI.Panel id={this.props.id}>
-                    <UI.PanelHeader
-                        left={<UI.HeaderButton onClick={this.navigationBack.bind(this)}>{osname === UI.IOS ?
-                            <Icon28ChevronBack/> : <Icon24Back/>}</UI.HeaderButton>}
-                    >
-                        Список свежих статей
-                    </UI.PanelHeader>
-                    <UI.Group title="Загрузка...">
-                    </UI.Group>
+                <UI.PanelHeader>
+                    Список свежих статей
+                </UI.PanelHeader>
+                  <UI.Group title="Загрузка...">
+                    <UI.Div style={{ height: 100 }}>
+                      <UI.Spinner size={50} />
+                    </UI.Div>
+                  </UI.Group>
                 </UI.Panel>
             );
         }
@@ -45,10 +45,7 @@ class ListPanel extends Component {
 
         return (
             <UI.Panel id={this.props.id}>
-                <UI.PanelHeader
-                    left={<UI.HeaderButton onClick={this.navigationBack.bind(this)}>{osname === UI.IOS ?
-                        <Icon28ChevronBack/> : <Icon24Back/>}</UI.HeaderButton>}
-                >
+                <UI.PanelHeader>
                     Список свежих статей
                 </UI.PanelHeader>
                 {articles.map(function(article, index){
