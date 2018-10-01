@@ -16,6 +16,7 @@ import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
 import Icon28Search from '@vkontakte/icons/dist/28/search';
 import Icon28About from '@vkontakte/icons/dist/28/about_outline';
 import Icon28More from '@vkontakte/icons/dist/28/more';
+import {push} from 'react-router-redux';
 
 class App extends Component {
 
@@ -31,7 +32,9 @@ class App extends Component {
     }
 
     onStoryChange (e) {
-      this.setState({ activeStory: e.currentTarget.dataset.story })
+//      this.setState({ activeStory: e.currentTarget.dataset.story });
+      this.props.dispatch(push('/'+e.currentTarget.dataset.story));
+
     }
 
 
@@ -58,9 +61,20 @@ class App extends Component {
 
 
     render () {
+      let activeStory = this.state.activeStory;
+      if(this.props.pageId === 'content') activeStory = 'feed';
+      if(this.props.pageId === 'about') activeStory = 'about';
+      if(this.props.pageId === 'intro') activeStory = 'intro';
+      if(this.props.pageId === 'content') activeStory = 'feed';
+      if(this.props.pageId === 'list') activeStory = 'list';
+      if(this.props.pageId === 'discover') activeStory = 'discover';
+      if(this.props.pageId === 'favorite') activeStory = 'favorite';
+
+
+      //this.setState({ activeStory: activeStory });
 
       return (
-        <UI.Epic activeStory={this.state.activeStory} tabbar={
+        <UI.Epic activeStory={activeStory} tabbar={
           <UI.Tabbar>
             <UI.TabbarItem
               onClick={this.onStoryChange}
@@ -118,7 +132,6 @@ class App extends Component {
           <UI.View id="intro" activePanel="intro">
             <IntroPanel id="intro"/>
           </UI.View>
-
         </UI.Epic>
       )
     }

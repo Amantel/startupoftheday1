@@ -28,7 +28,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <div>
-                <Route path='/:pageId(about|intro|content|list|)?' component={(props) => <App pageId={props.match.params.pageId}/>}/>
+                <Route path='/:pageId(about|intro|content|list|discover|favorite|)?' component={(props) => <App pageId={props.match.params.pageId}/>}/>
             </div>
         </ConnectedRouter>
     </Provider>,

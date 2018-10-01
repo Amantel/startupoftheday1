@@ -7,6 +7,7 @@ import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import * as startupSelectors from '../store/startup/reducer';
 import * as startupActions from '../store/startup/actions';
+import {push} from 'react-router-redux';
 
 class ListPanel extends Component {
     getPrettyDate(dateString) {
@@ -65,9 +66,7 @@ class ListPanel extends Component {
         this.props.dispatch(
           {type:"GOTO",index:index}
         );
-
-
-        this.props.dispatch(goBack());
+        this.props.dispatch(push('/'));
     }
     navigationBack() {
         this.props.dispatch(goBack());
