@@ -3,7 +3,6 @@ import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
-import Footer from './Footer';
 import PhotoImg from '../gorniy.jpg';
 
 

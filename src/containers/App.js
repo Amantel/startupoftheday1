@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
-import {isWebView} from '@vkontakte/vkui/src/lib/webview';
 import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import AboutPanel from './AboutPanel';
 import IntroPanel from './IntroPanel';
 import ListPanel from './ListPanel';
+import SearchPanel from './SearchPanel';
 import MainPanel from './MainPanel';
+import ArticlePanel from './ArticlePanel';
 import Cookies from '../services/Cookies';
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon28Favorite from '@vkontakte/icons/dist/28/favorite';
-import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
 import Icon28Search from '@vkontakte/icons/dist/28/search';
 import Icon28About from '@vkontakte/icons/dist/28/about_outline';
 import Icon28More from '@vkontakte/icons/dist/28/more';
@@ -32,7 +32,7 @@ class App extends Component {
     }
 
     onStoryChange (e) {
-//      this.setState({ activeStory: e.currentTarget.dataset.story });
+      this.setState({ activeStory: e.currentTarget.dataset.story });
       this.props.dispatch(push('/'+e.currentTarget.dataset.story));
 
     }
@@ -42,13 +42,10 @@ class App extends Component {
     componentWillMount() {
         this.props.dispatch(vkActions.initApp());
         //this.props.dispatch(vkActions.fetchAccessToken()); //this will ask for profile
-        console.log("componentWillMount");
         let cookie = Cookies.getCookie('isFirstOpen');
         let isFirst = false;
-        console.log("cookie",cookie);
 
         if(!cookie) {
-          console.log('here');
             cookie = 1;
             isFirst = true;
             Cookies.setCookie('isFirstOpen',cookie,3600000);
@@ -62,10 +59,11 @@ class App extends Component {
 
     render () {
       let activeStory = this.state.activeStory;
+      if(this.props.pageId === '') activeStory = 'feed';
       if(this.props.pageId === 'content') activeStory = 'feed';
       if(this.props.pageId === 'about') activeStory = 'about';
       if(this.props.pageId === 'intro') activeStory = 'intro';
-      if(this.props.pageId === 'content') activeStory = 'feed';
+      if(this.props.pageId === 'article') activeStory = 'article';
       if(this.props.pageId === 'list') activeStory = 'list';
       if(this.props.pageId === 'discover') activeStory = 'discover';
       if(this.props.pageId === 'favorite') activeStory = 'favorite';
@@ -107,13 +105,7 @@ class App extends Component {
             <MainPanel id="feed" accessToken={this.props.accessToken}/>
           </UI.View>
           <UI.View id="discover" activePanel="discover">
-            <UI.Panel id="discover">
-              <UI.PanelHeader>Discover</UI.PanelHeader>
-              <UI.Div>
-              Here be search form
-              </UI.Div>
-
-            </UI.Panel>
+            <SearchPanel id="discover"/>
           </UI.View>
           <UI.View id="favorite" activePanel="favorite">
             <UI.Panel id="favorite">
@@ -132,6 +124,10 @@ class App extends Component {
           <UI.View id="intro" activePanel="intro">
             <IntroPanel id="intro"/>
           </UI.View>
+          <UI.View id="article" activePanel="article">
+            <ArticlePanel id="article"/>
+          </UI.View>
+
         </UI.Epic>
       )
     }

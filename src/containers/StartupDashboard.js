@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import './StartupDashboard.css';
 import * as startupSelectors from '../store/startup/reducer';
-//import Swipe from 'react-easy-swipe';
 import * as VKConnect from '@vkontakte/vkui-connect';
 import Icon24Share from '@vkontakte/icons/dist/24/share';
 import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
@@ -23,13 +22,6 @@ class StartupDashboard extends Component {
         return ('0' + day).slice(-2) + '.' + ('0' + (month + 1)).slice(-2) + '.' + year.toString().substr(-2);
     }
 
-
-    onSwipeLeft(event) {
-      this.props.dispatch({ type: 'NEXT' });
-    }
-    onSwipeRight(event) {
-      this.props.dispatch({ type: 'PREV' });
-    }
 
 
 
@@ -63,12 +55,6 @@ class StartupDashboard extends Component {
         }
         //
         //maybe we should use https://stackoverflow.com/a/47159227/2863227
-/*            <Swipe
-               onSwipeLeft={this.onSwipeLeft.bind(this)}
-               onSwipeRight={this.onSwipeRight.bind(this)}>
-...
-</Swipe>
-*/
 
 
 

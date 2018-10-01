@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
-import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
-import Icon24Back from '@vkontakte/icons/dist/24/back';
 import PhotoImg from '../gorniy.jpg';
 import Cookies from '../services/Cookies';
 
@@ -20,7 +18,6 @@ const styles = {
 class AboutPanel extends Component {
 
     render() {
-        const osname = UI.platform();
         return (
             <UI.Panel id={this.props.id}>
                 <UI.PanelHeader>
@@ -48,15 +45,24 @@ class AboutPanel extends Component {
                         </UI.ListItem>
                     </UI.List>
                 </UI.Group>
-                <UI.Button level="buy" component="a" onClick={this.clearCookie}>
-                        DELETE COOKIES</UI.Button>
+                <UI.Group title="TMP CONTROLS">
+                  <UI.Div>
+                    <UI.Button level="buy" component="a" onClick={this.clearCookie}>
+                          DELETE COOKIES</UI.Button>
+                    <UI.Button level="buy" component="a" onClick={this.clearStorage}>
+                                CLEAR STORAGE</UI.Button>
+                                </UI.Div>
+                </UI.Group>
             </UI.Panel>
         );
     }
 
- 
+
     clearCookie() {
       Cookies.deleteCookie('isFirstOpen');
+    }
+    clearStorage() {
+      localStorage.clear();
     }
 }
 

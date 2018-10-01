@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
-import {goBack} from 'react-router-redux';
-import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
-import Icon24Back from '@vkontakte/icons/dist/24/back';
 import * as startupSelectors from '../store/startup/reducer';
 import * as startupActions from '../store/startup/actions';
 import {push} from 'react-router-redux';
@@ -18,12 +15,23 @@ class ListPanel extends Component {
 
         return ('0' + day).slice(-2) + '.' + ('0' + (month + 1)).slice(-2) + '.' + year.toString().substr(-2);
     }
-  componentWillMount() {
-    this.props.dispatch(startupActions.fetchArticles());
-  }
+    componentWillMount() {
+      if(!this.props.articles) {
+        const hasChanged = false;
+        let storedArticles = [];
+        if(localStorage.getItem('startupOfTheDayArticles')!=null) {
+          storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
+        }
+
+        if(!hasChanged && storedArticles.length!==0) {
+          this.props.dispatch(startupActions.fetchArticlesFromMemory());
+        } else {
+          this.props.dispatch(startupActions.fetchArticles());
+        }
+      }
+    }
 
     render() {
-        const osname = UI.platform();
         if (!this.props.articles) {
             return (
                 <UI.Panel id={this.props.id}>
@@ -51,8 +59,8 @@ class ListPanel extends Component {
                 </UI.PanelHeader>
                 {articles.map(function(article, index){
                     let date = thisPanel.getPrettyDate(article.isoDate);
-                      return <UI.Group title={date} key={date+index}>
-                        <UI.CellButton onClick={thisPanel.goToArticle.bind(thisPanel,index)}>{article.title}</UI.CellButton>
+                      return <UI.Group title={date} key={article.guid}>
+                        <UI.CellButton onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.CellButton>
                       </UI.Group>;
 
                 })}
@@ -62,22 +70,18 @@ class ListPanel extends Component {
             </UI.Panel>
         );
     }
-    goToArticle(index) {
+    goToArticle(guid) {
         this.props.dispatch(
-          {type:"GOTO",index:index}
+          {type:"GOTO",guid:guid}
         );
-        this.props.dispatch(push('/'));
+        this.props.dispatch(push('/article'));
     }
-    navigationBack() {
-        this.props.dispatch(goBack());
-    }
+
 }
 
 function mapStateToProps(state) {
     return {
         articles: startupSelectors.getArticlesContent(state),
-        currArticle: startupSelectors.getCurrArticleContent(state),
-        articleNumber:startupSelectors.getCurrArticleNumber(state),
     };
 }
 
