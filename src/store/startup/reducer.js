@@ -84,8 +84,15 @@ export default function reduce(state = initialState, action = {}) {
               return newState;
             }
             case types.USER_LOADED: {
-              state.user = action.user;
-              return state;
+              let newState = {
+                articles: state.articles,
+                currArticle:state.currArticle,
+                selectedArticle:state.selectedArticle,
+                articleNumber:state.articleNumber,
+                fromMemory:state.fromMemory,
+                user:action.user,
+              }
+              return newState;
             }
             case "SAVE_TO_FAVORITES": {
               let favs = new Set(state.user.favorites);

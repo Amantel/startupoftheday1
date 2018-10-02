@@ -19,6 +19,7 @@ import Icon28About from '@vkontakte/icons/dist/28/about_outline';
 import Icon28More from '@vkontakte/icons/dist/28/more';
 import {push} from 'react-router-redux';
 import * as startupActions from '../store/startup/actions';
+import * as startupSelectors from '../store/startup/reducer';
 
 class App extends Component {
 
@@ -43,23 +44,34 @@ class App extends Component {
     componentWillMount() {
         this.props.dispatch(vkActions.initApp());
 
-
+        this.props.dispatch(startupActions.loadUser());
+        let user =  JSON.parse(localStorage.getItem('startupOfTheDayUser'))
         if(!this.props.articles) {
-          const hasChanged = false;
-          let storedArticles = [];
-          if(localStorage.getItem('startupOfTheDayArticles')!=null) {
-            storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
+          if(!user)
+          {
+              this.props.dispatch(startupActions.fetchArticles());
+          } else {
+            const lastVisit = new Date(user.lastVisit).getTime()/1000/60/60; //hours
+            const timeNow = new Date().getTime()/1000/60/60; //hours
+            const hasChanged = timeNow - lastVisit > 3; //more than 3 hours
+
+            let storedArticles = [];
+            if(localStorage.getItem('startupOfTheDayArticles')!=null) {
+              storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
+            }
+
+            if(!hasChanged && storedArticles.length!==0) {
+              this.props.dispatch(startupActions.fetchArticlesFromMemory());
+            } else {
+              this.props.dispatch(startupActions.fetchArticles());
+            }
           }
 
-          if(!hasChanged && storedArticles.length!==0) {
-            this.props.dispatch(startupActions.fetchArticlesFromMemory());
-          } else {
-            this.props.dispatch(startupActions.fetchArticles());
-          }
+
+
 
         }
 
-        this.props.dispatch(startupActions.loadUser());
 
         //this.props.dispatch(vkActions.fetchAccessToken()); //this will ask for profile
         let cookie = Cookies.getCookie('isFirstOpen');
@@ -189,6 +201,7 @@ function mapStateToProps(state) {
     return {
         accessToken: vkSelectors.getAccessToken(state),
         insets: vkSelectors.getInsets(state),
+        user:startupSelectors.getUser(state),
     };
 }
 

@@ -22,7 +22,7 @@ export function fetchArticlesFromMemory() {
   };
 }
 
-
+ 
 export function loadUser() {
   return async (dispatch, getState) => {
       try {
@@ -33,6 +33,9 @@ export function loadUser() {
             lastVisit: new Date(),
             favorites:[]
           };
+          localStorage.setItem('startupOfTheDayUser', JSON.stringify(user));
+        } else {
+          user.lastVisit = new Date();
           localStorage.setItem('startupOfTheDayUser', JSON.stringify(user));
         }
 
