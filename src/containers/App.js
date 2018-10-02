@@ -53,7 +53,7 @@ class App extends Component {
           } else {
             const lastVisit = new Date(user.lastVisit).getTime()/1000/60/60; //hours
             const timeNow = new Date().getTime()/1000/60/60; //hours
-            const hasChanged = timeNow - lastVisit > 3; //more than 3 hours
+            const hasChanged = timeNow - lastVisit > 0; //more than 3 hours
 
             let storedArticles = [];
             if(localStorage.getItem('startupOfTheDayArticles')!=null) {

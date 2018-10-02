@@ -9,7 +9,10 @@ const initialState = Immutable({
 
 
 function saveArticlesToStorage(articles) {
-  localStorage.setItem('startupOfTheDayArticles', JSON.stringify(articles));
+  let original = getArticlesFromStorage();
+  let result = _.unionBy(articles, original, "guid");
+
+  localStorage.setItem('startupOfTheDayArticles', JSON.stringify(result));
 }
 function getArticlesFromStorage() {
   let articles = [];

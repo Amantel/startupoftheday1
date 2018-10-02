@@ -22,7 +22,7 @@ export function fetchArticlesFromMemory() {
   };
 }
 
- 
+
 export function loadUser() {
   return async (dispatch, getState) => {
       try {
