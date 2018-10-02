@@ -20,5 +20,26 @@ export function fetchArticlesFromMemory() {
           console.error(error);
       }
   };
+}
+
+
+export function loadUser() {
+  return async (dispatch, getState) => {
+      try {
+        let user =  JSON.parse(localStorage.getItem('startupOfTheDayUser'))
+        if(!user) {
+          user = {
+            created: new Date(),
+            lastVisit: new Date(),
+            favorites:[]
+          };
+          localStorage.setItem('startupOfTheDayUser', JSON.stringify(user));
+        }
+
+        dispatch({type: types.USER_LOADED, user});
+      } catch (error) {
+          console.error(error);
+      }
+  };
 
 }

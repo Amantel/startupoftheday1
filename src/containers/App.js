@@ -7,6 +7,7 @@ import * as vkActions from '../store/vk/actions';
 import AboutPanel from './AboutPanel';
 import IntroPanel from './IntroPanel';
 import ListPanel from './ListPanel';
+import FavoritesPanel from './FavoritesPanel';
 import SearchPanel from './SearchPanel';
 import MainPanel from './MainPanel';
 import ArticlePanel from './ArticlePanel';
@@ -17,6 +18,7 @@ import Icon28Search from '@vkontakte/icons/dist/28/search';
 import Icon28About from '@vkontakte/icons/dist/28/about_outline';
 import Icon28More from '@vkontakte/icons/dist/28/more';
 import {push} from 'react-router-redux';
+import * as startupActions from '../store/startup/actions';
 
 class App extends Component {
 
@@ -41,6 +43,25 @@ class App extends Component {
 
     componentWillMount() {
         this.props.dispatch(vkActions.initApp());
+
+
+        if(!this.props.articles) {
+          const hasChanged = false;
+          let storedArticles = [];
+          if(localStorage.getItem('startupOfTheDayArticles')!=null) {
+            storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
+          }
+
+          if(!hasChanged && storedArticles.length!==0) {
+            this.props.dispatch(startupActions.fetchArticlesFromMemory());
+          } else {
+            this.props.dispatch(startupActions.fetchArticles());
+          }
+
+        }
+
+        this.props.dispatch(startupActions.loadUser());
+
         //this.props.dispatch(vkActions.fetchAccessToken()); //this will ask for profile
         let cookie = Cookies.getCookie('isFirstOpen');
         let isFirst = false;
@@ -108,12 +129,7 @@ class App extends Component {
             <SearchPanel id="discover"/>
           </UI.View>
           <UI.View id="favorite" activePanel="favorite">
-            <UI.Panel id="favorite">
-              <UI.PanelHeader>Favorites</UI.PanelHeader>
-              <UI.Div>
-                Here be user favorites
-              </UI.Div>
-            </UI.Panel>
+            <FavoritesPanel id="favorite"/>
           </UI.View>
           <UI.View id="list" activePanel="list">
             <ListPanel id="list"/>

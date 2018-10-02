@@ -8,27 +8,13 @@ import Icon24User from '@vkontakte/icons/dist/24/user';
 import StartupDashboard from './StartupDashboard';
 import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
-import * as startupActions from '../store/startup/actions';
 import * as startupSelectors from '../store/startup/reducer';
 import Logger from './Logger';
 
 class MainPanel extends Component {
 
     componentWillMount() {
-      if(!this.props.articles) {
-        const hasChanged = false;
-        let storedArticles = [];
-        if(localStorage.getItem('startupOfTheDayArticles')!=null) {
-          storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
-        }
 
-        if(!hasChanged && storedArticles.length!==0) {
-          this.props.dispatch(startupActions.fetchArticlesFromMemory());
-        } else {
-          this.props.dispatch(startupActions.fetchArticles());
-        }
-
-      }
 
     }
 

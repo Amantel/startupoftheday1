@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as startupSelectors from '../store/startup/reducer';
 import {push} from 'react-router-redux';
 
-class ListPanel extends Component {
+class FavoritesPanel extends Component {
     getPrettyDate(dateString) {
         let date = new Date(dateString);
         let day = date.getDate();
@@ -22,18 +22,21 @@ class ListPanel extends Component {
             return (
                 <UI.Panel id={this.props.id}>
                 <UI.PanelHeader>
-                    Список свежих статей
+                    Избранное
                 </UI.PanelHeader>
-                  <UI.Group title="Загрузка...">
-                    <UI.Div style={{ height: 100 }}>
-                      <UI.Spinner size={50} />
-                    </UI.Div>
-                  </UI.Group>
                 </UI.Panel>
             );
         }
 
-        let articles = this.props.articles;
+        let articles = [];
+        if(this.props.user) {
+          articles = this.props.articles.filter(article=>{
+            if(article.guid
+              && this.props.user.favorites.indexOf(article.guid)!==-1) return true;
+            return false;
+          });
+        }
+
 
         //let date = this.getPrettyDate(article.isoDate);
         let thisPanel = this;
@@ -41,7 +44,7 @@ class ListPanel extends Component {
         return (
             <UI.Panel id={this.props.id}>
                 <UI.PanelHeader>
-                    Список свежих статей
+                    Избранное
                 </UI.PanelHeader>
                 {articles.map(function(article, index){
                     let date = thisPanel.getPrettyDate(article.isoDate);
@@ -68,8 +71,9 @@ class ListPanel extends Component {
 function mapStateToProps(state) {
     return {
         articles: startupSelectors.getArticlesContent(state),
+        user:startupSelectors.getUser(state),
     };
 }
 
 
-export default connect(mapStateToProps)(ListPanel);
+export default connect(mapStateToProps)(FavoritesPanel);

@@ -30,21 +30,7 @@ class SearchPanel extends Component {
 
 
   componentWillMount() {
-    /*
-    if(!this.props.articles) {
-      const hasChanged = false;
-      let storedArticles = [];
-      if(localStorage.getItem('startupOfTheDayArticles')!=null) {
-        storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
-      }
 
-      if(!hasChanged && storedArticles.length!==0) {
-        this.props.dispatch(startupActions.fetchArticlesFromMemory());
-      } else {
-        this.props.dispatch(startupActions.fetchArticles());
-      }
-    }
-    */
   }
 
     render() {

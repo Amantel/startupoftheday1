@@ -37,6 +37,7 @@ export default function reduce(state = initialState, action = {}) {
                   currArticle:articles[0],
                   articleNumber:0,
                   fromMemory:false,
+                  user:state.user,
               };
             }
             case types.ARTICLES_FETCHED_FROM_MEMORY: {
@@ -45,6 +46,7 @@ export default function reduce(state = initialState, action = {}) {
                   currArticle:action.articles[0],
                   articleNumber:0,
                   fromMemory:true,
+                  user:state.user,
               };
             }
             case "PREV": {
@@ -54,6 +56,7 @@ export default function reduce(state = initialState, action = {}) {
                   currArticle:state.articles[articleNumber],
                   articleNumber:articleNumber,
                   fromMemory:state.fromMemory,
+                  user:state.user,
               };
               return newState;
             }
@@ -64,6 +67,7 @@ export default function reduce(state = initialState, action = {}) {
                   currArticle:state.articles[articleNumber],
                   articleNumber:articleNumber,
                   fromMemory:state.fromMemory,
+                  user:state.user,
               };
               return newState;
             }
@@ -76,10 +80,23 @@ export default function reduce(state = initialState, action = {}) {
                   selectedArticle:selectedArticle,
                   articleNumber:state.articleNumber,
                   fromMemory:state.fromMemory,
+                  user:state.user,
               };
               return newState;
             }
+            case types.USER_LOADED: {
+              state.user = action.user;
+              return state;
+            }
+            case "SAVE_TO_FAVORITES": {
+              let favs = new Set(state.user.favorites);
+              favs.add(action.guid);
 
+              state.user.favorites = Array.from(favs);
+              localStorage.setItem('startupOfTheDayUser', JSON.stringify(state.user));
+
+              return state;
+            }
         default:
             return state;
     }
@@ -99,4 +116,7 @@ export function getSelectedArticle(state) {
 }
 export function getCurrArticleNumber(state) {
     return state.startup.articleNumber;
+}
+export function getUser(state) {
+    return state.startup.user;
 }

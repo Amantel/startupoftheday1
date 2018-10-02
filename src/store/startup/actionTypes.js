@@ -1,2 +1,3 @@
 export const ARTICLES_FETCHED = 'startup.ARTICLES_FETCHED';
 export const ARTICLES_FETCHED_FROM_MEMORY = 'startup.ARTICLES_FETCHED_FROM_MEMORY';
+export const USER_LOADED = 'startup.USER_LOADED';

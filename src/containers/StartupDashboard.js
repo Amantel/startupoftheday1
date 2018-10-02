@@ -59,6 +59,13 @@ class StartupDashboard extends Component {
 
 
         let content = article.content;
+
+        let isFav = false;
+        if(this.props.user && this.props.user.favorites.indexOf(article.guid)!==-1) {
+          isFav = true;
+        }
+
+
         return (
           <UI.Group title={title}>
 
@@ -76,8 +83,12 @@ class StartupDashboard extends Component {
                 </UI.Div>
 
                 <UI.Div style={{display: 'flex'}}>
-                      <UI.Button level="1" before={<Icon24Favorite/>} stretched className="">    Добавить в избранное</UI.Button>
-                      <UI.Button level="1" before={<Icon24Share/>} stretched className="" onClick={this.goShare.bind(this)}>
+                      <UI.Button level="1" before={<Icon24Favorite/>} disabled={isFav}
+                       stretched className="other_buttons"
+                      onClick={this.saveToFavorites.bind(this,article.guid)}
+                      >    Добавить в избранное</UI.Button>
+                      <UI.Button level="1" before={<Icon24Share/>} stretched className="other_buttons"
+                       onClick={this.goShare.bind(this)}>
                       Отправить другу</UI.Button>
                 </UI.Div>
 
@@ -106,6 +117,10 @@ class StartupDashboard extends Component {
     }
 
 
+    saveToFavorites(guid) {
+      this.props.dispatch({ type: 'SAVE_TO_FAVORITES', guid:this.props.currArticle.guid});
+    }
+
 }
 
 function mapStateToProps(state) {
@@ -114,7 +129,7 @@ function mapStateToProps(state) {
         currArticle: startupSelectors.getCurrArticleContent(state),
         articleNumber:startupSelectors.getCurrArticleNumber(state),
         fromMemory:startupSelectors.isFromMemory(state),
-
+        user:startupSelectors.getUser(state),
     };
 }
 
