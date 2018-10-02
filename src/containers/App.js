@@ -36,7 +36,6 @@ class App extends Component {
     onStoryChange (e) {
       this.setState({ activeStory: e.currentTarget.dataset.story });
       this.props.dispatch(push('/'+e.currentTarget.dataset.story));
-
     }
 
 

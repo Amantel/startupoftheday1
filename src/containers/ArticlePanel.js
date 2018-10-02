@@ -6,6 +6,10 @@ import * as startupSelectors from '../store/startup/reducer';
 import {goBack} from 'react-router-redux';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
+import Icon24Share from '@vkontakte/icons/dist/24/share';
+import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
+import './StartupDashboard.css';
+import * as VKConnect from '@vkontakte/vkui-connect';
 
 class ArticlePanel extends Component {
 
@@ -47,6 +51,12 @@ class ArticlePanel extends Component {
 
             let article = this.props.selectedArticle;
 
+            let isFav = false;
+            if(this.props.user && this.props.user.favorites.indexOf(article.guid)!==-1) {
+              isFav = true;
+            }
+
+
             let date = this.getPrettyDate(article.isoDate);
             let title = "Выпуск от "+date;
             if(this.props.fromMemory) {
@@ -77,6 +87,15 @@ class ArticlePanel extends Component {
                       <div  dangerouslySetInnerHTML={{ __html: content }} />
                     </UI.Div>
 
+                    <UI.Div style={{display: 'flex'}}>
+                          <UI.Button level="1" before={<Icon24Favorite/>} disabled={isFav}
+                           stretched className="other_buttons"
+                          onClick={this.saveToFavorites.bind(this,article.guid)}
+                          >    Добавить в избранное</UI.Button>
+                          <UI.Button level="1" before={<Icon24Share/>} stretched className="other_buttons"
+                           onClick={this.goShare.bind(this)}>
+                          Отправить другу</UI.Button>
+                    </UI.Div>
 
                 </UI.Div>
 
@@ -88,12 +107,19 @@ class ArticlePanel extends Component {
       navigationBack() {
           this.props.dispatch(goBack());
       }
-
+      goShare() {
+          let article = this.props.currArticle;
+          VKConnect.send("VKWebAppShare", {"link":article.guid});
+      }
+      saveToFavorites(guid) {
+        this.props.dispatch({ type: 'SAVE_TO_FAVORITES', guid:this.props.currArticle.guid});
+      }
 }
 
 function mapStateToProps(state) {
     return {
       selectedArticle: startupSelectors.getSelectedArticle(state),
+      user:startupSelectors.getUser(state),
     };
 }
 

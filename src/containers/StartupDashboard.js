@@ -69,8 +69,6 @@ class StartupDashboard extends Component {
         return (
           <UI.Group title={title}>
 
-
-
             <UI.Div>
               <UI.Div className="pagen_top_div">
                 <UI.Button  disabled={last} level="2"  className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
@@ -115,8 +113,6 @@ class StartupDashboard extends Component {
         let article = this.props.currArticle;
         VKConnect.send("VKWebAppShare", {"link":article.guid});
     }
-
-
     saveToFavorites(guid) {
       this.props.dispatch({ type: 'SAVE_TO_FAVORITES', guid:this.props.currArticle.guid});
     }

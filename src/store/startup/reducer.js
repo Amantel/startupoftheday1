@@ -73,7 +73,6 @@ export default function reduce(state = initialState, action = {}) {
             }
             case "GOTO": {
               let selectedArticle = findArticleByGUID(action.guid,state);
-              console.log("GOTO",selectedArticle);
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[0],
