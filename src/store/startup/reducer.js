@@ -6,12 +6,30 @@ const initialState = Immutable({
     articles: undefined,
     currArticle: undefined
 });
+const stopWords =
+[
+  'https://docs.google.com/spreadsheets/d/1LGn1-adzc2lTvOPYY0Stq64nil_lkNf4pzlf3nm_yww/',
+  '(На правах рекламы)'
+];
 
+function clearStopWords (articles) {
+  return articles.filter(article=>{
+    let isStoped = false;
+    stopWords.forEach(stopWord=>{
+      if(article.content
+        && article.content.indexOf(stopWord)>-1) isStoped = true;
+    });
+    if(isStoped) return false;
+    return true;
+  });
+
+}
 
 function saveArticlesToStorage(articles) {
   let original = getArticlesFromStorage();
-  let result = _.unionBy(articles, original, "guid");
 
+  let result = _.unionBy(articles, original, "guid");
+  result = clearStopWords(result);
   localStorage.setItem('startupOfTheDayArticles', JSON.stringify(result));
 }
 function getArticlesFromStorage() {
@@ -19,6 +37,7 @@ function getArticlesFromStorage() {
   let localStorageArticles = localStorage.getItem('startupOfTheDayArticles');
   if(localStorageArticles!=null)
     articles = JSON.parse(localStorageArticles);
+  articles = clearStopWords(articles);
   return articles;
 }
 
@@ -44,9 +63,11 @@ export default function reduce(state = initialState, action = {}) {
               };
             }
             case types.ARTICLES_FETCHED_FROM_MEMORY: {
+              let articles = clearStopWords(action.articles);
+              console.log(articles);
               return {
-                  articles: action.articles,
-                  currArticle:action.articles[0],
+                  articles: articles,
+                  currArticle:articles[0],
                   articleNumber:0,
                   fromMemory:true,
                   user:state.user,
