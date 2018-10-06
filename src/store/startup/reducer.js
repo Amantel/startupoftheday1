@@ -132,7 +132,6 @@ export default function reduce(state = initialState, action = {}) {
               return newState;
             }
             case types.USER_LOADED: {
-              console.log("USER LOADED");
               let isFav = false;
               if(state.currArticle && action.user && action.user.favorites.indexOf(state.currArticle.guid)!==-1) {
                 isFav = true;

@@ -87,9 +87,9 @@ class App extends Component {
             isFirst = true;
             Cookies.setCookie('isFirstOpen',cookie,3600000);
             this.setState({ isFirst });
-            this.setState({ activeStory:'intro' });
+            //this.setState({ activeStory:'intro' });
                     console.log("isFirst",isFirst);
-            //this.props.dispatch(push('/intro'));
+            this.props.dispatch(push('/intro'));
         }
     }
 
