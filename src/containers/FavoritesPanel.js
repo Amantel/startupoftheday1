@@ -54,7 +54,7 @@ class FavoritesPanel extends Component {
 
                 })}
 
-                <UI.Footer>{articles.length} статей</UI.Footer>
+                <UI.Footer>Всего статей: {articles.length} </UI.Footer>
 
             </UI.Panel>
         );

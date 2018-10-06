@@ -29,8 +29,9 @@ class ArticlePanel extends Component {
         render() {
         const osname = UI.platform();
 
-
-            document.querySelector('body').scrollIntoView({ block: 'start', behavior: 'smooth' });
+            if(!this.props.doNotScroll) {
+                document.querySelector('body').scrollIntoView({ block: 'start', behavior: 'smooth' });
+            }
 
             if (!this.props.selectedArticle) {
                 return (

@@ -12,7 +12,7 @@ const styles = {
  },
   intro_group: {
     minHeight:'160px'
-  }
+  },
 }
 
 class AboutPanel extends Component {
@@ -45,16 +45,20 @@ class AboutPanel extends Component {
                         </UI.ListItem>
                     </UI.List>
                 </UI.Group>
-                <UI.Group title="TMP CONTROLS">
-                  <UI.Div>
-                    <UI.Button level="buy" component="a" onClick={this.clearCookie}>
-                          DELETE COOKIES</UI.Button>
-                    <UI.Button level="buy" component="a" onClick={this.clearStorage}>
-                                CLEAR STORAGE</UI.Button>
-                                </UI.Div>
-                </UI.Group>
             </UI.Panel>
         );
+
+          /*
+          <UI.Group title="TMP CONTROLS" className="hidden" >
+            <UI.Div>
+              <UI.Button level="buy" component="a" onClick={this.clearCookie}>
+                    DELETE COOKIES</UI.Button>
+              <UI.Button level="buy" component="a" onClick={this.clearStorage}>
+                          CLEAR STORAGE</UI.Button>
+                          </UI.Div>
+          </UI.Group>
+          */
+
     }
 
 
