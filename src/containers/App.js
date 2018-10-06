@@ -52,9 +52,9 @@ class App extends Component {
               this.props.dispatch(startupActions.fetchArticles());
           } else {
 
-            const lastVisit = new Date(user.lastVisit).getTime()/1000/60; //hours
-            const timeNow = new Date().getTime()/1000/60; //hours
-            const hasChanged = timeNow - lastVisit > 2; //more than 3 hours
+            const lastVisit = new Date(user.lastVisit).getTime()/1000/60/60; //hours
+            const timeNow = new Date().getTime()/1000/60/60; //hours
+            const hasChanged = timeNow - lastVisit > 3; //more than 3 hours
 
 
             let storedArticles = [];
