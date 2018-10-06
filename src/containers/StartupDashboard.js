@@ -8,11 +8,14 @@ import Icon24Share from '@vkontakte/icons/dist/24/share';
 import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
 
 class StartupDashboard extends Component {
-/*
+
     constructor(props) {
         super(props);
+        this.state = {
+          isFav: false,
+        };
     }
-*/
+
     getPrettyDate(dateString) {
         let date = new Date(dateString);
         let day = date.getDate();
@@ -24,9 +27,15 @@ class StartupDashboard extends Component {
 
 
 
+        componentWillUpdate() {
+        }
+
 
     render() {
-        document.querySelector('body').scrollIntoView({ block: 'start', behavior: 'smooth' });
+        if(!this.props.doNotScroll) {
+            document.querySelector('body').scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }
+
 
 
         if (!this.props.articles) {
@@ -40,6 +49,7 @@ class StartupDashboard extends Component {
             );
         }
 
+        let isFav = this.props.isFav || false;
         let articles = this.props.articles;
         let article = this.props.currArticle;
         let articleNumber = this.props.articleNumber;
@@ -59,11 +69,6 @@ class StartupDashboard extends Component {
 
 
         let content = article.content;
-
-        let isFav = false;
-        if(this.props.user && this.props.user.favorites.indexOf(article.guid)!==-1) {
-          isFav = true;
-        }
 
 
         return (
@@ -126,6 +131,8 @@ function mapStateToProps(state) {
         articleNumber:startupSelectors.getCurrArticleNumber(state),
         fromMemory:startupSelectors.isFromMemory(state),
         user:startupSelectors.getUser(state),
+        isFav:startupSelectors.isFav(state),
+        doNotScroll:startupSelectors.doNotScroll(state),
     };
 }
 

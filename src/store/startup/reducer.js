@@ -54,44 +54,66 @@ export default function reduce(state = initialState, action = {}) {
               saveArticlesToStorage(action.articles);
               let articles = getArticlesFromStorage();
               //getArticlesFromMemory
+              let isFav = false;
+              if(state.user && state.user.favorites.indexOf(articles[0].guid)!==-1) {
+                isFav = true;
+              }
               return {
                   articles: articles,
                   currArticle:articles[0],
                   articleNumber:0,
                   fromMemory:false,
                   user:state.user,
+                  isFav:isFav
               };
             }
             case types.ARTICLES_FETCHED_FROM_MEMORY: {
               let articles = clearStopWords(action.articles);
-              console.log(articles);
+              let isFav = false;
+              if(state.user && state.user.favorites.indexOf(articles[0].guid)!==-1) {
+                isFav = true;
+              }
               return {
                   articles: articles,
                   currArticle:articles[0],
                   articleNumber:0,
                   fromMemory:true,
                   user:state.user,
+                  isFav:isFav
               };
             }
             case "PREV": {
               let articleNumber = Math.min(state.articleNumber + 1,state.articles.length-1);
+
+              let isFav = false;
+              if(state.user && state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1) {
+                isFav = true;
+              }
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
                   articleNumber:articleNumber,
                   fromMemory:state.fromMemory,
                   user:state.user,
+                  isFav:isFav
+
               };
               return newState;
             }
             case "NEXT": {
               let articleNumber = Math.max(state.articleNumber - 1,0);
+
+              let isFav = false;
+              if(state.user && state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1) {
+                isFav = true;
+              }
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
                   articleNumber:articleNumber,
                   fromMemory:state.fromMemory,
                   user:state.user,
+                  isFav:isFav
               };
               return newState;
             }
@@ -104,28 +126,48 @@ export default function reduce(state = initialState, action = {}) {
                   articleNumber:state.articleNumber,
                   fromMemory:state.fromMemory,
                   user:state.user,
+                  isFav:false
+
               };
               return newState;
             }
             case types.USER_LOADED: {
+              console.log("USER LOADED");
+              let isFav = false;
+              if(state.currArticle && action.user && action.user.favorites.indexOf(state.currArticle.guid)!==-1) {
+                isFav = true;
+              }
+
               let newState = {
                 articles: state.articles,
                 currArticle:state.currArticle,
                 selectedArticle:state.selectedArticle,
                 articleNumber:state.articleNumber,
                 fromMemory:state.fromMemory,
+                isFav:isFav,
                 user:action.user,
               }
               return newState;
             }
             case "SAVE_TO_FAVORITES": {
               let favs = new Set(state.user.favorites);
+              let user = state.user;
               favs.add(action.guid);
 
-              state.user.favorites = Array.from(favs);
-              localStorage.setItem('startupOfTheDayUser', JSON.stringify(state.user));
+              user.favorites = Array.from(favs);
+              localStorage.setItem('startupOfTheDayUser', JSON.stringify(user));
 
-              return state;
+              let newState = {
+                articles: state.articles,
+                currArticle:state.currArticle,
+                selectedArticle:state.selectedArticle,
+                articleNumber:state.articleNumber,
+                fromMemory:state.fromMemory,
+                isFav:true,
+                user:user,
+                doNotScroll:true,
+              }
+              return newState;
             }
         default:
             return state;
@@ -149,4 +191,10 @@ export function getCurrArticleNumber(state) {
 }
 export function getUser(state) {
     return state.startup.user;
+}
+export function isFav(state) {
+    return state.startup.isFav;
+}
+export function doNotScroll(state) {
+    return state.startup.doNotScroll || false;
 }
