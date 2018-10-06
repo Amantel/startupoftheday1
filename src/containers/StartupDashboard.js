@@ -61,7 +61,7 @@ class StartupDashboard extends Component {
         let title = "Свежий выпуск";
         if(!first) title = "Выпуск от "+date;
         if(this.props.fromMemory) {
-          title = title + " < FROM LOCAL STORAGE >";
+          //title = title + " < FROM LOCAL STORAGE >";
         }
         //
         //maybe we should use https://stackoverflow.com/a/47159227/2863227

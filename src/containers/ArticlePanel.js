@@ -51,16 +51,14 @@ class ArticlePanel extends Component {
 
             let article = this.props.selectedArticle;
 
-            let isFav = false;
-            if(this.props.user && this.props.user.favorites.indexOf(article.guid)!==-1) {
-              isFav = true;
-            }
+            let isFav = this.props.isFav || false;
+
 
 
             let date = this.getPrettyDate(article.isoDate);
             let title = "Выпуск от "+date;
             if(this.props.fromMemory) {
-              title = title + " < FROM LOCAL STORAGE >";
+            //  title = title + " < FROM LOCAL STORAGE >";
             }
             //
             //maybe we should use https://stackoverflow.com/a/47159227/2863227
@@ -108,11 +106,11 @@ class ArticlePanel extends Component {
           this.props.dispatch(goBack());
       }
       goShare() {
-          let article = this.props.currArticle;
+          let article = this.props.selectedArticle;
           VKConnect.send("VKWebAppShare", {"link":article.guid});
       }
       saveToFavorites(guid) {
-        this.props.dispatch({ type: 'SAVE_TO_FAVORITES', guid:this.props.currArticle.guid});
+        this.props.dispatch({ type: 'SAVE_TO_FAVORITES', guid:this.props.selectedArticle.guid});
       }
 }
 
@@ -120,6 +118,8 @@ function mapStateToProps(state) {
     return {
       selectedArticle: startupSelectors.getSelectedArticle(state),
       user:startupSelectors.getUser(state),
+      isFav:startupSelectors.isFav(state),
+      doNotScroll:startupSelectors.doNotScroll(state),
     };
 }
 
