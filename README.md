@@ -19,6 +19,4 @@
 
 Починить ошибку "Failed to minify the code from this file:./node_modules/rss-parser/lib/parser.js:16" при билде
 
-Добавить прогресс-бар пока загружается контент https://vkcom.github.io/vkui-styleguide/#progress
-
 Сохранять айди подписывающихся людей куда-то
