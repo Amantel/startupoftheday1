@@ -6,6 +6,11 @@
 }
 .pagen_button {
   margin: 0 4px;
+
+}
+.pagen_button_round {
+  border-radius: 30px !important;
+  height: 60px ;  
 }
 .other_buttons {
   margin: 0 4px;

@@ -9,7 +9,6 @@ import StartupDashboard from './StartupDashboard';
 import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import * as startupSelectors from '../store/startup/reducer';
-import Logger from './Logger';
 
 class MainPanel extends Component {
 
@@ -25,23 +24,11 @@ class MainPanel extends Component {
     }
 
     render() {
-        const isProduction = process.env.NODE_ENV === 'production';
-        let logger = null;
-        if (!isProduction) {
-            logger = <Logger/>;
-        }
+
 
         return (
-            <UI.Panel id={this.props.id}>
-                <UI.PanelHeader>
-                    Startup of the day
-                </UI.PanelHeader>
-                    <StartupDashboard/>
-                    {
-                //   this.renderNotificationButton()
-                  }
-                {logger}
-            </UI.Panel>
+                  <StartupDashboard id={this.props.id}/>
+
         );
     }
 

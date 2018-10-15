@@ -10,6 +10,8 @@ const styles = {
   photo_image: {
    float: 'left',
    padding: '20px',
+   borderRadius:100,
+   marginBottom: 30
  },
   intro_group: {
     minHeight:'160px'
@@ -23,10 +25,10 @@ class IntroPanel extends Component {
         return (
             <UI.Panel id={this.props.id}>
             <UI.PanelHeader>
-                Startup of the day
+                Стартап дня
             </UI.PanelHeader>
 
-                <UI.Group title="Описание">
+                <UI.Group>
                     <UI.Div style={styles.intro_group}>
                     <img width={100} style={styles.photo_image} height={100} src={PhotoImg} alt="Александр Горный"/>
 
@@ -38,7 +40,7 @@ class IntroPanel extends Component {
                     </p>
                     </UI.Div>
                     <UI.Div style={{display: 'flex'}}>
-                      <UI.Button size="l" stretched level="2" onClick={this.navigationRead.bind(this)}>Читать</UI.Button>
+                      <UI.Button size="l" stretched level="1" onClick={this.navigationRead.bind(this)}>Читать</UI.Button>
                     </UI.Div>
 
                 </UI.Group>

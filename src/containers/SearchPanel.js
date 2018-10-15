@@ -53,7 +53,7 @@ class SearchPanel extends Component {
 
                     <UI.FormLayoutGroup>
                       <UI.Div>
-                        <UI.Button level="outline" onClick={this.doSearch.bind(this)}>Искать</UI.Button>
+                        <UI.Button level="1" onClick={this.doSearch.bind(this)}>Искать</UI.Button>
                       </UI.Div>
                     </UI.FormLayoutGroup>
                   </UI.FormLayout>

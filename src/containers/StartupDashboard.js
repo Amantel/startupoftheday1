@@ -6,7 +6,8 @@ import * as startupSelectors from '../store/startup/reducer';
 import * as VKConnect from '@vkontakte/vkui-connect';
 import Icon24Share from '@vkontakte/icons/dist/24/share';
 import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
-
+import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
+import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
 class StartupDashboard extends Component {
 
     constructor(props) {
@@ -70,15 +71,20 @@ class StartupDashboard extends Component {
 
         let content = article.content;
 
-
         return (
-          <UI.Group title={title}>
+          <UI.Panel id={this.props.id}>
+
+          <UI.PanelHeader>
+          {title}
+          </UI.PanelHeader>
+
+          <UI.Group >
 
             <UI.Div>
               <UI.Div className="pagen_top_div">
-                <UI.Button  disabled={last} level="2"  className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
+                <UI.Button  disabled={last} level="2"  className="pagen_button pagen_button_round" onClick={this.goPrev.bind(this)}>  <Icon24BrowserBack/></UI.Button>
 
-                <UI.Button disabled={first} level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+                <UI.Button disabled={first} level="2" className="pagen_button_round" style={{float:'right'}} onClick={this.goNext.bind(this)}>  <Icon24BrowserForward/></UI.Button>
               </UI.Div>
 
                 <UI.Div className="startup_article_content_div">
@@ -89,21 +95,22 @@ class StartupDashboard extends Component {
                       <UI.Button level="1" before={<Icon24Favorite/>} disabled={isFav}
                        stretched className="other_buttons"
                       onClick={this.saveToFavorites.bind(this,article.guid)}
-                      >    Добавить в избранное</UI.Button>
+                      >    В избранное</UI.Button>
                       <UI.Button level="1" before={<Icon24Share/>} stretched className="other_buttons"
                        onClick={this.goShare.bind(this)}>
-                      Отправить другу</UI.Button>
+                      Поделиться</UI.Button>
                 </UI.Div>
 
 
               <UI.Div>
-                <UI.Button  disabled={last} level="2" className="pagen_button" onClick={this.goPrev.bind(this)}>Назад</UI.Button>
-                <UI.Button disabled={first} level="2" style={{float:'right'}} onClick={this.goNext.bind(this)}>Вперёд</UI.Button>
+                <UI.Button  disabled={last} level="2"  className="pagen_button pagen_button_round" onClick={this.goPrev.bind(this)}>  <Icon24BrowserBack/></UI.Button>
+                <UI.Button disabled={first} level="2" className="pagen_button_round" style={{float:'right'}} onClick={this.goNext.bind(this)}>  <Icon24BrowserForward/></UI.Button>              
               </UI.Div>
 
             </UI.Div>
 
           </UI.Group>
+          </UI.Panel >
 
         );
     }

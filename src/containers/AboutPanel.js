@@ -9,6 +9,8 @@ const styles = {
   photo_image: {
    float: 'left',
    padding: '20px',
+   borderRadius:100,
+   marginBottom: 30
  },
   intro_group: {
     minHeight:'160px'
@@ -23,7 +25,7 @@ class AboutPanel extends Component {
                 <UI.PanelHeader>
                     О Сервисе
                 </UI.PanelHeader>
-                <UI.Group title="Описание" >
+                <UI.Group >
                     <UI.Div style={styles.intro_group}>
                     <img width={100} style={styles.photo_image} height={100} src={PhotoImg} alt="Александр Горный"/>
 

@@ -73,9 +73,9 @@ class ArticlePanel extends Component {
                     left={<UI.HeaderButton onClick={this.navigationBack.bind(this)}>{osname === UI.IOS ?
                         <Icon28ChevronBack/> : <Icon24Back/>}</UI.HeaderButton>}
                 >
-                    Статья
+                    {title}
                 </UI.PanelHeader>
-              <UI.Group title={title}>
+              <UI.Group>
 
 
 
