@@ -17,7 +17,7 @@ function clearStopWords (articles) {
     let isStoped = false;
     stopWords.forEach(stopWord=>{
       if(article.content
-        && article.content.indexOf(stopWord)>-1) isStoped = true;
+        && article.content.toLowerCase().indexOf(stopWord.toLowerCase())>-1) isStoped = true;
     });
     if(isStoped) return false;
     return true;
