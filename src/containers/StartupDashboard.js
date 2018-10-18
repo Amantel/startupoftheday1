@@ -91,20 +91,20 @@ class StartupDashboard extends Component {
                   <div  dangerouslySetInnerHTML={{ __html: content }} />
                 </UI.Div>
 
+
                 <UI.Div style={{display: 'flex'}}>
-                      <UI.Button level="1" before={<Icon24Favorite/>} disabled={isFav}
-                       stretched className="other_buttons"
-                      onClick={this.saveToFavorites.bind(this,article.guid)}
-                      >    В избранное</UI.Button>
-                      <UI.Button level="1" before={<Icon24Share/>} stretched className="other_buttons"
-                       onClick={this.goShare.bind(this)}>
-                      Поделиться</UI.Button>
+                  <UI.Button size="l" before={<Icon24Favorite/>} stretched level="1" disabled={isFav} style={{ marginRight: 4 }} onClick={this.goShare.bind(this)}>В избранное</UI.Button>
+                  <UI.Button size="l" before={<Icon24Share/>} stretched level="1" onClick={this.saveToFavorites.bind(this,article.guid)}>Поделиться</UI.Button>
                 </UI.Div>
+
+
+
+   
 
 
               <UI.Div>
                 <UI.Button  disabled={last} level="2"  className="pagen_button pagen_button_round" onClick={this.goPrev.bind(this)}>  <Icon24BrowserBack/></UI.Button>
-                <UI.Button disabled={first} level="2" className="pagen_button_round" style={{float:'right'}} onClick={this.goNext.bind(this)}>  <Icon24BrowserForward/></UI.Button>              
+                <UI.Button disabled={first} level="2" className="pagen_button_round" style={{float:'right'}} onClick={this.goNext.bind(this)}>  <Icon24BrowserForward/></UI.Button>
               </UI.Div>
 
             </UI.Div>
