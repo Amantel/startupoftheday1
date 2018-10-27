@@ -8,12 +8,10 @@ import AboutPanel from './AboutPanel';
 import IntroPanel from './IntroPanel';
 import ListPanel from './ListPanel';
 import FavoritesPanel from './FavoritesPanel';
-import SearchPanel from './SearchPanel';
 import MainPanel from './MainPanel';
 import ArticlePanel from './ArticlePanel';
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon28Favorite from '@vkontakte/icons/dist/28/favorite';
-import Icon28Search from '@vkontakte/icons/dist/28/search';
 import Icon28About from '@vkontakte/icons/dist/28/about_outline';
 import Icon28More from '@vkontakte/icons/dist/28/more';
 import {push} from 'react-router-redux';
@@ -103,7 +101,6 @@ class App extends Component {
       if(this.props.pageId === 'intro') activeStory = 'intro';
       if(this.props.pageId === 'article') activeStory = 'article';
       if(this.props.pageId === 'list') activeStory = 'list';
-      if(this.props.pageId === 'discover') activeStory = 'discover';
       if(this.props.pageId === 'favorite') activeStory = 'favorite';
 
 
@@ -117,11 +114,6 @@ class App extends Component {
               selected={this.state.activeStory === 'feed'}
               data-story="feed"
             ><Icon28Newsfeed /></UI.TabbarItem>
-            <UI.TabbarItem
-              onClick={this.onStoryChange}
-              selected={this.state.activeStory === 'discover'}
-              data-story="discover"
-            ><Icon28Search /></UI.TabbarItem>
             <UI.TabbarItem
               onClick={this.onStoryChange}
               selected={this.state.activeStory === 'favorite'}
@@ -141,9 +133,6 @@ class App extends Component {
         }>
           <UI.View id="feed" activePanel="feed">
             <MainPanel id="feed" accessToken={this.props.accessToken}/>
-          </UI.View>
-          <UI.View id="discover" activePanel="discover">
-            <SearchPanel id="discover"/>
           </UI.View>
           <UI.View id="favorite" activePanel="favorite">
             <FavoritesPanel id="favorite"/>
