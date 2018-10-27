@@ -29,7 +29,7 @@
 }
 */
 .big_photo {
- 
+ max-width: 600px;
       height: 12rem;
 
 

@@ -47,8 +47,7 @@ class SearchPanel extends Component {
                 <UI.Group >
                   <UI.FormLayout>
                     <UI.FormLayoutGroup bottom="4 и более символов">
-
-                    <UI.Input   value={this.state.searchValue} onChange={this.handleChange} type="text" placeholder="Введите текст для поиска" />
+                      <UI.Input   value={this.state.searchValue} onChange={this.handleChange} type="text" placeholder="Введите текст для поиска" />
                     </UI.FormLayoutGroup>
 
                     <UI.FormLayoutGroup>
