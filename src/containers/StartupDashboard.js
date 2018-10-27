@@ -4,10 +4,12 @@ import * as UI from '@vkontakte/vkui';
 import './StartupDashboard.css';
 import * as startupSelectors from '../store/startup/reducer';
 import * as VKConnect from '@vkontakte/vkui-connect';
-import Icon24Share from '@vkontakte/icons/dist/24/share';
-import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
+import Icon24ShareOutline from '@vkontakte/icons/dist/24/share_outline';
+import Icon24FavoriteOutline from '@vkontakte/icons/dist/24/favorite_outline';
 import Icon24BrowserBack from '@vkontakte/icons/dist/24/browser_back';
 import Icon24BrowserForward from '@vkontakte/icons/dist/24/browser_forward';
+//import '../css/App.css';
+
 class StartupDashboard extends Component {
 
     constructor(props) {
@@ -86,13 +88,13 @@ class StartupDashboard extends Component {
                 <UI.Button disabled={first} level="2" className="pagen_button_round" style={{float:'right'}} onClick={this.goNext.bind(this)}>  <Icon24BrowserForward/></UI.Button>
               </UI.Div>
 
-                <UI.Div className="startup_article_content_div" dangerouslySetInnerHTML={{ __html: content }}>
-                </UI.Div>
+                <UI.Div className="startup_article_content_div" dangerouslySetInnerHTML={{ __html: content }}/>
 
 
-                <UI.Div style={{display: 'flex'}}>
-                  <UI.Button size="l" before={<Icon24Favorite/>} stretched level="1" disabled={isFav} style={{ marginRight: 4 }} onClick={this.goShare.bind(this)}></UI.Button>
-                  <UI.Button size="l" before={<Icon24Share/>} stretched level="1" onClick={this.saveToFavorites.bind(this,article.guid)}></UI.Button>
+                <UI.Div >
+                <UI.Button size="l" before={<Icon24FavoriteOutline/>} className="social_button"  level="tertiary"  disabled={isFav} onClick={this.saveToFavorites.bind(this,article.guid)}/>
+                  <UI.Button size="l" before={<Icon24ShareOutline/>}  className="social_button"  level="tertiary" style={{ marginRight: 4 }} onClick={this.goShare.bind(this)}></UI.Button>
+
                 </UI.Div>
 
 

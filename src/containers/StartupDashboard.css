@@ -10,10 +10,14 @@
 }
 .pagen_button_round {
   border-radius: 30px !important;
-  height: 60px ;  
+  height: 60px ;
 }
 .other_buttons {
   margin: 0 4px;
+}
+
+.social_button {
+  color:rgba(0, 0, 0, 0.35);
 }
 /*
 .pagen_top_div {
