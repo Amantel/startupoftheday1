@@ -80,21 +80,19 @@ class StartupDashboard extends Component {
 
           <UI.Group >
 
-            <UI.Div>
               <UI.Div className="pagen_top_div">
                 <UI.Button  disabled={last} level="2"  className="pagen_button pagen_button_round" onClick={this.goPrev.bind(this)}>  <Icon24BrowserBack/></UI.Button>
 
                 <UI.Button disabled={first} level="2" className="pagen_button_round" style={{float:'right'}} onClick={this.goNext.bind(this)}>  <Icon24BrowserForward/></UI.Button>
               </UI.Div>
 
-                <UI.Div className="startup_article_content_div">
-                  <div  dangerouslySetInnerHTML={{ __html: content }} />
+                <UI.Div className="startup_article_content_div" dangerouslySetInnerHTML={{ __html: content }}>
                 </UI.Div>
 
 
                 <UI.Div style={{display: 'flex'}}>
-                  <UI.Button size="l" before={<Icon24Favorite/>} stretched level="1" disabled={isFav} style={{ marginRight: 4 }} onClick={this.goShare.bind(this)}>В избранное</UI.Button>
-                  <UI.Button size="l" before={<Icon24Share/>} stretched level="1" onClick={this.saveToFavorites.bind(this,article.guid)}>Поделиться</UI.Button>
+                  <UI.Button size="l" before={<Icon24Favorite/>} stretched level="1" disabled={isFav} style={{ marginRight: 4 }} onClick={this.goShare.bind(this)}></UI.Button>
+                  <UI.Button size="l" before={<Icon24Share/>} stretched level="1" onClick={this.saveToFavorites.bind(this,article.guid)}></UI.Button>
                 </UI.Div>
 
 
@@ -107,7 +105,6 @@ class StartupDashboard extends Component {
                 <UI.Button disabled={first} level="2" className="pagen_button_round" style={{float:'right'}} onClick={this.goNext.bind(this)}>  <Icon24BrowserForward/></UI.Button>
               </UI.Div>
 
-            </UI.Div>
 
           </UI.Group>
           </UI.Panel >
