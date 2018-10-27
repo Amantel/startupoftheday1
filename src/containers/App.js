@@ -11,7 +11,6 @@ import FavoritesPanel from './FavoritesPanel';
 import SearchPanel from './SearchPanel';
 import MainPanel from './MainPanel';
 import ArticlePanel from './ArticlePanel';
-import Cookies from '../services/Cookies';
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon28Favorite from '@vkontakte/icons/dist/28/favorite';
 import Icon28Search from '@vkontakte/icons/dist/28/search';
@@ -79,13 +78,15 @@ class App extends Component {
 
 
         //this.props.dispatch(vkActions.fetchAccessToken()); //this will ask for profile
-        let cookie = Cookies.getCookie('isFirstOpen');
+
+        let cookie = parseInt(localStorage.getItem('startUpisFirstOpen'));
         let isFirst = false;
 
-        if(!cookie) {
+        if(cookie!==1) {
             cookie = 1;
             isFirst = true;
-            Cookies.setCookie('isFirstOpen',cookie,3600000);
+            localStorage.setItem('startUpisFirstOpen', 1);
+
             this.setState({ isFirst });
             //this.setState({ activeStory:'intro' });
                     console.log("isFirst",isFirst);
