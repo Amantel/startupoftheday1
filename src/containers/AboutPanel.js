@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
-import PhotoImg from '../gorniy.jpg';
+import PhotoImg from '../gorniy_big.png';
 import Cookies from '../services/Cookies';
+import './StartupDashboard.css';
 
 const styles = {
   photo_image: {
@@ -15,6 +16,7 @@ const styles = {
   intro_group: {
     minHeight:'160px'
   },
+
 }
 
 class AboutPanel extends Component {
@@ -26,8 +28,9 @@ class AboutPanel extends Component {
                     О Сервисе
                 </UI.PanelHeader>
                 <UI.Group >
+                    <UI.Div className="big_photo" style={{backgroundImage: "url(" + PhotoImg + ")"}} />
                     <UI.Div style={styles.intro_group}>
-                    <img width={100} style={styles.photo_image} height={100} src={PhotoImg} alt="Александр Горный"/>
+
 
                     <p>
                         Я пишу каждый день про один новый малоизвестный стартап и иногда свои мысли и новости про рынок.
