@@ -20,13 +20,15 @@ class AboutPanel extends Component {
                 <AboutContent/>
 
                 <UI.Group title="Этот блог на других площадках">
-                          <UI.CellButton>
-                            <UI.Link href="https://t.me/startupoftheday/">Telegram</UI.Link>
+                          <UI.Link href="https://t.me/startupoftheday/"><UI.CellButton>
+                            Telegram
                           </UI.CellButton>
-
+                          </UI.Link>
+                          <UI.Link href="https://www.facebook.com/gornal/">
                           <UI.CellButton className="topGreyBorder">
-                            <UI.Link href="https://www.facebook.com/gornal/">Facebook</UI.Link>
+                            Facebook
                           </UI.CellButton>
+                            </UI.Link>
                 </UI.Group>
             </UI.Panel>
         );
