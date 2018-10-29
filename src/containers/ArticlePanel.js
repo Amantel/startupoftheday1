@@ -102,6 +102,7 @@ class ArticlePanel extends Component {
             <UI.Button
               size="l"
               before={isFavButton}
+              activeEffectDelay = '50'
               className={favClassName}
               level="tertiary"
               onClick={this.saveToFavorites.bind(this, article.guid)}
@@ -110,6 +111,7 @@ class ArticlePanel extends Component {
               size="l"
               before={<Icon24ShareOutline />}
               className="social_button"
+              activeEffectDelay = '50'
               level="tertiary"
               style={{ marginRight: 4 }}
               onClick={this.goShare.bind(this)}

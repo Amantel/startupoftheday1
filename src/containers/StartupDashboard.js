@@ -89,6 +89,7 @@ class StartupDashboard extends Component {
           <UI.Div className="pagen_top_div">
             <UI.Button
               disabled={last}
+              activeEffectDelay = '50'
               level="2"
               className="pagen_button pagen_button_round"
               onClick={this.goPrev.bind(this)}
@@ -99,6 +100,7 @@ class StartupDashboard extends Component {
 
             <UI.Button
               disabled={first}
+              activeEffectDelay = '50'
               level="2"
               className="pagen_button_round"
               style={{ float: "right" }}
@@ -118,9 +120,8 @@ class StartupDashboard extends Component {
           <UI.Div>
             <UI.Button
               size="l"
-              before={
-                isFavButton
-              }
+              before={isFavButton}
+              activeEffectDelay = '50'
               className={favClassName}
               level="tertiary"
               onClick={this.saveToFavorites.bind(this, article.guid)}
@@ -129,6 +130,7 @@ class StartupDashboard extends Component {
               size="l"
               before={<Icon24ShareOutline />}
               className="social_button"
+              activeEffectDelay = '50'
               level="tertiary"
               style={{ marginRight: 4 }}
               onClick={this.goShare.bind(this)}
@@ -139,6 +141,7 @@ class StartupDashboard extends Component {
             <UI.Button
               disabled={last}
               level="2"
+              activeEffectDelay = '50'
               className="pagen_button pagen_button_round"
               onClick={this.goPrev.bind(this)}
             >
@@ -147,6 +150,7 @@ class StartupDashboard extends Component {
             </UI.Button>
             <UI.Button
               disabled={first}
+              activeEffectDelay = '50'
               level="2"
               className="pagen_button_round"
               style={{ float: "right" }}
