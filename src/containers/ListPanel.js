@@ -80,7 +80,7 @@ class ListPanel extends Component {
             return (
                 <UI.Panel id={this.props.id}>
                 <UI.PanelHeader>
-                    Список свежих статей
+                    Список статей
                 </UI.PanelHeader>
                   <UI.Group title="Загрузка...">
                     <UI.Div style={{ height: 100 }}>
