@@ -5,19 +5,9 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import PhotoImg from '../gorniy_big.png';
 import './StartupDashboard.css';
+import AboutContent from './AboutContent';
 
 
-const styles = {
-  photo_image: {
-   float: 'left',
-   padding: '20px',
-   borderRadius:100,
-   marginBottom: 30
- },
-  intro_group: {
-    minHeight:'160px'
-  }
-}
 
 class IntroPanel extends Component {
 
@@ -29,24 +19,8 @@ class IntroPanel extends Component {
                 Стартап дня
             </UI.PanelHeader>
 
-                <UI.Group>
-                    <UI.Div className="big_photo" style={{backgroundImage: "url(" + PhotoImg + ")"}} />
+            <AboutContent/>
 
-                    <UI.Div style={styles.intro_group}>
-
-
-                    <p>
-                        Я пишу каждый день про один новый малоизвестный стартап и иногда свои мысли и новости про рынок.
-                    </p>
-                    <p>
-                      Меня зовут Александр Горный, я директор по стратегии и анализу в Mail.Ru Group.
-                    </p>
-                    </UI.Div>
-                    <UI.Div style={{display: 'flex'}}>
-                      <UI.Button size="l" stretched level="1" onClick={this.navigationRead.bind(this)}>Читать</UI.Button>
-                    </UI.Div>
-
-                </UI.Group>
             </UI.Panel>
         );
     }

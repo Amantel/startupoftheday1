@@ -5,19 +5,9 @@ import {connect} from 'react-redux';
 import PhotoImg from '../gorniy_big.png';
 import Cookies from '../services/Cookies';
 import './StartupDashboard.css';
+import AboutContent from './AboutContent';
 
-const styles = {
-  photo_image: {
-   float: 'left',
-   padding: '20px',
-   borderRadius:100,
-   marginBottom: 30
- },
-  intro_group: {
-    minHeight:'160px'
-  },
 
-}
 
 class AboutPanel extends Component {
 
@@ -27,28 +17,16 @@ class AboutPanel extends Component {
                 <UI.PanelHeader>
                     О Сервисе
                 </UI.PanelHeader>
-                <UI.Group >
-                    <UI.Div className="big_photo" style={{backgroundImage: "url(" + PhotoImg + ")"}} />
-                    <UI.Div style={styles.intro_group}>
+                <AboutContent/>
 
-
-                    <p>
-                        Я пишу каждый день про один новый малоизвестный стартап и иногда свои мысли и новости про рынок.
-                    </p>
-                    <p>
-                      Меня зовут Александр Горный, я директор по стратегии и анализу в Mail.Ru Group.
-                    </p>
-                    </UI.Div>
-                </UI.Group>
                 <UI.Group title="Этот блог на других площадках">
-                    <UI.List>
-                        <UI.ListItem multiline>
-                          <UI.Link href="https://t.me/startupoftheday/">Telegram</UI.Link>
-                        </UI.ListItem>
-                        <UI.ListItem multiline>
-                        <UI.Link href="https://www.facebook.com/gornal/">Facebook</UI.Link>
-                        </UI.ListItem>
-                    </UI.List>
+                          <UI.CellButton>
+                            <UI.Link href="https://t.me/startupoftheday/">Telegram</UI.Link>
+                          </UI.CellButton>
+
+                          <UI.CellButton>
+                            <UI.Link href="https://www.facebook.com/gornal/">Facebook</UI.Link>
+                          </UI.CellButton>
                 </UI.Group>
             </UI.Panel>
         );
