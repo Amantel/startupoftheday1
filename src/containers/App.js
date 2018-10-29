@@ -111,21 +111,25 @@ class App extends Component {
         <UI.Epic activeStory={activeStory} tabbar={
           <UI.Tabbar>
             <UI.TabbarItem
+              className = "tabItem"
               onClick={this.onStoryChange}
               selected={this.state.activeStory === 'feed'}
               data-story="feed"
             ><Icon28Newsfeed /></UI.TabbarItem>
             <UI.TabbarItem
+            className = "tabItem"
               onClick={this.onStoryChange}
               selected={this.state.activeStory === 'favorite'}
               data-story="favorite"
             ><Icon28Favorite /></UI.TabbarItem>
             <UI.TabbarItem
+            className = "tabItem"
               onClick={this.onStoryChange}
               selected={this.state.activeStory === 'list'}
               data-story="list"
             ><Icon28More /></UI.TabbarItem>
             <UI.TabbarItem
+              className = "tabItem"
               onClick={this.onStoryChange}
               selected={this.state.activeStory === 'about'}
               data-story="about"

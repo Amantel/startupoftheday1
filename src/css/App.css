@@ -2,9 +2,7 @@ hr {
   border-top:1px solid #e7e8ec;
   width:90%;
 }
-.favored {
-  color:#FFD54F;
-}
+
 .listDiv {
   padding-top: 0;
   font-weight: 400;
@@ -12,3 +10,38 @@ hr {
 .intro_group {
   /*minHeight:'160px*/
 }
+.big_photo {
+ max-width: 600px;
+      height: 12rem;
+
+
+      background-size: cover;
+
+}
+.social_button {
+  color:#99A2AD;
+  font-weight: 300;
+}
+.favored {
+  color:#FFD54F;
+}
+
+.topGreyBorder {
+      border-top: 1px solid #e7e8ec;
+}
+
+/*
+.tabItem {
+  color:#99A2AD;
+
+}
+.pagen_button_round:active {
+
+background-color:#3371B8;
+
+}
+
+.pagen_button_round:focus {
+  background-color:#3371B8;
+
+}*/

@@ -24,7 +24,7 @@ class AboutPanel extends Component {
                             <UI.Link href="https://t.me/startupoftheday/">Telegram</UI.Link>
                           </UI.CellButton>
 
-                          <UI.CellButton>
+                          <UI.CellButton className="topGreyBorder">
                             <UI.Link href="https://www.facebook.com/gornal/">Facebook</UI.Link>
                           </UI.CellButton>
                 </UI.Group>

@@ -80,6 +80,7 @@ class ArticlePanel extends Component {
       favClassName = "social_button";
       isFavButton = <Icon24FavoriteOutline />;
     }
+    let ActiveDelay = 50;
 
     return (
       <UI.Panel id={this.props.id}>
@@ -97,12 +98,11 @@ class ArticlePanel extends Component {
             <div dangerouslySetInnerHTML={{ __html: content }} />
           </UI.Div>
 
-          <hr />
-          <UI.Div>
+          <UI.Div  className='topGreyBorder'>
             <UI.Button
               size="l"
               before={isFavButton}
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               className={favClassName}
               level="tertiary"
               onClick={this.saveToFavorites.bind(this, article.guid)}
@@ -111,7 +111,7 @@ class ArticlePanel extends Component {
               size="l"
               before={<Icon24ShareOutline />}
               className="social_button"
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               level="tertiary"
               style={{ marginRight: 4 }}
               onClick={this.goShare.bind(this)}

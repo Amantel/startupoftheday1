@@ -81,6 +81,10 @@ class StartupDashboard extends Component {
       favClassName = 'social_button';
       isFavButton = <Icon24FavoriteOutline />;
     }
+
+    let ActiveDelay = 50;
+
+
     return (
       <UI.Panel id={this.props.id}>
         <UI.PanelHeader>{title}</UI.PanelHeader>
@@ -89,7 +93,7 @@ class StartupDashboard extends Component {
           <UI.Div className="pagen_top_div">
             <UI.Button
               disabled={last}
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               level="2"
               className="pagen_button pagen_button_round"
               onClick={this.goPrev.bind(this)}
@@ -100,7 +104,7 @@ class StartupDashboard extends Component {
 
             <UI.Button
               disabled={first}
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               level="2"
               className="pagen_button_round"
               style={{ float: "right" }}
@@ -116,12 +120,12 @@ class StartupDashboard extends Component {
             dangerouslySetInnerHTML={{ __html: content }}
           />
 
-          <hr />
-          <UI.Div>
+
+          <UI.Div className='topGreyBorder'>
             <UI.Button
               size="l"
               before={isFavButton}
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               className={favClassName}
               level="tertiary"
               onClick={this.saveToFavorites.bind(this, article.guid)}
@@ -130,7 +134,7 @@ class StartupDashboard extends Component {
               size="l"
               before={<Icon24ShareOutline />}
               className="social_button"
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               level="tertiary"
               style={{ marginRight: 4 }}
               onClick={this.goShare.bind(this)}
@@ -141,7 +145,7 @@ class StartupDashboard extends Component {
             <UI.Button
               disabled={last}
               level="2"
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               className="pagen_button pagen_button_round"
               onClick={this.goPrev.bind(this)}
             >
@@ -150,7 +154,7 @@ class StartupDashboard extends Component {
             </UI.Button>
             <UI.Button
               disabled={first}
-              activeEffectDelay = '50'
+              activeEffectDelay = {ActiveDelay}
               level="2"
               className="pagen_button_round"
               style={{ float: "right" }}
