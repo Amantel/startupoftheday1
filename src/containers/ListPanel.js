@@ -5,6 +5,15 @@ import {connect} from 'react-redux';
 import * as startupSelectors from '../store/startup/reducer';
 import {push} from 'react-router-redux';
 
+import Icon28ChevronBack from "@vkontakte/icons/dist/28/chevron_back";
+import Icon24Back from "@vkontakte/icons/dist/24/back";
+import Icon24Search from "@vkontakte/icons/dist/24/search";
+
+import { platform, IOS, ANDROID } from '@vkontakte/vkui';
+
+
+
+
 class ListPanel extends Component {
 
   constructor(props) {
@@ -14,14 +23,14 @@ class ListPanel extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
-    this.setState({searchValue: e.target.value});
+  handleChange (search) {
+    this.setState({searchValue: search});
     function doSearch(thisG,searchValue) {
       console.log('searching',searchValue);
       let storedArticles = thisG.props.articles || [];
       let foundArticles = [];
 
-      if(searchValue.length<5) {
+      if(searchValue.length<2) {
           thisG.setState({foundArticles: [], isFiltered:false});
 
           return false;
@@ -42,7 +51,7 @@ class ListPanel extends Component {
 
     }
 
-    doSearch(this,e.target.value);
+    doSearch(this,search);
   }
 
     getPrettyDate(dateString) {
@@ -56,7 +65,17 @@ class ListPanel extends Component {
     componentWillMount() {
     }
 
+/*
+    onChange (search) {
+      console.log(search);
+      this.setState({ search }); }
+*/
+
     render() {
+
+
+
+
         if (!this.props.articles) {
             return (
                 <UI.Panel id={this.props.id}>
@@ -78,6 +97,27 @@ class ListPanel extends Component {
         if(this.state.isFiltered) {
           articles = this.state.foundArticles;
         }
+/*
+        <UI.Search
+         theme="header"
+         value={this.state.searchValue}
+         onChange={this.handleChange}
+
+       /> : 'Поиск'
+       */
+
+/*
+<UI.FormLayout>
+    <UI.FormLayoutGroup bottom="4 и более символов">
+      <UI.Input   value={this.state.searchValue} onChange={this.handleChange} type="text" placeholder="Поиск статьи..." />
+    </UI.FormLayoutGroup>
+  </UI.FormLayout>
+*/
+
+
+
+
+        const osname = platform();
 
         //let date = this.getPrettyDate(article.isoDate);
         let thisPanel = this;
@@ -85,19 +125,19 @@ class ListPanel extends Component {
 //
         return (
             <UI.Panel id={this.props.id}>
-                <UI.PanelHeader>
-                    Список статей
-                </UI.PanelHeader>
-                <UI.Group >
-                  <UI.FormLayout>
-                      <UI.FormLayoutGroup bottom="4 и более символов">
-                        <UI.Input   value={this.state.searchValue} onChange={this.handleChange} type="text" placeholder="Поиск статьи..." />
-                      </UI.FormLayoutGroup>
-                    </UI.FormLayout>
-                </UI.Group >
+            <UI.PanelHeader>
+              Список свежих статей
+            </UI.PanelHeader>
+
+              <UI.Search
+              className="searchCustom"
+               theme="default"
+               value={this.state.searchValue}
+               onChange={this.handleChange.bind(this)}
+             />
                 {articles.map(function(article, index){
                     let date = thisPanel.getPrettyDate(article.isoDate);
-                      return <UI.Group title={date} key={article.guid}>
+                      return <UI.Group title={date} className="groupList" key={article.guid}>
                         <UI.Div className="listDiv" onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.Div>
                       </UI.Group>;
 

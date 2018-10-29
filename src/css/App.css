@@ -30,6 +30,17 @@ hr {
       border-top: 1px solid #e7e8ec;
 }
 
+.searchDiv {
+  background-color: #5181b8;
+  height: 10px;
+}
+.groupList {
+  margin-top: 0;
+}
+.searchCustom::after{
+  position:  initial !important;
+}
+
 /*
 .tabItem {
   color:#99A2AD;
