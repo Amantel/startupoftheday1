@@ -17,6 +17,7 @@ import Icon28More from '@vkontakte/icons/dist/28/more';
 import {push} from 'react-router-redux';
 import * as startupActions from '../store/startup/actions';
 import * as startupSelectors from '../store/startup/reducer';
+import '../css/App.css';
 
 class App extends Component {
 
