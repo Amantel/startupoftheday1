@@ -81,7 +81,8 @@ class ListPanel extends Component {
 
         //let date = this.getPrettyDate(article.isoDate);
         let thisPanel = this;
-
+//                        <UI.CellButton onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.CellButton>
+//
         return (
             <UI.Panel id={this.props.id}>
                 <UI.PanelHeader>
@@ -97,7 +98,7 @@ class ListPanel extends Component {
                 {articles.map(function(article, index){
                     let date = thisPanel.getPrettyDate(article.isoDate);
                       return <UI.Group title={date} key={article.guid}>
-                        <UI.CellButton onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.CellButton>
+                        <UI.Div className="listDiv" onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.Div>
                       </UI.Group>;
 
                 })}

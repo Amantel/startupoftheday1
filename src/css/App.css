@@ -5,3 +5,7 @@ hr {
 .favored {
   color:#FFD54F;
 }
+.listDiv {
+  padding-top: 0;
+  font-weight: 400;
+}
