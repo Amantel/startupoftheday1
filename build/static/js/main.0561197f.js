@@ -48498,7 +48498,7 @@ var _createClass=function(){function defineProperties(target,props){for(var i=0;
     onChange (search) {
       console.log(search);
       this.setState({ search }); }
-*/},{key:'render',value:function render(){if(!this.props.articles){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u0421\u043F\u0438\u0441\u043E\u043A \u0441\u0432\u0435\u0436\u0438\u0445 \u0441\u0442\u0430\u0442\u0435\u0439'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{title:'\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{style:{height:100}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Spinner"],{size:50}))));}var articles=this.props.articles;if(this.state.isFiltered){articles=this.state.foundArticles;}/*
+*/},{key:'render',value:function render(){if(!this.props.articles){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u0421\u043F\u0438\u0441\u043E\u043A \u0441\u0442\u0430\u0442\u0435\u0439'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{title:'\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{style:{height:100}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Spinner"],{size:50}))));}var articles=this.props.articles;if(this.state.isFiltered){articles=this.state.foundArticles;}/*
         <UI.Search
          theme="header"
          value={this.state.searchValue}
@@ -56205,4 +56205,4 @@ module.exports = {"0":65533,"128":8364,"130":8218,"131":402,"132":8222,"133":823
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.d030e7c2.js.map
+//# sourceMappingURL=main.0561197f.js.map
