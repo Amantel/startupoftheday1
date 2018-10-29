@@ -153,9 +153,21 @@ export default function reduce(state = initialState, action = {}) {
               return newState;
             }
             case "SAVE_TO_FAVORITES": {
-              let favs = new Set(state.user.favorites);
+              let isFav = true;
+              let favsArr = state.user.favorites;
               let user = state.user;
-              favs.add(action.guid);
+              let favs;
+              let favIndex = favsArr.indexOf(action.guid);
+              if(favIndex===-1) {
+                  favs = new Set(favsArr);
+                  favs.add(action.guid);
+              } else {
+                  favsArr.splice(favIndex, 1);
+                  favs = new Set(favsArr);
+                  isFav = false;
+              }
+
+
 
               user.favorites = Array.from(favs);
               localStorage.setItem('startupOfTheDayUser', JSON.stringify(user));
@@ -166,8 +178,8 @@ export default function reduce(state = initialState, action = {}) {
                 selectedArticle:state.selectedArticle,
                 articleNumber:state.articleNumber,
                 fromMemory:state.fromMemory,
-                isFav:true,
-                user:user,
+                isFav,
+                user,
                 doNotScroll:true,
               }
               return newState;

@@ -1,4 +1,7 @@
 hr {
   border-top:1px solid #e7e8ec;
-  width:90%; 
+  width:90%;
+}
+.favored {
+  color:#FFD54F;
 }

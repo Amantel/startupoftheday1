@@ -8,6 +8,8 @@ import Icon28ChevronBack from "@vkontakte/icons/dist/28/chevron_back";
 import Icon24Back from "@vkontakte/icons/dist/24/back";
 import Icon24ShareOutline from "@vkontakte/icons/dist/24/share_outline";
 import Icon24FavoriteOutline from "@vkontakte/icons/dist/24/favorite_outline";
+import Icon24Favorite from "@vkontakte/icons/dist/24/favorite";
+
 import "./StartupDashboard.css";
 import * as VKConnect from "@vkontakte/vkui-connect";
 
@@ -67,6 +69,18 @@ class ArticlePanel extends Component {
     //maybe we should use https://stackoverflow.com/a/47159227/2863227
 
     let content = article.content;
+
+    let favClassName = 'social_button';
+    let isFavButton = <Icon24FavoriteOutline />;
+
+    if (isFav) {
+      favClassName += " favored ";
+      isFavButton = <Icon24Favorite />;
+    } else {
+      favClassName = "social_button";
+      isFavButton = <Icon24FavoriteOutline />;
+    }
+
     return (
       <UI.Panel id={this.props.id}>
         <UI.PanelHeader
@@ -87,10 +101,9 @@ class ArticlePanel extends Component {
           <UI.Div>
             <UI.Button
               size="l"
-              before={<Icon24FavoriteOutline />}
-              className="social_button"
+              before={isFavButton}
+              className={favClassName}
               level="tertiary"
-              disabled={isFav}
               onClick={this.saveToFavorites.bind(this, article.guid)}
             />
             <UI.Button
