@@ -15,19 +15,19 @@ class IntroPanel extends Component {
 
         return (
             <UI.Panel id={this.props.id}>
-            <UI.PanelHeader>
-                Стартап дня
-            </UI.PanelHeader>
+              <UI.PanelHeader>
+                  Стартап дня
+              </UI.PanelHeader>
 
-            <AboutContent/>
+              <AboutContent showButton='1'/>
+
+
 
             </UI.Panel>
         );
     }
 
-    navigationRead() {
-        this.props.dispatch(push('/content'));
-    }
+
 }
 
 function mapStateToProps(state) {
