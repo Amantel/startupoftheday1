@@ -106,14 +106,14 @@ class App extends Component {
 
 
       //this.setState({ activeStory: activeStory });
-
+      console.log(activeStory);
       return (
         <UI.Epic activeStory={activeStory} tabbar={
           <UI.Tabbar>
             <UI.TabbarItem
               className = "tabItem"
               onClick={this.onStoryChange}
-              selected={this.state.activeStory === 'feed'}
+              selected={activeStory === 'feed'}
               data-story="feed"
             ><Icon28Newsfeed /></UI.TabbarItem>
             <UI.TabbarItem
