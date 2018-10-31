@@ -11,7 +11,9 @@ const stopWords =
   'https://docs.google.com/spreadsheets/d/1LGn1-adzc2lTvOPYY0Stq64nil_lkNf4pzlf3nm_yww/',
   '(На правах рекламы)'
 ];
-
+const whiteList = [
+  '#стартапдня'
+]
 function clearStopWords (articles) {
   return articles.filter(article=>{
     let isStoped = false;
@@ -25,11 +27,24 @@ function clearStopWords (articles) {
 
 }
 
+function clearWhiteList (articles) {
+  return articles.filter(article=>{
+    let isStoped = false;
+    whiteList.forEach(stopWord=>{
+      if(article.content
+        && article.content.toLowerCase().indexOf(stopWord.toLowerCase())===-1) isStoped = true;
+    });
+    if(isStoped) return false;
+    return true;
+  });
+
+}
+
 function saveArticlesToStorage(articles) {
   let original = getArticlesFromStorage();
 
   let result = _.unionBy(articles, original, "guid");
-  result = clearStopWords(result);
+  result = clearWhiteList(result);
   localStorage.setItem('startupOfTheDayArticles', JSON.stringify(result));
 }
 function getArticlesFromStorage() {
@@ -37,7 +52,7 @@ function getArticlesFromStorage() {
   let localStorageArticles = localStorage.getItem('startupOfTheDayArticles');
   if(localStorageArticles!=null)
     articles = JSON.parse(localStorageArticles);
-  articles = clearStopWords(articles);
+  articles = clearWhiteList(articles);
   return articles;
 }
 
@@ -68,7 +83,7 @@ export default function reduce(state = initialState, action = {}) {
               };
             }
             case types.ARTICLES_FETCHED_FROM_MEMORY: {
-              let articles = clearStopWords(action.articles);
+              let articles = clearWhiteList(action.articles);
               let isFav = false;
               if(state.user && state.user.favorites.indexOf(articles[0].guid)!==-1) {
                 isFav = true;
