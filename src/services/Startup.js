@@ -20,7 +20,7 @@ ResponseError.prototype.constructor = ResponseError;
 
 class Startup {
     async getArticles() {
-        return fetch(CORS_PROXY + 'http://startupoftheday.ru/feed/rsssssss')
+        return fetch(CORS_PROXY + 'http://startupoftheday.ru/feed/rss')
             .then(function (response) {
               console.log(response);
               if(response.ok) {
