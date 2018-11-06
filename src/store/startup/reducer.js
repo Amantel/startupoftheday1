@@ -74,6 +74,15 @@ export default function reduce(state = initialState, action = {}) {
                 isFav = true;
               }
               return {
+                 ...state,
+                 articles,
+                 currArticle:articles[0],
+                 articleNumber:0,
+                 fromMemory:false,
+                 isFav
+               }
+               /*
+              return {
                   articles: articles,
                   currArticle:articles[0],
                   articleNumber:0,
@@ -81,6 +90,7 @@ export default function reduce(state = initialState, action = {}) {
                   user:state.user,
                   isFav:isFav
               };
+              */
             }
             case types.ARTICLES_FETCHED_FROM_MEMORY: {
               let articles = clearWhiteList(action.articles);
@@ -89,6 +99,15 @@ export default function reduce(state = initialState, action = {}) {
                 isFav = true;
               }
               return {
+                 ...state,
+                 articles,
+                 currArticle:articles[0],
+                 articleNumber:0,
+                 fromMemory:true,
+                 isFav
+               }
+              /*
+              return {
                   articles: articles,
                   currArticle:articles[0],
                   articleNumber:0,
@@ -96,6 +115,7 @@ export default function reduce(state = initialState, action = {}) {
                   user:state.user,
                   isFav:isFav
               };
+              */
             }
             case "PREV": {
               let articleNumber = Math.min(state.articleNumber + 1,state.articles.length-1);
@@ -104,6 +124,14 @@ export default function reduce(state = initialState, action = {}) {
               if(state.user && state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1) {
                 isFav = true;
               }
+
+              return {
+                 ...state,
+                 articleNumber,
+                 currArticle:state.articles[articleNumber],
+                 isFav
+               }
+              /*
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
@@ -114,6 +142,13 @@ export default function reduce(state = initialState, action = {}) {
 
               };
               return newState;
+              */
+            }
+            case "SEARCH": {
+              return {
+                 ...state,
+                 search: action.search,
+               }
             }
             case "NEXT": {
               let articleNumber = Math.max(state.articleNumber - 1,0);
@@ -122,6 +157,14 @@ export default function reduce(state = initialState, action = {}) {
               if(state.user && state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1) {
                 isFav = true;
               }
+              return {
+                 ...state,
+                 articleNumber,
+                 currArticle:state.articles[articleNumber],
+                 isFav
+               }
+
+              /*
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
@@ -131,6 +174,7 @@ export default function reduce(state = initialState, action = {}) {
                   isFav:isFav
               };
               return newState;
+              */
             }
             case "GOTO": {
               let selectedArticle = findArticleByGUID(action.guid,state);
@@ -139,6 +183,13 @@ export default function reduce(state = initialState, action = {}) {
               if(selectedArticle && state.user && state.user.favorites.indexOf(selectedArticle.guid)!==-1) {
                 isFav = true;
               }
+
+              return {
+                 ...state,
+                 selectedArticle,
+                 isFav
+               }
+              /*
               let newState = {
                   articles: state.articles,
                   currArticle:state.currArticle,
@@ -150,12 +201,20 @@ export default function reduce(state = initialState, action = {}) {
 
               };
               return newState;
+              */
             }
             case types.USER_LOADED: {
               let isFav = false;
               if(state.currArticle && action.user && action.user.favorites.indexOf(state.currArticle.guid)!==-1) {
                 isFav = true;
               }
+              return {
+                 ...state,
+                 user:action.user,
+                 isFav
+               }
+
+              /*
 
               let newState = {
                 articles: state.articles,
@@ -167,6 +226,7 @@ export default function reduce(state = initialState, action = {}) {
                 user:action.user,
               }
               return newState;
+              */
             }
             case "SAVE_TO_FAVORITES": {
               let isFav = true;
@@ -187,7 +247,14 @@ export default function reduce(state = initialState, action = {}) {
 
               user.favorites = Array.from(favs);
               localStorage.setItem('startupOfTheDayUser', JSON.stringify(user));
+              return {
+                 ...state,
+                 user,
+                 isFav,
+                 doNotScroll:true,
+               }
 
+              /*
               let newState = {
                 articles: state.articles,
                 currArticle:state.currArticle,
@@ -199,6 +266,7 @@ export default function reduce(state = initialState, action = {}) {
                 doNotScroll:true,
               }
               return newState;
+              */
             }
         default:
             return state;

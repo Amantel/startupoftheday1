@@ -33,6 +33,7 @@ class App extends Component {
     }
 
     onStoryChange (e) {
+
       this.setState({ activeStory: e.currentTarget.dataset.story });
       this.props.dispatch(push('/'+e.currentTarget.dataset.story));
     }
@@ -106,7 +107,7 @@ class App extends Component {
 
 
       //this.setState({ activeStory: activeStory });
-      console.log(activeStory);
+      //console.log(activeStory);
       return (
         <UI.Epic activeStory={activeStory} tabbar={
           <UI.Tabbar>
@@ -159,40 +160,6 @@ class App extends Component {
       )
     }
 
-    /*
-
-    render() {
-
-
-        let activePanel =   'mainPanel';
-        //first launch
-
-        if( this.state.isFirst ) {
-          activePanel = 'introPanel';
-        }
-
-
-        if(this.props.pageId === 'about') activePanel = 'aboutPanel';
-        if(this.props.pageId === 'intro') activePanel = 'introPanel';
-        if(this.props.pageId === 'content') activePanel = 'mainPanel';
-        if(this.props.pageId === 'list') activePanel = 'listPanel';
-
-        return (
-            <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>
-                <UI.Root activeView="mainView">
-                    <UI.View id="mainView" activePanel={activePanel}>
-                        <AboutPanel id="aboutPanel"/>
-                        <IntroPanel id="introPanel"/>
-                        <ListPanel id="listPanel"/>
-                        <MainPanel id="mainPanel" accessToken={this.props.accessToken}/>
-
-
-                    </UI.View>
-                </UI.Root>
-            </UI.ConfigProvider>
-        );
-    }
-    */
 }
 
 

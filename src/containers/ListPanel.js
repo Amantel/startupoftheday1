@@ -18,9 +18,20 @@ class ListPanel extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {searchValue: '', foundArticles: [], isFiltered:false};
+
+    this.state = {searchValue: props.search || '', foundArticles: [], isFiltered:false};
 
     this.handleChange = this.handleChange.bind(this);
+
+    console.log('constructed');
+
+  }
+
+  componentDidMount () {
+    console.log('onLoad',this.props.search)
+    if(this.props.search) {
+      this.handleChange(this.props.search);
+    }
   }
 
   handleChange (search) {
@@ -50,7 +61,9 @@ class ListPanel extends Component {
 
 
     }
-
+    this.props.dispatch(
+      {type:"SEARCH",search}
+    );
     doSearch(this,search);
   }
 
@@ -62,8 +75,7 @@ class ListPanel extends Component {
 
         return ('0' + day).slice(-2) + '.' + ('0' + (month + 1)).slice(-2) + '.' + year.toString().substr(-2);
     }
-    componentWillMount() {
-    }
+
 
 /*
     onChange (search) {
@@ -97,31 +109,16 @@ class ListPanel extends Component {
         if(this.state.isFiltered) {
           articles = this.state.foundArticles;
         }
-/*
-        <UI.Search
-         theme="header"
-         value={this.state.searchValue}
-         onChange={this.handleChange}
-
-       /> : 'Поиск'
-       */
-
-/*
-<UI.FormLayout>
-    <UI.FormLayoutGroup bottom="4 и более символов">
-      <UI.Input   value={this.state.searchValue} onChange={this.handleChange} type="text" placeholder="Поиск статьи..." />
-    </UI.FormLayoutGroup>
-  </UI.FormLayout>
-*/
 
 
 
 
         const osname = platform();
+        let searchText = this.state.searchValue;
 
         //let date = this.getPrettyDate(article.isoDate);
         let thisPanel = this;
-//                        <UI.CellButton onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.CellButton>
+
 //
         return (
             <UI.Panel id={this.props.id}>
@@ -132,7 +129,7 @@ class ListPanel extends Component {
               <UI.Search
               className="searchCustom"
                theme="default"
-               value={this.state.searchValue}
+               value={searchText}
                onChange={this.handleChange.bind(this)}
              />
                 {articles.map(function(article, index){
@@ -160,6 +157,7 @@ class ListPanel extends Component {
 function mapStateToProps(state) {
     return {
         articles: startupSelectors.getArticlesContent(state),
+        search:state.startup.search || "",
     };
 }
 
