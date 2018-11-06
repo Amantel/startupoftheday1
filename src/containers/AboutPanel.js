@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
-import PhotoImg from '../gorniy_big.png';
 import Cookies from '../services/Cookies';
 import './StartupDashboard.css';
 import AboutContent from './AboutContent';

@@ -3,7 +3,6 @@ import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
 import PhotoImg from '../gorniy_big.png';
-import Cookies from '../services/Cookies';
 import './StartupDashboard.css';
 import {push} from 'react-router-redux';
 
@@ -11,7 +10,6 @@ import {push} from 'react-router-redux';
 class AboutContent extends Component {
 
     render() {
-        let superThis = this;
 
         return (
                 <UI.Group className="groupOnTop">

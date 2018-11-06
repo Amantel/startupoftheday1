@@ -18,12 +18,17 @@ import {push} from 'react-router-redux';
 import * as startupActions from '../store/startup/actions';
 import * as startupSelectors from '../store/startup/reducer';
 import '../css/App.css';
+import * as Sentry from '@sentry/browser';
 
 class App extends Component {
 
 
     constructor (props) {
       super(props);
+
+      Sentry.init({
+        dsn: "https://49bf82af6c2841ac859c57ab10b9ff38@sentry.io/1317015"
+      });
 
       this.state = {
         activeStory: 'feed',
@@ -47,8 +52,7 @@ class App extends Component {
         let user =  JSON.parse(localStorage.getItem('startupOfTheDayUser'))
         this.props.dispatch(startupActions.loadUser());
 
-
-
+ 
         if(!this.props.articles) {
           if(!user)
           {
@@ -77,7 +81,7 @@ class App extends Component {
 
         //this.props.dispatch(vkActions.fetchAccessToken()); //this will ask for profile
 
-        let cookie = parseInt(localStorage.getItem('startUpisFirstOpen'));
+        let cookie = parseInt(localStorage.getItem('startUpisFirstOpen'),10);
         let isFirst = false;
 
         if(cookie!==1) {

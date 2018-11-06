@@ -6,14 +6,17 @@ const initialState = Immutable({
     articles: undefined,
     currArticle: undefined
 });
+/*
 const stopWords =
 [
   'https://docs.google.com/spreadsheets/d/1LGn1-adzc2lTvOPYY0Stq64nil_lkNf4pzlf3nm_yww/',
   '(На правах рекламы)'
 ];
+*/
 const whiteList = [
   '#стартапдня'
 ]
+/*
 function clearStopWords (articles) {
   return articles.filter(article=>{
     let isStoped = false;
@@ -26,7 +29,7 @@ function clearStopWords (articles) {
   });
 
 }
-
+*/
 function clearWhiteList (articles) {
   return articles.filter(article=>{
     let isStoped = false;
@@ -68,7 +71,7 @@ export default function reduce(state = initialState, action = {}) {
 
     switch (action.type) {
             case types.ARTICLES_FETCHED: {
-              
+
               if(action.articles)
                 saveArticlesToStorage(action.articles);
               let articles = getArticlesFromStorage();
@@ -183,7 +186,7 @@ export default function reduce(state = initialState, action = {}) {
             }
             case "GOTO": {
               let selectedArticle = findArticleByGUID(action.guid,state);
-              let articleNumber = _.findIndex(state.articles,['guid',selectedArticle.guid]);
+              //  let articleNumber = _.findIndex(state.articles,['guid',selectedArticle.guid]);
               let isFav = false;
               if(selectedArticle && state.user && state.user.favorites.indexOf(selectedArticle.guid)!==-1) {
                 isFav = true;

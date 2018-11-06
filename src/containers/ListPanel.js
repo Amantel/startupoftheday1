@@ -5,11 +5,8 @@ import {connect} from 'react-redux';
 import * as startupSelectors from '../store/startup/reducer';
 import {push} from 'react-router-redux';
 
-import Icon28ChevronBack from "@vkontakte/icons/dist/28/chevron_back";
-import Icon24Back from "@vkontakte/icons/dist/24/back";
-import Icon24Search from "@vkontakte/icons/dist/24/search";
 
-import { platform, IOS, ANDROID } from '@vkontakte/vkui';
+
 
 
 
@@ -113,7 +110,7 @@ class ListPanel extends Component {
 
 
 
-        const osname = platform();
+        //const osname = platform();
         let searchText = this.state.searchValue;
 
         //let date = this.getPrettyDate(article.isoDate);
