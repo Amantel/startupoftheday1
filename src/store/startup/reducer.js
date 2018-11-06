@@ -134,13 +134,14 @@ export default function reduce(state = initialState, action = {}) {
             }
             case "GOTO": {
               let selectedArticle = findArticleByGUID(action.guid,state);
+              let articleNumber = _.findIndex(state.articles,['guid',selectedArticle.guid]);
               let isFav = false;
               if(selectedArticle && state.user && state.user.favorites.indexOf(selectedArticle.guid)!==-1) {
                 isFav = true;
               }
               let newState = {
                   articles: state.articles,
-                  currArticle:state.articles[0],
+                  currArticle:selectedArticle,
                   selectedArticle:selectedArticle,
                   articleNumber:state.articleNumber,
                   fromMemory:state.fromMemory,
