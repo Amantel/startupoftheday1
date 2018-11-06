@@ -20,15 +20,33 @@ class AboutPanel extends Component {
                 <AboutContent/>
 
                 <UI.Group title="Этот блог на других площадках">
-                          <UI.Link href="https://t.me/startupoftheday/"><UI.CellButton>
-                            Telegram
-                          </UI.CellButton>
-                          </UI.Link>
-                          <UI.Link href="https://www.facebook.com/gornal/">
-                          <UI.CellButton className="topGreyBorder">
-                            Facebook
-                          </UI.CellButton>
+                            <UI.Link target="_blank" href="https://t.me/startupoftheday/"><UI.CellButton>
+                              Telegram
+                            </UI.CellButton>
                             </UI.Link>
+                            <UI.Link target="_blank" href="https://www.facebook.com/gornal/">
+                              <UI.CellButton className="topGreyBorder">
+                                Facebook
+                              </UI.CellButton>
+                            </UI.Link>
+                            <UI.Link target="_blank" href="https://icq.com/chat/startups">
+                              <UI.CellButton className="topGreyBorder">
+                                ICQ
+                              </UI.CellButton>
+                            </UI.Link>
+                            <UI.Link target="_blank" href="https://vk.com/startupoftheday">
+                              <UI.CellButton className="topGreyBorder">
+                                Группа Вконтакте
+                              </UI.CellButton>
+                            </UI.Link>
+                            <UI.Link target="_blank" href="http://startupoftheday.ru">
+                              <UI.CellButton className="topGreyBorder">
+                                startupoftheday.ru
+                              </UI.CellButton>
+                            </UI.Link>
+
+
+
                 </UI.Group>
             </UI.Panel>
         );
