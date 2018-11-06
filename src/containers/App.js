@@ -46,6 +46,9 @@ class App extends Component {
 
         let user =  JSON.parse(localStorage.getItem('startupOfTheDayUser'))
         this.props.dispatch(startupActions.loadUser());
+
+
+
         if(!this.props.articles) {
           if(!user)
           {
@@ -62,18 +65,12 @@ class App extends Component {
               storedArticles = JSON.parse(localStorage.getItem('startupOfTheDayArticles'));
             }
 
-
-
-
             if(!hasChanged && storedArticles.length!==0) {
               this.props.dispatch(startupActions.fetchArticlesFromMemory());
             } else {
               this.props.dispatch(startupActions.fetchArticles());
             }
           }
-
-
-
 
         }
 

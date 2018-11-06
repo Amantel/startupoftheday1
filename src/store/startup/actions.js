@@ -5,7 +5,10 @@ export function fetchArticles() {
     return async (dispatch, getState) => {
         try {
             const articles = await Startup.getArticles();
-            dispatch({type: types.ARTICLES_FETCHED, articles});
+            if(articles && articles.length>0)
+              dispatch({type: types.ARTICLES_FETCHED, articles});
+            else
+              dispatch({type: types.ARTICLES_FETCHED_ERROR, articles});
         } catch (error) {
             console.error(error);
         }

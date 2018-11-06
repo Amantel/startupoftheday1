@@ -45,22 +45,40 @@ class StartupDashboard extends Component {
         .scrollIntoView({ block: "start", behavior: "smooth" });
     }
 
-    if (!this.props.articles) {
-      //here will be the loader
+
+    if (!this.props.articles && !this.props.noArticlesFound) {
       return (
-        <UI.Group title="Загрузка...">
-          <UI.Div style={{ height: 100 }}>
-            <UI.Spinner size={50} />
-          </UI.Div>
-        </UI.Group>
+        <UI.Panel id={this.props.id}>
+          <UI.PanelHeader>Свежий выпуск</UI.PanelHeader>
+          <UI.Group title="Загрузка...">
+            <UI.Div style={{ height: 100 }}>
+              <UI.Spinner size={50} />
+            </UI.Div>
+          </UI.Group>
+        </UI.Panel>
       );
     }
+     else if (this.props.articles && this.props.articles.length === 0) {
+       return (
+         <UI.Panel id={this.props.id}  >
+         <UI.PanelHeader>Свежий выпуск</UI.PanelHeader>
+           <UI.Group>
+           <UI.Div style={{ height: 100 }}>
+            К сожалению, произошла ошибка загрузки данных.
+            <br/>
+            Пожалуйста, попробуйте запустить сервис позже.
+              </UI.Div>
+            </UI.Group>
+
+         </UI.Panel>
+       );
+     }
 
 
     let articles = this.props.articles;
     let article = this.props.currArticle;
     let articleNumber = this.props.articleNumber;
-    
+
     let isFav = false;
     if(this.props.user
       && this.props.user.favorites
@@ -203,7 +221,8 @@ function mapStateToProps(state) {
     fromMemory: startupSelectors.isFromMemory(state),
     user: startupSelectors.getUser(state),
     isFav: startupSelectors.isFav(state),
-    doNotScroll: startupSelectors.doNotScroll(state)
+    doNotScroll: startupSelectors.doNotScroll(state),
+    noArticlesFound:state.startup.noArticlesFound,
   };
 }
 

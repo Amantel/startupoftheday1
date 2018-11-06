@@ -7,12 +7,20 @@ class Startup {
     async getArticles() {
         return fetch(CORS_PROXY + 'http://startupoftheday.ru/feed/rss')
             .then(function (response) {
-              return response.text();
+              console.log(response);
+              if(response.ok) {
+                return response.text();
+              }
+              throw new Error('Network response was not ok.');
+
             }).then(function (text) {
                 return parser.parseString(text)
             }).then(function(parsedText){
               return parsedText.items.filter(a=>a.title);
-            })
+            }).catch(function(error) {
+                console.log('There has been a problem with your fetch operation: ' + error.message);
+                return [];
+            });
 
     }
 }
