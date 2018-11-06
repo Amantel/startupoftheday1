@@ -11,12 +11,11 @@ hr {
   /*minHeight:'160px*/
 }
 .big_photo {
- max-width: 600px;
-      height: 12rem;
-
-
-      background-size: cover;
-
+  display: inline-block;
+  width: 100%;
+  height: 12rem;
+  background-size: cover;
+  max-width: 600px;
 }
 .social_button {
   color:#99A2AD;
@@ -40,7 +39,12 @@ hr {
 .searchCustom::after{
   position:  initial !important;
 }
-
+.groupOnTop {
+  margin-top: 0;
+}
+.photo-div {
+  text-align: center;
+}
 /*
 .tabItem {
   color:#99A2AD;

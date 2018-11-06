@@ -14,8 +14,8 @@ class AboutContent extends Component {
         let superThis = this;
 
         return (
-                <UI.Group >
-                    <UI.Div className="big_photo" style={{backgroundImage: "url(" + PhotoImg + ")"}} />
+                <UI.Group className="groupOnTop">
+                    <div className="photo-div"><UI.Div className="big_photo" style={{backgroundImage: "url(" + PhotoImg + ")"}} /></div>
                     <UI.Div className='intro_group'>Я пишу каждый день про один новый малоизвестный стартап и иногда свои мысли и новости про рынок.</UI.Div>
                     <UI.Div className='intro_group'>Меня зовут Александр Горный, я директор по стратегии и анализу в Mail.Ru Group.</UI.Div>
                     {this.props.showButton &&
