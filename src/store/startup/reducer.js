@@ -247,6 +247,7 @@ export default function reduce(state = initialState, action = {}) {
 
               user.favorites = Array.from(favs);
               localStorage.setItem('startupOfTheDayUser', JSON.stringify(user));
+              
               return {
                  ...state,
                  user,

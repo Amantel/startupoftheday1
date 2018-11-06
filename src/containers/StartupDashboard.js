@@ -60,8 +60,12 @@ class StartupDashboard extends Component {
     let articles = this.props.articles;
     let article = this.props.currArticle;
     let articleNumber = this.props.articleNumber;
-
-    let isFav = checkIsFav(article.guid, articles);
+    
+    let isFav = false;
+    if(this.props.user
+      && this.props.user.favorites
+      && this.props.user.favorites.length>0)
+    isFav = checkIsFav(article.guid, this.props.user.favorites);
 
     let last = articleNumber === articles.length - 1;
     let first = articleNumber === 0;
