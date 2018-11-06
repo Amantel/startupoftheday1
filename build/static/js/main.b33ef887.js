@@ -13777,8 +13777,79 @@ if (typeof Object.create === 'function') {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionTypes__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
-var initialState=__WEBPACK_IMPORTED_MODULE_0_seamless_immutable___default()({articles:undefined,currArticle:undefined});var stopWords=['https://docs.google.com/spreadsheets/d/1LGn1-adzc2lTvOPYY0Stq64nil_lkNf4pzlf3nm_yww/','(На правах рекламы)'];var whiteList=['#стартапдня'];function clearStopWords(articles){return articles.filter(function(article){var isStoped=false;stopWords.forEach(function(stopWord){if(article.content&&article.content.toLowerCase().indexOf(stopWord.toLowerCase())>-1)isStoped=true;});if(isStoped)return false;return true;});}function clearWhiteList(articles){return articles.filter(function(article){var isStoped=false;whiteList.forEach(function(stopWord){if(article.content&&article.content.toLowerCase().indexOf(stopWord.toLowerCase())===-1)isStoped=true;});if(isStoped)return false;return true;});}function saveArticlesToStorage(articles){var original=getArticlesFromStorage();var result=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.unionBy(articles,original,"guid");result=clearWhiteList(result);localStorage.setItem('startupOfTheDayArticles',JSON.stringify(result));}function getArticlesFromStorage(){var articles=[];var localStorageArticles=localStorage.getItem('startupOfTheDayArticles');if(localStorageArticles!=null)articles=JSON.parse(localStorageArticles);articles=clearWhiteList(articles);return articles;}function findArticleByGUID(guid,state){if(!state.articles||state.articles.length===0)return undefined;var match=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.find(state.articles,{'guid':guid});return match;}function reduce(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:initialState;var action=arguments.length>1&&arguments[1]!==undefined?arguments[1]:{};switch(action.type){case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["a" /* ARTICLES_FETCHED */]:{saveArticlesToStorage(action.articles);var articles=getArticlesFromStorage();//getArticlesFromMemory
-var _isFav=false;if(state.user&&state.user.favorites.indexOf(articles[0].guid)!==-1){_isFav=true;}return{articles:articles,currArticle:articles[0],articleNumber:0,fromMemory:false,user:state.user,isFav:_isFav};}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["b" /* ARTICLES_FETCHED_FROM_MEMORY */]:{var _articles=clearWhiteList(action.articles);var _isFav2=false;if(state.user&&state.user.favorites.indexOf(_articles[0].guid)!==-1){_isFav2=true;}return{articles:_articles,currArticle:_articles[0],articleNumber:0,fromMemory:true,user:state.user,isFav:_isFav2};}case"PREV":{var articleNumber=Math.min(state.articleNumber+1,state.articles.length-1);var _isFav3=false;if(state.user&&state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1){_isFav3=true;}var newState={articles:state.articles,currArticle:state.articles[articleNumber],articleNumber:articleNumber,fromMemory:state.fromMemory,user:state.user,isFav:_isFav3};return newState;}case"NEXT":{var _articleNumber=Math.max(state.articleNumber-1,0);var _isFav4=false;if(state.user&&state.user.favorites.indexOf(state.articles[_articleNumber].guid)!==-1){_isFav4=true;}var _newState={articles:state.articles,currArticle:state.articles[_articleNumber],articleNumber:_articleNumber,fromMemory:state.fromMemory,user:state.user,isFav:_isFav4};return _newState;}case"GOTO":{var selectedArticle=findArticleByGUID(action.guid,state);var _isFav5=false;if(selectedArticle&&state.user&&state.user.favorites.indexOf(selectedArticle.guid)!==-1){_isFav5=true;}var _newState2={articles:state.articles,currArticle:state.articles[0],selectedArticle:selectedArticle,articleNumber:state.articleNumber,fromMemory:state.fromMemory,user:state.user,isFav:_isFav5};return _newState2;}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* USER_LOADED */]:{var _isFav6=false;if(state.currArticle&&action.user&&action.user.favorites.indexOf(state.currArticle.guid)!==-1){_isFav6=true;}var _newState3={articles:state.articles,currArticle:state.currArticle,selectedArticle:state.selectedArticle,articleNumber:state.articleNumber,fromMemory:state.fromMemory,isFav:_isFav6,user:action.user};return _newState3;}case"SAVE_TO_FAVORITES":{var _isFav7=true;var favsArr=state.user.favorites;var user=state.user;var favs=void 0;var favIndex=favsArr.indexOf(action.guid);if(favIndex===-1){favs=new Set(favsArr);favs.add(action.guid);}else{favsArr.splice(favIndex,1);favs=new Set(favsArr);_isFav7=false;}user.favorites=Array.from(favs);localStorage.setItem('startupOfTheDayUser',JSON.stringify(user));var _newState4={articles:state.articles,currArticle:state.currArticle,selectedArticle:state.selectedArticle,articleNumber:state.articleNumber,fromMemory:state.fromMemory,isFav:_isFav7,user:user,doNotScroll:true};return _newState4;}default:return state;}}function getArticlesContent(state){return state.startup.articles;}function getCurrArticleContent(state){return state.startup.currArticle;}function isFromMemory(state){return state.startup.fromMemory;}function getSelectedArticle(state){return state.startup.selectedArticle;}function getCurrArticleNumber(state){return state.startup.articleNumber;}function getUser(state){return state.startup.user;}function isFav(state){return state.startup.isFav;}function doNotScroll(state){return state.startup.doNotScroll||false;}
+var initialState=__WEBPACK_IMPORTED_MODULE_0_seamless_immutable___default()({articles:undefined,currArticle:undefined});var stopWords=['https://docs.google.com/spreadsheets/d/1LGn1-adzc2lTvOPYY0Stq64nil_lkNf4pzlf3nm_yww/','(На правах рекламы)'];var whiteList=['#стартапдня'];function clearStopWords(articles){return articles.filter(function(article){var isStoped=false;stopWords.forEach(function(stopWord){if(article.content&&article.content.toLowerCase().indexOf(stopWord.toLowerCase())>-1)isStoped=true;});if(isStoped)return false;return true;});}function clearWhiteList(articles){return articles.filter(function(article){var isStoped=false;whiteList.forEach(function(stopWord){if(article.content&&article.content.toLowerCase().indexOf(stopWord.toLowerCase())===-1)isStoped=true;});if(isStoped)return false;return true;});}function saveArticlesToStorage(articles){var original=getArticlesFromStorage();var result=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.unionBy(articles,original,"guid");result=clearWhiteList(result);localStorage.setItem('startupOfTheDayArticles',JSON.stringify(result));}function getArticlesFromStorage(){var articles=[];/*
+  let localStorageArticles = localStorage.getItem('startupOfTheDayArticles');
+  if(localStorageArticles!=null)
+    articles = JSON.parse(localStorageArticles);
+  articles = clearWhiteList(articles);
+  */return articles;}function findArticleByGUID(guid,state){if(!state.articles||state.articles.length===0)return undefined;var match=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.find(state.articles,{'guid':guid});return match;}function reduce(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:initialState;var action=arguments.length>1&&arguments[1]!==undefined?arguments[1]:{};switch(action.type){case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["a" /* ARTICLES_FETCHED */]:{if(action.articles)saveArticlesToStorage(action.articles);var articles=getArticlesFromStorage();//getArticlesFromMemory
+var _isFav=false;if(state.user&&state.user.favorites.indexOf(articles[0].guid)!==-1){_isFav=true;}return Object.assign({},state,{articles:articles,currArticle:articles[0],articleNumber:0,fromMemory:false,isFav:_isFav});}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["b" /* ARTICLES_FETCHED_ERROR */]:{var _articles=getArticlesFromStorage();return Object.assign({},state,{articles:_articles,noArticlesFound:_articles.length===0});}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* ARTICLES_FETCHED_FROM_MEMORY */]:{var _articles2=clearWhiteList(action.articles);var _isFav2=false;if(state.user&&state.user.favorites.indexOf(_articles2[0].guid)!==-1){_isFav2=true;}return Object.assign({},state,{articles:_articles2,currArticle:_articles2[0],articleNumber:0,fromMemory:true,isFav:_isFav2/*
+              return {
+                  articles: articles,
+                  currArticle:articles[0],
+                  articleNumber:0,
+                  fromMemory:true,
+                  user:state.user,
+                  isFav:isFav
+              };
+              */});}case"PREV":{var articleNumber=Math.min(state.articleNumber+1,state.articles.length-1);var _isFav3=false;if(state.user&&state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1){_isFav3=true;}return Object.assign({},state,{articleNumber:articleNumber,currArticle:state.articles[articleNumber],isFav:_isFav3/*
+              let newState = {
+                  articles: state.articles,
+                  currArticle:state.articles[articleNumber],
+                  articleNumber:articleNumber,
+                  fromMemory:state.fromMemory,
+                  user:state.user,
+                  isFav:isFav
+
+              };
+              return newState;
+              */});}case"SEARCH":{return Object.assign({},state,{search:action.search});}case"NEXT":{var _articleNumber=Math.max(state.articleNumber-1,0);var _isFav4=false;if(state.user&&state.user.favorites.indexOf(state.articles[_articleNumber].guid)!==-1){_isFav4=true;}return Object.assign({},state,{articleNumber:_articleNumber,currArticle:state.articles[_articleNumber],isFav:_isFav4/*
+              let newState = {
+                  articles: state.articles,
+                  currArticle:state.articles[articleNumber],
+                  articleNumber:articleNumber,
+                  fromMemory:state.fromMemory,
+                  user:state.user,
+                  isFav:isFav
+              };
+              return newState;
+              */});}case"GOTO":{var selectedArticle=findArticleByGUID(action.guid,state);var _articleNumber2=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.findIndex(state.articles,['guid',selectedArticle.guid]);var _isFav5=false;if(selectedArticle&&state.user&&state.user.favorites.indexOf(selectedArticle.guid)!==-1){_isFav5=true;}return Object.assign({},state,{selectedArticle:selectedArticle,isFav:_isFav5/*
+              let newState = {
+                  articles: state.articles,
+                  currArticle:state.currArticle,
+                  selectedArticle:selectedArticle,
+                  articleNumber:state.articleNumber,
+                  fromMemory:state.fromMemory,
+                  user:state.user,
+                  isFav:isFav
+
+              };
+              return newState;
+              */});}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["d" /* USER_LOADED */]:{var _isFav6=false;if(state.currArticle&&action.user&&action.user.favorites.indexOf(state.currArticle.guid)!==-1){_isFav6=true;}return Object.assign({},state,{user:action.user,isFav:_isFav6/*
+
+              let newState = {
+                articles: state.articles,
+                currArticle:state.currArticle,
+                selectedArticle:state.selectedArticle,
+                articleNumber:state.articleNumber,
+                fromMemory:state.fromMemory,
+                isFav:isFav,
+                user:action.user,
+              }
+              return newState;
+              */});}case"SAVE_TO_FAVORITES":{var _isFav7=true;var favsArr=state.user.favorites;var user=state.user;var favs=void 0;var favIndex=favsArr.indexOf(action.guid);if(favIndex===-1){favs=new Set(favsArr);favs.add(action.guid);}else{favsArr.splice(favIndex,1);favs=new Set(favsArr);_isFav7=false;}user.favorites=Array.from(favs);localStorage.setItem('startupOfTheDayUser',JSON.stringify(user));return Object.assign({},state,{user:user,isFav:_isFav7,doNotScroll:true/*
+              let newState = {
+                articles: state.articles,
+                currArticle:state.currArticle,
+                selectedArticle:state.selectedArticle,
+                articleNumber:state.articleNumber,
+                fromMemory:state.fromMemory,
+                isFav,
+                user,
+                doNotScroll:true,
+              }
+              return newState;
+              */});}default:return state;}}function getArticlesContent(state){return state.startup.articles;}function getCurrArticleContent(state){return state.startup.currArticle;}function isFromMemory(state){return state.startup.fromMemory;}function getSelectedArticle(state){return state.startup.selectedArticle;}function getCurrArticleNumber(state){return state.startup.articleNumber;}function getUser(state){return state.startup.user;}function isFav(state){return state.startup.isFav;}function doNotScroll(state){return state.startup.doNotScroll||false;}
 
 /***/ }),
 /* 14 */
@@ -14001,8 +14072,8 @@ module.exports = warning;
 
 
 
-var base64 = __webpack_require__(176)
-var ieee754 = __webpack_require__(177)
+var base64 = __webpack_require__(177)
+var ieee754 = __webpack_require__(178)
 var isArray = __webpack_require__(83)
 
 exports.Buffer = Buffer
@@ -16060,7 +16131,7 @@ exports.Readable = exports;
 exports.Writable = __webpack_require__(51);
 exports.Duplex = __webpack_require__(14);
 exports.Transform = __webpack_require__(90);
-exports.PassThrough = __webpack_require__(183);
+exports.PassThrough = __webpack_require__(184);
 
 
 /***/ }),
@@ -18716,7 +18787,7 @@ util.inherits = __webpack_require__(11);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(182)
+  deprecate: __webpack_require__(183)
 };
 /*</replacement>*/
 
@@ -19663,8 +19734,8 @@ function simpleEnd(buf) {
 
 
 
-var punycode = __webpack_require__(187);
-var util = __webpack_require__(188);
+var punycode = __webpack_require__(188);
+var util = __webpack_require__(189);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -19739,7 +19810,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
       'gopher:': true,
       'file:': true
     },
-    querystring = __webpack_require__(189);
+    querystring = __webpack_require__(190);
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
   if (url && util.isObject(url) && url instanceof Url) return url;
@@ -23119,9 +23190,10 @@ function immutableInit(config) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ARTICLES_FETCHED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ARTICLES_FETCHED_FROM_MEMORY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return USER_LOADED; });
-var ARTICLES_FETCHED='startup.ARTICLES_FETCHED';var ARTICLES_FETCHED_FROM_MEMORY='startup.ARTICLES_FETCHED_FROM_MEMORY';var USER_LOADED='startup.USER_LOADED';
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ARTICLES_FETCHED_ERROR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ARTICLES_FETCHED_FROM_MEMORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return USER_LOADED; });
+var ARTICLES_FETCHED='startup.ARTICLES_FETCHED';var ARTICLES_FETCHED_ERROR='startup.ARTICLES_FETCHED_ERROR';var ARTICLES_FETCHED_FROM_MEMORY='startup.ARTICLES_FETCHED_FROM_MEMORY';var USER_LOADED='startup.USER_LOADED';
 
 /***/ }),
 /* 72 */
@@ -23206,7 +23278,7 @@ var _createClass=function(){function defineProperties(target,props){for(var i=0;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__StartupDashboard_css__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__StartupDashboard_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__StartupDashboard_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_router_redux__ = __webpack_require__(9);
-var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var AboutContent=function(_Component){_inherits(AboutContent,_Component);function AboutContent(){_classCallCheck(this,AboutContent);return _possibleConstructorReturn(this,(AboutContent.__proto__||Object.getPrototypeOf(AboutContent)).apply(this,arguments));}_createClass(AboutContent,[{key:'render',value:function render(){var superThis=this;return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'big_photo',style:{backgroundImage:"url("+__WEBPACK_IMPORTED_MODULE_4__gorniy_big_png___default.a+")"}}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'intro_group'},'\u042F \u043F\u0438\u0448\u0443 \u043A\u0430\u0436\u0434\u044B\u0439 \u0434\u0435\u043D\u044C \u043F\u0440\u043E \u043E\u0434\u0438\u043D \u043D\u043E\u0432\u044B\u0439 \u043C\u0430\u043B\u043E\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0441\u0442\u0430\u0440\u0442\u0430\u043F \u0438 \u0438\u043D\u043E\u0433\u0434\u0430 \u0441\u0432\u043E\u0438 \u043C\u044B\u0441\u043B\u0438 \u0438 \u043D\u043E\u0432\u043E\u0441\u0442\u0438 \u043F\u0440\u043E \u0440\u044B\u043D\u043E\u043A.'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'intro_group'},'\u041C\u0435\u043D\u044F \u0437\u043E\u0432\u0443\u0442 \u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440 \u0413\u043E\u0440\u043D\u044B\u0439, \u044F \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440 \u043F\u043E \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0438 \u0438 \u0430\u043D\u0430\u043B\u0438\u0437\u0443 \u0432 Mail.Ru Group.'),this.props.showButton&&__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{style:{display:'flex'}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Button"],{size:'l',stretched:true,level:'2',onClick:this.navigationRead.bind(this)},'\u0427\u0438\u0442\u0430\u0442\u044C')));}},{key:'navigationRead',value:function navigationRead(){this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_7_react_router_redux__["c" /* push */])('/content'));}}]);return AboutContent;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["b" /* connect */])(mapStateToProps)(AboutContent));
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var AboutContent=function(_Component){_inherits(AboutContent,_Component);function AboutContent(){_classCallCheck(this,AboutContent);return _possibleConstructorReturn(this,(AboutContent.__proto__||Object.getPrototypeOf(AboutContent)).apply(this,arguments));}_createClass(AboutContent,[{key:'render',value:function render(){var superThis=this;return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{className:'groupOnTop'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div',{className:'photo-div'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'big_photo',style:{backgroundImage:"url("+__WEBPACK_IMPORTED_MODULE_4__gorniy_big_png___default.a+")"}})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'intro_group'},'\u042F \u043F\u0438\u0448\u0443 \u043A\u0430\u0436\u0434\u044B\u0439 \u0434\u0435\u043D\u044C \u043F\u0440\u043E \u043E\u0434\u0438\u043D \u043D\u043E\u0432\u044B\u0439 \u043C\u0430\u043B\u043E\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439 \u0441\u0442\u0430\u0440\u0442\u0430\u043F \u0438 \u0438\u043D\u043E\u0433\u0434\u0430 \u0441\u0432\u043E\u0438 \u043C\u044B\u0441\u043B\u0438 \u0438 \u043D\u043E\u0432\u043E\u0441\u0442\u0438 \u043F\u0440\u043E \u0440\u044B\u043D\u043E\u043A.'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'intro_group'},'\u041C\u0435\u043D\u044F \u0437\u043E\u0432\u0443\u0442 \u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440 \u0413\u043E\u0440\u043D\u044B\u0439, \u044F \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440 \u043F\u043E \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0438 \u0438 \u0430\u043D\u0430\u043B\u0438\u0437\u0443 \u0432 Mail.Ru Group.'),this.props.showButton&&__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{style:{display:'flex'}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Button"],{size:'l',stretched:true,level:'2',onClick:this.navigationRead.bind(this)},'\u0427\u0438\u0442\u0430\u0442\u044C')));}},{key:'navigationRead',value:function navigationRead(){this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_7_react_router_redux__["c" /* push */])('/content'));}}]);return AboutContent;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["b" /* connect */])(mapStateToProps)(AboutContent));
 
 /***/ }),
 /* 77 */
@@ -24167,10 +24239,10 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__2__;
 /* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var ClientRequest = __webpack_require__(175)
+/* WEBPACK VAR INJECTION */(function(global) {var ClientRequest = __webpack_require__(176)
 var response = __webpack_require__(85)
-var extend = __webpack_require__(185)
-var statusCodes = __webpack_require__(186)
+var extend = __webpack_require__(186)
+var statusCodes = __webpack_require__(187)
 var url = __webpack_require__(53)
 
 var http = exports
@@ -24652,7 +24724,7 @@ util.inherits = __webpack_require__(11);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(178);
+var debugUtil = __webpack_require__(179);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -24661,7 +24733,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(179);
+var BufferList = __webpack_require__(180);
 var destroyImpl = __webpack_require__(88);
 var StringDecoder;
 
@@ -25746,7 +25818,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(181);
+__webpack_require__(182);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -25992,9 +26064,9 @@ function done(stream, er, data) {
 
   defaults = __webpack_require__(54);
 
-  builder = __webpack_require__(193);
+  builder = __webpack_require__(194);
 
-  parser = __webpack_require__(198);
+  parser = __webpack_require__(199);
 
   processors = __webpack_require__(95);
 
@@ -47597,60 +47669,28 @@ registerValidSW(swUrl);}}).catch(function(){console.log('No internet connection 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ListPanel__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__FavoritesPanel__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__MainPanel__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ArticlePanel__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__vkontakte_icons_dist_28_newsfeed__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ArticlePanel__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__vkontakte_icons_dist_28_newsfeed__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__vkontakte_icons_dist_28_newsfeed___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__vkontakte_icons_dist_28_newsfeed__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__vkontakte_icons_dist_28_favorite__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__vkontakte_icons_dist_28_favorite__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__vkontakte_icons_dist_28_favorite___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__vkontakte_icons_dist_28_favorite__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__vkontakte_icons_dist_28_about_outline__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__vkontakte_icons_dist_28_about_outline__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__vkontakte_icons_dist_28_about_outline___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__vkontakte_icons_dist_28_about_outline__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__vkontakte_icons_dist_28_more__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__vkontakte_icons_dist_28_more__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__vkontakte_icons_dist_28_more___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__vkontakte_icons_dist_28_more__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_react_router_redux__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__store_startup_actions__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__store_startup_actions__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__store_startup_reducer__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__css_App_css__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__css_App_css__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__css_App_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__css_App_css__);
-var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(props){_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this,props));_this.state={activeStory:'feed',isFirst:undefined};_this.onStoryChange=_this.onStoryChange.bind(_this);return _this;}_createClass(App,[{key:'onStoryChange',value:function onStoryChange(e){this.setState({activeStory:e.currentTarget.dataset.story});this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_16_react_router_redux__["c" /* push */])('/'+e.currentTarget.dataset.story));}},{key:'componentWillMount',value:function componentWillMount(){this.props.dispatch(__WEBPACK_IMPORTED_MODULE_5__store_vk_actions__["e" /* initApp */]());var user=JSON.parse(localStorage.getItem('startupOfTheDayUser'));this.props.dispatch(__WEBPACK_IMPORTED_MODULE_17__store_startup_actions__["c" /* loadUser */]());if(!this.props.articles){if(!user){this.props.dispatch(__WEBPACK_IMPORTED_MODULE_17__store_startup_actions__["a" /* fetchArticles */]());}else{var lastVisit=new Date(user.lastVisit).getTime()/1000/60/60;//hours
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var App=function(_Component){_inherits(App,_Component);function App(props){_classCallCheck(this,App);var _this=_possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).call(this,props));_this.state={activeStory:'feed',isFirst:undefined};_this.onStoryChange=_this.onStoryChange.bind(_this);return _this;}_createClass(App,[{key:'onStoryChange',value:function onStoryChange(e){window.scrollTo(0,0);this.setState({activeStory:e.currentTarget.dataset.story});this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_16_react_router_redux__["c" /* push */])('/'+e.currentTarget.dataset.story));}},{key:'componentWillMount',value:function componentWillMount(){this.props.dispatch(__WEBPACK_IMPORTED_MODULE_5__store_vk_actions__["e" /* initApp */]());var user=JSON.parse(localStorage.getItem('startupOfTheDayUser'));this.props.dispatch(__WEBPACK_IMPORTED_MODULE_17__store_startup_actions__["c" /* loadUser */]());if(!this.props.articles){if(!user){this.props.dispatch(__WEBPACK_IMPORTED_MODULE_17__store_startup_actions__["a" /* fetchArticles */]());}else{var lastVisit=new Date(user.lastVisit).getTime()/1000/60/60;//hours
 var timeNow=new Date().getTime()/1000/60/60;//hours
 var hasChanged=timeNow-lastVisit>3;//more than 3 hours
 var storedArticles=[];if(localStorage.getItem('startupOfTheDayArticles')!=null){storedArticles=JSON.parse(localStorage.getItem('startupOfTheDayArticles'));}if(!hasChanged&&storedArticles.length!==0){this.props.dispatch(__WEBPACK_IMPORTED_MODULE_17__store_startup_actions__["b" /* fetchArticlesFromMemory */]());}else{this.props.dispatch(__WEBPACK_IMPORTED_MODULE_17__store_startup_actions__["a" /* fetchArticles */]());}}}//this.props.dispatch(vkActions.fetchAccessToken()); //this will ask for profile
 var cookie=parseInt(localStorage.getItem('startUpisFirstOpen'));var isFirst=false;if(cookie!==1){cookie=1;isFirst=true;localStorage.setItem('startUpisFirstOpen',1);this.setState({isFirst:isFirst});//this.setState({ activeStory:'intro' });
 console.log("isFirst",isFirst);this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_16_react_router_redux__["c" /* push */])('/intro'));}}},{key:'render',value:function render(){var activeStory=this.state.activeStory;if(this.props.pageId==='')activeStory='feed';if(this.props.pageId==='content')activeStory='feed';if(this.props.pageId==='about')activeStory='about';if(this.props.pageId==='intro')activeStory='intro';if(this.props.pageId==='article')activeStory='article';if(this.props.pageId==='list')activeStory='list';if(this.props.pageId==='favorite')activeStory='favorite';//this.setState({ activeStory: activeStory });
-console.log(activeStory);return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Epic"],{activeStory:activeStory,tabbar:__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Tabbar"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:activeStory==='feed','data-story':'feed'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_12__vkontakte_icons_dist_28_newsfeed___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:this.state.activeStory==='favorite','data-story':'favorite'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_13__vkontakte_icons_dist_28_favorite___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:this.state.activeStory==='list','data-story':'list'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15__vkontakte_icons_dist_28_more___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:this.state.activeStory==='about','data-story':'about'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_14__vkontakte_icons_dist_28_about_outline___default.a,null)))},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'feed',activePanel:'feed'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__MainPanel__["a" /* default */],{id:'feed',accessToken:this.props.accessToken})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'favorite',activePanel:'favorite'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__FavoritesPanel__["a" /* default */],{id:'favorite'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'list',activePanel:'list'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ListPanel__["a" /* default */],{id:'list'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'about',activePanel:'about'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__AboutPanel__["a" /* default */],{id:'about'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'intro',activePanel:'intro'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__IntroPanel__["a" /* default */],{id:'intro'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'article',activePanel:'article'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__ArticlePanel__["a" /* default */],{id:'article'})));}/*
-
-    render() {
-
-
-        let activePanel =   'mainPanel';
-        //first launch
-
-        if( this.state.isFirst ) {
-          activePanel = 'introPanel';
-        }
-
-
-        if(this.props.pageId === 'about') activePanel = 'aboutPanel';
-        if(this.props.pageId === 'intro') activePanel = 'introPanel';
-        if(this.props.pageId === 'content') activePanel = 'mainPanel';
-        if(this.props.pageId === 'list') activePanel = 'listPanel';
-
-        return (
-            <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>
-                <UI.Root activeView="mainView">
-                    <UI.View id="mainView" activePanel={activePanel}>
-                        <AboutPanel id="aboutPanel"/>
-                        <IntroPanel id="introPanel"/>
-                        <ListPanel id="listPanel"/>
-                        <MainPanel id="mainPanel" accessToken={this.props.accessToken}/>
-
-
-                    </UI.View>
-                </UI.Root>
-            </UI.ConfigProvider>
-        );
-    }
-    */}]);return App;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{accessToken:__WEBPACK_IMPORTED_MODULE_4__store_vk_reducer__["b" /* getAccessToken */](state),insets:__WEBPACK_IMPORTED_MODULE_4__store_vk_reducer__["c" /* getInsets */](state),user:__WEBPACK_IMPORTED_MODULE_18__store_startup_reducer__["g" /* getUser */](state)};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(App));
+//console.log(activeStory);
+return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Epic"],{activeStory:activeStory,tabbar:__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Tabbar"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:activeStory==='feed','data-story':'feed'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_12__vkontakte_icons_dist_28_newsfeed___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:this.state.activeStory==='favorite','data-story':'favorite'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_13__vkontakte_icons_dist_28_favorite___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:this.state.activeStory==='list','data-story':'list'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15__vkontakte_icons_dist_28_more___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["TabbarItem"],{className:'tabItem',onClick:this.onStoryChange,selected:this.state.activeStory==='about','data-story':'about'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_14__vkontakte_icons_dist_28_about_outline___default.a,null)))},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'feed',activePanel:'feed'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__MainPanel__["a" /* default */],{id:'feed',accessToken:this.props.accessToken})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'favorite',activePanel:'favorite'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__FavoritesPanel__["a" /* default */],{id:'favorite'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'list',activePanel:'list'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ListPanel__["a" /* default */],{id:'list'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'about',activePanel:'about'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__AboutPanel__["a" /* default */],{id:'about'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'intro',activePanel:'intro'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__IntroPanel__["a" /* default */],{id:'intro'})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["View"],{id:'article',activePanel:'article'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__ArticlePanel__["a" /* default */],{id:'article'})));}}]);return App;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{accessToken:__WEBPACK_IMPORTED_MODULE_4__store_vk_reducer__["b" /* getAccessToken */](state),insets:__WEBPACK_IMPORTED_MODULE_4__store_vk_reducer__["c" /* getInsets */](state),user:__WEBPACK_IMPORTED_MODULE_18__store_startup_reducer__["g" /* getUser */](state)};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(App));
 
 /***/ }),
 /* 152 */
@@ -48444,7 +48484,7 @@ if (hadRuntime) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__StartupDashboard_css__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__StartupDashboard_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__StartupDashboard_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__AboutContent__ = __webpack_require__(76);
-var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var AboutPanel=function(_Component){_inherits(AboutPanel,_Component);function AboutPanel(){_classCallCheck(this,AboutPanel);return _possibleConstructorReturn(this,(AboutPanel.__proto__||Object.getPrototypeOf(AboutPanel)).apply(this,arguments));}_createClass(AboutPanel,[{key:'render',value:function render(){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u041E \u0421\u0435\u0440\u0432\u0438\u0441\u0435'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__AboutContent__["a" /* default */],null),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{title:'\u042D\u0442\u043E\u0442 \u0431\u043B\u043E\u0433 \u043D\u0430 \u0434\u0440\u0443\u0433\u0438\u0445 \u043F\u043B\u043E\u0449\u0430\u0434\u043A\u0430\u0445'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Link"],{href:'https://t.me/startupoftheday/'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["CellButton"],null,'Telegram')),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Link"],{href:'https://www.facebook.com/gornal/'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["CellButton"],{className:'topGreyBorder'},'Facebook'))));/*
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var AboutPanel=function(_Component){_inherits(AboutPanel,_Component);function AboutPanel(){_classCallCheck(this,AboutPanel);return _possibleConstructorReturn(this,(AboutPanel.__proto__||Object.getPrototypeOf(AboutPanel)).apply(this,arguments));}_createClass(AboutPanel,[{key:'render',value:function render(){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u041E \u0421\u0435\u0440\u0432\u0438\u0441\u0435'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__AboutContent__["a" /* default */],null),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{className:'no-select-gtitle',title:'\u042D\u0442\u043E\u0442 \u0431\u043B\u043E\u0433 \u043D\u0430 \u0434\u0440\u0443\u0433\u0438\u0445 \u043F\u043B\u043E\u0449\u0430\u0434\u043A\u0430\u0445'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Link"],{target:'_blank',href:'https://t.me/startupoftheday/'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["CellButton"],null,'Telegram')),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Link"],{target:'_blank',href:'https://www.facebook.com/gornal/'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["CellButton"],{className:'topGreyBorder'},'Facebook')),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Link"],{target:'_blank',href:'https://icq.com/chat/startups'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["CellButton"],{className:'topGreyBorder'},'ICQ')),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Link"],{target:'_blank',href:'https://vk.com/startupoftheday'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["CellButton"],{className:'topGreyBorder'},'\u0413\u0440\u0443\u043F\u043F\u0430 \u0412\u043A\u043E\u043D\u0442\u0430\u043A\u0442\u0435')),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Link"],{target:'_blank',href:'http://startupoftheday.ru'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["CellButton"],{className:'topGreyBorder'},'startupoftheday.ru'))));/*
           <UI.Group title="TMP CONTROLS" className="hidden" >
             <UI.Div>
               <UI.Button level="buy" component="a" onClick={this.clearCookie}>
@@ -48495,27 +48535,13 @@ var _createClass=function(){function defineProperties(target,props){for(var i=0;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__vkontakte_icons_dist_24_back___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__vkontakte_icons_dist_24_back__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__vkontakte_icons_dist_24_search__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__vkontakte_icons_dist_24_search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__vkontakte_icons_dist_24_search__);
-var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var ListPanel=function(_Component){_inherits(ListPanel,_Component);function ListPanel(props){_classCallCheck(this,ListPanel);var _this=_possibleConstructorReturn(this,(ListPanel.__proto__||Object.getPrototypeOf(ListPanel)).call(this,props));_this.state={searchValue:'',foundArticles:[],isFiltered:false};_this.handleChange=_this.handleChange.bind(_this);return _this;}_createClass(ListPanel,[{key:'handleChange',value:function handleChange(search){this.setState({searchValue:search});function doSearch(thisG,searchValue){console.log('searching',searchValue);var storedArticles=thisG.props.articles||[];var foundArticles=[];if(searchValue.length<2){thisG.setState({foundArticles:[],isFiltered:false});return false;}var searchValueRegex=new RegExp(searchValue,"gi");if(storedArticles.length>0){foundArticles=storedArticles.filter(function(article){if(article.content&&article.content.search(searchValueRegex)>-1)return true;return false;});}console.log(foundArticles);thisG.setState({foundArticles:foundArticles,isFiltered:true});}doSearch(this,search);}},{key:'getPrettyDate',value:function getPrettyDate(dateString){var date=new Date(dateString);var day=date.getDate();var month=date.getMonth();var year=date.getFullYear();return('0'+day).slice(-2)+'.'+('0'+(month+1)).slice(-2)+'.'+year.toString().substr(-2);}},{key:'componentWillMount',value:function componentWillMount(){}/*
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var ListPanel=function(_Component){_inherits(ListPanel,_Component);function ListPanel(props){_classCallCheck(this,ListPanel);var _this=_possibleConstructorReturn(this,(ListPanel.__proto__||Object.getPrototypeOf(ListPanel)).call(this,props));_this.state={searchValue:props.search||'',foundArticles:[],isFiltered:false};_this.handleChange=_this.handleChange.bind(_this);console.log('constructed');return _this;}_createClass(ListPanel,[{key:'componentDidMount',value:function componentDidMount(){console.log('onLoad',this.props.search);if(this.props.search){this.handleChange(this.props.search);}}},{key:'handleChange',value:function handleChange(search){this.setState({searchValue:search});function doSearch(thisG,searchValue){console.log('searching',searchValue);var storedArticles=thisG.props.articles||[];var foundArticles=[];if(searchValue.length<2){thisG.setState({foundArticles:[],isFiltered:false});return false;}var searchValueRegex=new RegExp(searchValue,"gi");if(storedArticles.length>0){foundArticles=storedArticles.filter(function(article){if(article.content&&article.content.search(searchValueRegex)>-1)return true;return false;});}console.log(foundArticles);thisG.setState({foundArticles:foundArticles,isFiltered:true});}this.props.dispatch({type:"SEARCH",search:search});doSearch(this,search);}},{key:'getPrettyDate',value:function getPrettyDate(dateString){var date=new Date(dateString);var day=date.getDate();var month=date.getMonth();var year=date.getFullYear();return('0'+day).slice(-2)+'.'+('0'+(month+1)).slice(-2)+'.'+year.toString().substr(-2);}/*
     onChange (search) {
       console.log(search);
       this.setState({ search }); }
-*/},{key:'render',value:function render(){if(!this.props.articles){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u0421\u043F\u0438\u0441\u043E\u043A \u0441\u0442\u0430\u0442\u0435\u0439'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{title:'\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{style:{height:100}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Spinner"],{size:50}))));}var articles=this.props.articles;if(this.state.isFiltered){articles=this.state.foundArticles;}/*
-        <UI.Search
-         theme="header"
-         value={this.state.searchValue}
-         onChange={this.handleChange}
-
-       /> : 'Поиск'
-       *//*
-<UI.FormLayout>
-    <UI.FormLayoutGroup bottom="4 и более символов">
-      <UI.Input   value={this.state.searchValue} onChange={this.handleChange} type="text" placeholder="Поиск статьи..." />
-    </UI.FormLayoutGroup>
-  </UI.FormLayout>
-*/var osname=Object(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["platform"])();//let date = this.getPrettyDate(article.isoDate);
-var thisPanel=this;//                        <UI.CellButton onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.CellButton>
-//
-return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u0421\u043F\u0438\u0441\u043E\u043A \u0441\u0432\u0435\u0436\u0438\u0445 \u0441\u0442\u0430\u0442\u0435\u0439'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Search"],{className:'searchCustom',theme:'default',value:this.state.searchValue,onChange:this.handleChange.bind(this)}),articles.map(function(article,index){var date=thisPanel.getPrettyDate(article.isoDate);return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{title:date,className:'groupList',key:article.guid},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'listDiv',onClick:thisPanel.goToArticle.bind(thisPanel,article.guid)},article.title));}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Footer"],null,'\u0412\u0441\u0435\u0433\u043E \u0441\u0442\u0430\u0442\u0435\u0439: ',articles.length,' '));}},{key:'goToArticle',value:function goToArticle(guid){this.props.dispatch({type:"GOTO",guid:guid});this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_5_react_router_redux__["c" /* push */])('/article'));}}]);return ListPanel;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{articles:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["c" /* getArticlesContent */](state)};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["b" /* connect */])(mapStateToProps)(ListPanel));
+*/},{key:'render',value:function render(){if(!this.props.articles){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u0421\u043F\u0438\u0441\u043E\u043A \u0441\u0442\u0430\u0442\u0435\u0439'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{title:'\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...'},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{style:{height:100}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Spinner"],{size:50}))));}var articles=this.props.articles;if(this.state.isFiltered){articles=this.state.foundArticles;}var osname=Object(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["platform"])();var searchText=this.state.searchValue;//let date = this.getPrettyDate(article.isoDate);
+var thisPanel=this;//
+return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],null,'\u0421\u043F\u0438\u0441\u043E\u043A \u0441\u0442\u0430\u0442\u0435\u0439'),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Search"],{className:'searchCustom',theme:'default',value:searchText,onChange:this.handleChange.bind(this)}),articles.map(function(article,index){var date=thisPanel.getPrettyDate(article.isoDate);return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],{title:date,className:'groupList no-select-gtitle',key:article.guid},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:'listDiv',onClick:thisPanel.goToArticle.bind(thisPanel,article.guid)},article.title));}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Footer"],{className:'no-select'},'\u0412\u0441\u0435\u0433\u043E \u0441\u0442\u0430\u0442\u0435\u0439: ',articles.length,' '));}},{key:'goToArticle',value:function goToArticle(guid){this.props.dispatch({type:"GOTO",guid:guid});this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_5_react_router_redux__["c" /* push */])('/article'));}}]);return ListPanel;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{articles:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["c" /* getArticlesContent */](state),search:state.startup.search||""};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["b" /* connect */])(mapStateToProps)(ListPanel));
 
 /***/ }),
 /* 157 */
@@ -49347,12 +49373,12 @@ exports.default = SvgIcon;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_browser_back___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_browser_back__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_browser_forward__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_browser_forward___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_browser_forward__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utilities_index__ = __webpack_require__(166);
 var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}//import '../css/App.css';
-var StartupDashboard=function(_Component){_inherits(StartupDashboard,_Component);function StartupDashboard(props){_classCallCheck(this,StartupDashboard);var _this=_possibleConstructorReturn(this,(StartupDashboard.__proto__||Object.getPrototypeOf(StartupDashboard)).call(this,props));_this.state={isFav:false};return _this;}_createClass(StartupDashboard,[{key:"getPrettyDate",value:function getPrettyDate(dateString){var date=new Date(dateString);var day=date.getDate();var month=date.getMonth();var year=date.getFullYear();return("0"+day).slice(-2)+"."+("0"+(month+1)).slice(-2)+"."+year.toString().substr(-2);}},{key:"componentWillUpdate",value:function componentWillUpdate(){}},{key:"render",value:function render(){if(!this.props.doNotScroll){document.querySelector("body").scrollIntoView({block:"start",behavior:"smooth"});}if(!this.props.articles){//here will be the loader
-return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Group"],{title:"\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430..."},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{style:{height:100}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Spinner"],{size:50})));}var isFav=this.props.isFav||false;var articles=this.props.articles;var article=this.props.currArticle;var articleNumber=this.props.articleNumber;var last=articleNumber===articles.length-1;var first=articleNumber===0;var date=this.getPrettyDate(article.isoDate);var title="Свежий выпуск";if(!first)title="Выпуск от "+date;if(this.props.fromMemory){}//title = title + " < FROM LOCAL STORAGE >";
+var StartupDashboard=function(_Component){_inherits(StartupDashboard,_Component);function StartupDashboard(props){_classCallCheck(this,StartupDashboard);var _this=_possibleConstructorReturn(this,(StartupDashboard.__proto__||Object.getPrototypeOf(StartupDashboard)).call(this,props));_this.state={isFav:false};return _this;}_createClass(StartupDashboard,[{key:"getPrettyDate",value:function getPrettyDate(dateString){var date=new Date(dateString);var day=date.getDate();var month=date.getMonth();var year=date.getFullYear();return("0"+day).slice(-2)+"."+("0"+(month+1)).slice(-2)+"."+year.toString().substr(-2);}},{key:"componentWillUpdate",value:function componentWillUpdate(){}},{key:"render",value:function render(){if(!this.props.doNotScroll){document.querySelector("body").scrollIntoView({block:"start",behavior:"smooth"});}if(!this.props.articles&&!this.props.noArticlesFound){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["PanelHeader"],null,"\u0421\u0432\u0435\u0436\u0438\u0439 \u0432\u044B\u043F\u0443\u0441\u043A"),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Group"],{title:"\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430..."},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{style:{height:100}},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Spinner"],{size:50}))));}else if(this.props.articles&&this.props.articles.length===0){return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["PanelHeader"],null,"\u0421\u0432\u0435\u0436\u0438\u0439 \u0432\u044B\u043F\u0443\u0441\u043A"),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Group"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{style:{height:100}},"\u041A \u0441\u043E\u0436\u0430\u043B\u0435\u043D\u0438\u044E, \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0434\u0430\u043D\u043D\u044B\u0445.",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br",null),"\u041F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430, \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u0442\u044C \u0441\u0435\u0440\u0432\u0438\u0441 \u043F\u043E\u0437\u0436\u0435.")));}var articles=this.props.articles;var article=this.props.currArticle;var articleNumber=this.props.articleNumber;var isFav=false;if(this.props.user&&this.props.user.favorites&&this.props.user.favorites.length>0)isFav=Object(__WEBPACK_IMPORTED_MODULE_11__utilities_index__["a" /* checkIsFav */])(article.guid,this.props.user.favorites);var last=articleNumber===articles.length-1;var first=articleNumber===0;var date=this.getPrettyDate(article.isoDate);var title="Свежий выпуск";if(!first)title="Выпуск от "+date;if(this.props.fromMemory){}//title = title + " < FROM LOCAL STORAGE >";
 //
 //maybe we should use https://stackoverflow.com/a/47159227/2863227
-var content=article.content;var favClassName='social_button';var isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__vkontakte_icons_dist_24_favorite_outline___default.a,null);if(isFav){favClassName+=" favored ";isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__vkontakte_icons_dist_24_favorite___default.a,null);}else{favClassName='social_button';isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__vkontakte_icons_dist_24_favorite_outline___default.a,null);}var ActiveDelay=50;return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["PanelHeader"],null,title),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Group"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{className:"pagen_top_div"},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:last,activeEffectDelay:ActiveDelay,level:"2",className:"pagen_button pagen_button_round",onClick:this.goPrev.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_browser_back___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:first,activeEffectDelay:ActiveDelay,level:"2",className:"pagen_button_round",style:{float:"right"},onClick:this.goNext.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_browser_forward___default.a,null))),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{className:"startup_article_content_div",dangerouslySetInnerHTML:{__html:content}}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{className:"topGreyBorder"},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{size:"l",before:isFavButton,activeEffectDelay:ActiveDelay,className:favClassName,level:"tertiary",onClick:this.saveToFavorites.bind(this,article.guid)}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{size:"l",before:__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__vkontakte_icons_dist_24_share_outline___default.a,null),className:"social_button",activeEffectDelay:ActiveDelay,level:"tertiary",style:{marginRight:4},onClick:this.goShare.bind(this)})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:last,level:"2",activeEffectDelay:ActiveDelay,className:"pagen_button pagen_button_round",onClick:this.goPrev.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_browser_back___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:first,activeEffectDelay:ActiveDelay,level:"2",className:"pagen_button_round",style:{float:"right"},onClick:this.goNext.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_browser_forward___default.a,null)))));}},{key:"goPrev",value:function goPrev(){this.props.dispatch({type:"PREV"});}},{key:"goNext",value:function goNext(){this.props.dispatch({type:"NEXT"});}},{key:"goShare",value:function goShare(){var article=this.props.currArticle;__WEBPACK_IMPORTED_MODULE_5__vkontakte_vkui_connect__["send"]("VKWebAppShare",{link:article.guid});}},{key:"saveToFavorites",value:function saveToFavorites(guid){this.props.dispatch({type:"SAVE_TO_FAVORITES",guid:this.props.currArticle.guid});}}]);return StartupDashboard;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{articles:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["c" /* getArticlesContent */](state),currArticle:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["d" /* getCurrArticleContent */](state),articleNumber:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["e" /* getCurrArticleNumber */](state),fromMemory:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["i" /* isFromMemory */](state),user:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["g" /* getUser */](state),isFav:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["h" /* isFav */](state),doNotScroll:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["b" /* doNotScroll */](state)};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(StartupDashboard));
+var content=article.content;var favClassName='social_button';var isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__vkontakte_icons_dist_24_favorite_outline___default.a,null);if(isFav){favClassName+=" favored ";isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__vkontakte_icons_dist_24_favorite___default.a,null);}else{favClassName='social_button';isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__vkontakte_icons_dist_24_favorite_outline___default.a,null);}var ActiveDelay=50;return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["PanelHeader"],null,title),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Group"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{className:"pagen_top_div"},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:last,activeEffectDelay:ActiveDelay,level:"2",className:"pagen_button pagen_button_round",onClick:this.goPrev.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_browser_back___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:first,activeEffectDelay:ActiveDelay,level:"2",className:"pagen_button_round",style:{float:"right"},onClick:this.goNext.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_browser_forward___default.a,null))),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{className:"startup_article_content_div",dangerouslySetInnerHTML:{__html:content}}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],{className:"topGreyBorder"},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{size:"l",before:isFavButton,activeEffectDelay:ActiveDelay,className:favClassName,level:"tertiary",onClick:this.saveToFavorites.bind(this,article.guid)}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{size:"l",before:__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__vkontakte_icons_dist_24_share_outline___default.a,null),className:"social_button",activeEffectDelay:ActiveDelay,level:"tertiary",style:{marginRight:4},onClick:this.goShare.bind(this)})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Div"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:last,level:"2",activeEffectDelay:ActiveDelay,className:"pagen_button pagen_button_round",onClick:this.goPrev.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_browser_back___default.a,null)),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__vkontakte_vkui__["Button"],{disabled:first,activeEffectDelay:ActiveDelay,level:"2",className:"pagen_button_round",style:{float:"right"},onClick:this.goNext.bind(this)}," ",__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_browser_forward___default.a,null)))));}},{key:"goPrev",value:function goPrev(){this.props.dispatch({type:"PREV"});}},{key:"goNext",value:function goNext(){this.props.dispatch({type:"NEXT"});}},{key:"goShare",value:function goShare(){var article=this.props.currArticle;__WEBPACK_IMPORTED_MODULE_5__vkontakte_vkui_connect__["send"]("VKWebAppShare",{link:article.guid});}},{key:"saveToFavorites",value:function saveToFavorites(guid){this.props.dispatch({type:"SAVE_TO_FAVORITES",guid:this.props.currArticle.guid});}}]);return StartupDashboard;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{articles:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["c" /* getArticlesContent */](state),currArticle:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["d" /* getCurrArticleContent */](state),articleNumber:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["e" /* getCurrArticleNumber */](state),fromMemory:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["i" /* isFromMemory */](state),user:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["g" /* getUser */](state),isFav:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["h" /* isFav */](state),doNotScroll:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["b" /* doNotScroll */](state),noArticlesFound:state.startup.noArticlesFound};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(StartupDashboard));
 
 /***/ }),
 /* 164 */
@@ -49741,6 +49767,14 @@ exports.default = SvgIcon;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = checkIsFav;
+function checkIsFav(guid,favorites){return favorites.indexOf(guid)>-1;}
+
+/***/ }),
+/* 167 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__ = __webpack_require__(7);
@@ -49770,7 +49804,7 @@ var _createClass=function(){function defineProperties(target,props){for(var i=0;
 var content=article.content;var favClassName='social_button';var isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_favorite_outline___default.a,null);if(isFav){favClassName+=" favored ";isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__vkontakte_icons_dist_24_favorite___default.a,null);}else{favClassName="social_button";isFavButton=__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__vkontakte_icons_dist_24_favorite_outline___default.a,null);}var ActiveDelay=50;return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Panel"],{id:this.props.id},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["PanelHeader"],{left:__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["HeaderButton"],{onClick:this.navigationBack.bind(this)},osname===__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["IOS"]?__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__vkontakte_icons_dist_28_chevron_back___default.a,null):__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__vkontakte_icons_dist_24_back___default.a,null))},title),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Group"],null,__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:"startup_article_content_div"},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div",{dangerouslySetInnerHTML:{__html:content}})),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Div"],{className:"topGreyBorder"},__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Button"],{size:"l",before:isFavButton,activeEffectDelay:ActiveDelay,className:favClassName,level:"tertiary",onClick:this.saveToFavorites.bind(this,article.guid)}),__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__vkontakte_vkui__["Button"],{size:"l",before:__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__vkontakte_icons_dist_24_share_outline___default.a,null),className:"social_button",activeEffectDelay:ActiveDelay,level:"tertiary",style:{marginRight:4},onClick:this.goShare.bind(this)}))));}},{key:"navigationBack",value:function navigationBack(){this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_5_react_router_redux__["b" /* goBack */])());}},{key:"goShare",value:function goShare(){var article=this.props.selectedArticle;__WEBPACK_IMPORTED_MODULE_12__vkontakte_vkui_connect__["send"]("VKWebAppShare",{link:article.guid});}},{key:"saveToFavorites",value:function saveToFavorites(guid){this.props.dispatch({type:"SAVE_TO_FAVORITES",guid:this.props.selectedArticle.guid});}}]);return ArticlePanel;}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);function mapStateToProps(state){return{selectedArticle:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["f" /* getSelectedArticle */](state),user:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["g" /* getUser */](state),isFav:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["h" /* isFav */](state),doNotScroll:__WEBPACK_IMPORTED_MODULE_4__store_startup_reducer__["b" /* doNotScroll */](state)};}/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_redux__["b" /* connect */])(mapStateToProps)(ArticlePanel));
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -49961,7 +49995,7 @@ exports.default = SvgIcon;
 });
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -50152,7 +50186,7 @@ exports.default = SvgIcon;
 });
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -50343,7 +50377,7 @@ exports.default = SvgIcon;
 });
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -50534,7 +50568,7 @@ exports.default = SvgIcon;
 });
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50544,28 +50578,17 @@ exports.default = SvgIcon;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionTypes__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_Startup__ = __webpack_require__(172);
-function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}function fetchArticles(){var _this=this;return function(){var _ref=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(dispatch,getState){var articles;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return __WEBPACK_IMPORTED_MODULE_2__services_Startup__["a" /* default */].getArticles();case 3:articles=_context.sent;dispatch({type:__WEBPACK_IMPORTED_MODULE_1__actionTypes__["a" /* ARTICLES_FETCHED */],articles:articles});_context.next=10;break;case 7:_context.prev=7;_context.t0=_context['catch'](0);console.error(_context.t0);case 10:case'end':return _context.stop();}}},_callee,_this,[[0,7]]);}));return function(_x,_x2){return _ref.apply(this,arguments);};}();}function fetchArticlesFromMemory(){var _this2=this;return function(){var _ref2=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(dispatch,getState){var articles;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:try{articles=JSON.parse(localStorage.getItem('startupOfTheDayArticles'));dispatch({type:__WEBPACK_IMPORTED_MODULE_1__actionTypes__["b" /* ARTICLES_FETCHED_FROM_MEMORY */],articles:articles});}catch(error){console.error(error);}case 1:case'end':return _context2.stop();}}},_callee2,_this2);}));return function(_x3,_x4){return _ref2.apply(this,arguments);};}();}function loadUser(){var _this3=this;return function(){var _ref3=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(dispatch,getState){var user;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:try{user=JSON.parse(localStorage.getItem('startupOfTheDayUser'));if(!user){user={created:new Date(),lastVisit:new Date(),favorites:[]};localStorage.setItem('startupOfTheDayUser',JSON.stringify(user));}else{user.lastVisit=new Date();localStorage.setItem('startupOfTheDayUser',JSON.stringify(user));}dispatch({type:__WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* USER_LOADED */],user:user});}catch(error){console.error(error);}case 1:case'end':return _context3.stop();}}},_callee3,_this3);}));return function(_x5,_x6){return _ref3.apply(this,arguments);};}();}
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_Startup__ = __webpack_require__(173);
+function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}function fetchArticles(){var _this=this;return function(){var _ref=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(dispatch,getState){var articles;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return __WEBPACK_IMPORTED_MODULE_2__services_Startup__["a" /* default */].getArticles();case 3:articles=_context.sent;if(articles&&articles.length>0)dispatch({type:__WEBPACK_IMPORTED_MODULE_1__actionTypes__["a" /* ARTICLES_FETCHED */],articles:articles});else dispatch({type:__WEBPACK_IMPORTED_MODULE_1__actionTypes__["b" /* ARTICLES_FETCHED_ERROR */],articles:articles});_context.next=10;break;case 7:_context.prev=7;_context.t0=_context['catch'](0);console.error(_context.t0);case 10:case'end':return _context.stop();}}},_callee,_this,[[0,7]]);}));return function(_x,_x2){return _ref.apply(this,arguments);};}();}function fetchArticlesFromMemory(){var _this2=this;return function(){var _ref2=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(dispatch,getState){var articles;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:try{articles=JSON.parse(localStorage.getItem('startupOfTheDayArticles'));dispatch({type:__WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* ARTICLES_FETCHED_FROM_MEMORY */],articles:articles});}catch(error){console.error(error);}case 1:case'end':return _context2.stop();}}},_callee2,_this2);}));return function(_x3,_x4){return _ref2.apply(this,arguments);};}();}function loadUser(){var _this3=this;return function(){var _ref3=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(dispatch,getState){var user;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:try{user=JSON.parse(localStorage.getItem('startupOfTheDayUser'));if(!user){user={created:new Date(),lastVisit:new Date(),favorites:[]};localStorage.setItem('startupOfTheDayUser',JSON.stringify(user));}else{user.lastVisit=new Date();localStorage.setItem('startupOfTheDayUser',JSON.stringify(user));}dispatch({type:__WEBPACK_IMPORTED_MODULE_1__actionTypes__["d" /* USER_LOADED */],user:user});}catch(error){console.error(error);}case 1:case'end':return _context3.stop();}}},_callee3,_this3);}));return function(_x5,_x6){return _ref3.apply(this,arguments);};}();}
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var Parser=__webpack_require__(173);var parser=new Parser();var CORS_PROXY="https://cors-anywhere.herokuapp.com/";var Startup=function(){function Startup(){_classCallCheck(this,Startup);}_createClass(Startup,[{key:'getArticles',value:function(){var _ref=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(){return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:return _context.abrupt('return',fetch(CORS_PROXY+'http://startupoftheday.ru/feed/rss').then(function(response){return response.text();}).then(function(text){return parser.parseString(text);}).then(function(parsedText){return parsedText.items.filter(function(a){return a.title;});}));case 1:case'end':return _context.stop();}}},_callee,this);}));function getArticles(){return _ref.apply(this,arguments);}return getArticles;}()}]);return Startup;}();/* harmony default export */ __webpack_exports__["a"] = (new Startup());
-
-/***/ }),
-/* 173 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(174);
-
-
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var Parser=__webpack_require__(174);var parser=new Parser();var CORS_PROXY="https://cors-anywhere.herokuapp.com/";var Startup=function(){function Startup(){_classCallCheck(this,Startup);}_createClass(Startup,[{key:'getArticles',value:function(){var _ref=_asyncToGenerator(/*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(){return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:return _context.abrupt('return',fetch(CORS_PROXY+'http://startupoftheday.ru/feed/rss').then(function(response){console.log(response);if(response.ok){return response.text();}throw new Error('Network response was not ok.');}).then(function(text){return parser.parseString(text);}).then(function(parsedText){return parsedText.items.filter(function(a){return a.title;});}).catch(function(error){console.log('There has been a problem with your fetch operation: '+error.message);return[];}));case 1:case'end':return _context.stop();}}},_callee,this);}));function getArticles(){return _ref.apply(this,arguments);}return getArticles;}()}]);return Startup;}();/* harmony default export */ __webpack_exports__["a"] = (new Startup());
 
 /***/ }),
 /* 174 */
@@ -50573,13 +50596,24 @@ module.exports = __webpack_require__(174);
 
 "use strict";
 
+
+module.exports = __webpack_require__(175);
+
+
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 const http = __webpack_require__(82);
-const https = __webpack_require__(192);
+const https = __webpack_require__(193);
 const xml2js = __webpack_require__(91);
 const url = __webpack_require__(53);
 
-const fields = __webpack_require__(206);
-const utils = __webpack_require__(207);
+const fields = __webpack_require__(207);
+const utils = __webpack_require__(208);
 
 const DEFAULT_HEADERS = {
   'User-Agent': 'rss-parser',
@@ -50828,14 +50862,14 @@ module.exports = Parser;
 
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer, global, process) {var capability = __webpack_require__(84)
 var inherits = __webpack_require__(11)
 var response = __webpack_require__(85)
 var stream = __webpack_require__(20)
-var toArrayBuffer = __webpack_require__(184)
+var toArrayBuffer = __webpack_require__(185)
 
 var IncomingMessage = response.IncomingMessage
 var rStates = response.readyStates
@@ -51162,7 +51196,7 @@ var unsafeHeaders = [
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16).Buffer, __webpack_require__(1), __webpack_require__(17)))
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51320,7 +51354,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -51410,13 +51444,13 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51425,7 +51459,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Buffer = __webpack_require__(27).Buffer;
-var util = __webpack_require__(180);
+var util = __webpack_require__(181);
 
 function copyBuffer(src, target, offset) {
   src.copy(target, offset);
@@ -51501,13 +51535,13 @@ if (util && util.inspect && util.inspect.custom) {
 }
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -51700,7 +51734,7 @@ if (util && util.inspect && util.inspect.custom) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(17)))
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -51774,7 +51808,7 @@ function config (name) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51827,7 +51861,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(16).Buffer
@@ -51860,7 +51894,7 @@ module.exports = function (buf) {
 
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports) {
 
 module.exports = extend
@@ -51885,7 +51919,7 @@ function extend() {
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -51955,7 +51989,7 @@ module.exports = {
 
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -52494,7 +52528,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)(module), __webpack_require__(1)))
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52517,18 +52551,18 @@ module.exports = {
 
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(190);
-exports.encode = exports.stringify = __webpack_require__(191);
+exports.decode = exports.parse = __webpack_require__(191);
+exports.encode = exports.stringify = __webpack_require__(192);
 
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52619,7 +52653,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52711,7 +52745,7 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var http = __webpack_require__(82)
@@ -52748,7 +52782,7 @@ function validateParams (params) {
 
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.12.7
@@ -52757,7 +52791,7 @@ function validateParams (params) {
   var builder, defaults, escapeCDATA, requiresCDATA, wrapCDATA,
     hasProp = {}.hasOwnProperty;
 
-  builder = __webpack_require__(194);
+  builder = __webpack_require__(195);
 
   defaults = __webpack_require__(54).defaults;
 
@@ -52881,7 +52915,7 @@ function validateParams (params) {
 
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.12.7
@@ -52890,13 +52924,13 @@ function validateParams (params) {
 
   ref = __webpack_require__(12), assign = ref.assign, isFunction = ref.isFunction;
 
-  XMLDocument = __webpack_require__(195);
+  XMLDocument = __webpack_require__(196);
 
-  XMLDocumentCB = __webpack_require__(196);
+  XMLDocumentCB = __webpack_require__(197);
 
   XMLStringWriter = __webpack_require__(55);
 
-  XMLStreamWriter = __webpack_require__(197);
+  XMLStreamWriter = __webpack_require__(198);
 
   module.exports.create = function(name, xmldec, doctype, options) {
     var doc, root;
@@ -52940,7 +52974,7 @@ function validateParams (params) {
 
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.12.7
@@ -52994,7 +53028,7 @@ function validateParams (params) {
 
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.12.7
@@ -53402,7 +53436,7 @@ function validateParams (params) {
 
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.12.7
@@ -53687,7 +53721,7 @@ function validateParams (params) {
 
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.12.7
@@ -53698,11 +53732,11 @@ function validateParams (params) {
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  sax = __webpack_require__(199);
+  sax = __webpack_require__(200);
 
   events = __webpack_require__(26);
 
-  bom = __webpack_require__(205);
+  bom = __webpack_require__(206);
 
   processors = __webpack_require__(95);
 
@@ -54050,7 +54084,7 @@ function validateParams (params) {
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {;(function (sax) { // wrapper for non-node envs
@@ -54215,7 +54249,7 @@ function validateParams (params) {
 
   var Stream
   try {
-    Stream = __webpack_require__(200).Stream
+    Stream = __webpack_require__(201).Stream
   } catch (ex) {
     Stream = function () {}
   }
@@ -55622,7 +55656,7 @@ function validateParams (params) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16).Buffer))
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -55653,10 +55687,10 @@ var inherits = __webpack_require__(11);
 
 inherits(Stream, EE);
 Stream.Readable = __webpack_require__(20);
-Stream.Writable = __webpack_require__(201);
-Stream.Duplex = __webpack_require__(202);
-Stream.Transform = __webpack_require__(203);
-Stream.PassThrough = __webpack_require__(204);
+Stream.Writable = __webpack_require__(202);
+Stream.Duplex = __webpack_require__(203);
+Stream.Transform = __webpack_require__(204);
+Stream.PassThrough = __webpack_require__(205);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -55755,35 +55789,35 @@ Stream.prototype.pipe = function(dest, options) {
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(51);
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(14);
 
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(20).Transform
 
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(20).PassThrough
 
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports) {
 
 // Generated by CoffeeScript 1.12.7
@@ -55801,7 +55835,7 @@ module.exports = __webpack_require__(20).PassThrough
 
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports) {
 
 const fields = module.exports = {};
@@ -55878,11 +55912,11 @@ fields.podcastItem = ([
 
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const utils = module.exports = {};
-const entities = __webpack_require__(208);
+const entities = __webpack_require__(209);
 const xml2js = __webpack_require__(91);
 
 utils.stripHtml = function(str) {
@@ -55960,11 +55994,11 @@ utils.getEncodingFromContentType = function(contentType) {
 
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var encode = __webpack_require__(209),
-    decode = __webpack_require__(210);
+var encode = __webpack_require__(210),
+    decode = __webpack_require__(211);
 
 exports.decode = function(data, level){
 	return (!level || level <= 0 ? decode.XML : decode.HTML)(data);
@@ -55999,7 +56033,7 @@ exports.escape = encode.escape;
 
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inverseXML = getInverseObj(__webpack_require__(96)),
@@ -56078,13 +56112,13 @@ exports.escape = escapeXML;
 
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var entityMap = __webpack_require__(97),
-    legacyMap = __webpack_require__(211),
+    legacyMap = __webpack_require__(212),
     xmlMap    = __webpack_require__(96),
-    decodeCodePoint = __webpack_require__(212);
+    decodeCodePoint = __webpack_require__(213);
 
 var decodeXMLStrict  = getStrictDecoder(xmlMap),
     decodeHTMLStrict = getStrictDecoder(entityMap);
@@ -56155,16 +56189,16 @@ module.exports = {
 };
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports) {
 
 module.exports = {"Aacute":"Á","aacute":"á","Acirc":"Â","acirc":"â","acute":"´","AElig":"Æ","aelig":"æ","Agrave":"À","agrave":"à","amp":"&","AMP":"&","Aring":"Å","aring":"å","Atilde":"Ã","atilde":"ã","Auml":"Ä","auml":"ä","brvbar":"¦","Ccedil":"Ç","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","COPY":"©","curren":"¤","deg":"°","divide":"÷","Eacute":"É","eacute":"é","Ecirc":"Ê","ecirc":"ê","Egrave":"È","egrave":"è","ETH":"Ð","eth":"ð","Euml":"Ë","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","GT":">","Iacute":"Í","iacute":"í","Icirc":"Î","icirc":"î","iexcl":"¡","Igrave":"Ì","igrave":"ì","iquest":"¿","Iuml":"Ï","iuml":"ï","laquo":"«","lt":"<","LT":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","Ntilde":"Ñ","ntilde":"ñ","Oacute":"Ó","oacute":"ó","Ocirc":"Ô","ocirc":"ô","Ograve":"Ò","ograve":"ò","ordf":"ª","ordm":"º","Oslash":"Ø","oslash":"ø","Otilde":"Õ","otilde":"õ","Ouml":"Ö","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\"","QUOT":"\"","raquo":"»","reg":"®","REG":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","THORN":"Þ","thorn":"þ","times":"×","Uacute":"Ú","uacute":"ú","Ucirc":"Û","ucirc":"û","Ugrave":"Ù","ugrave":"ù","uml":"¨","Uuml":"Ü","uuml":"ü","Yacute":"Ý","yacute":"ý","yen":"¥","yuml":"ÿ"}
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var decodeMap = __webpack_require__(213);
+var decodeMap = __webpack_require__(214);
 
 module.exports = decodeCodePoint;
 
@@ -56193,17 +56227,17 @@ function decodeCodePoint(codePoint){
 
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports) {
 
 module.exports = {"0":65533,"128":8364,"130":8218,"131":402,"132":8222,"133":8230,"134":8224,"135":8225,"136":710,"137":8240,"138":352,"139":8249,"140":338,"142":381,"145":8216,"146":8217,"147":8220,"148":8221,"149":8226,"150":8211,"151":8212,"152":732,"153":8482,"154":353,"155":8250,"156":339,"158":382,"159":376}
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.7db84f2e.js.map
+//# sourceMappingURL=main.b33ef887.js.map
