@@ -19,7 +19,7 @@ class AboutPanel extends Component {
                 </UI.PanelHeader>
                 <AboutContent/>
 
-                <UI.Group title="Этот блог на других площадках">
+                <UI.Group className="no-select-gtitle" title="Этот блог на других площадках">
                             <UI.Link target="_blank" href="https://t.me/startupoftheday/"><UI.CellButton>
                               Telegram
                             </UI.CellButton>

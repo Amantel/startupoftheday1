@@ -123,7 +123,7 @@ class ListPanel extends Component {
         return (
             <UI.Panel id={this.props.id}>
             <UI.PanelHeader>
-              Список свежих статей
+              Список статей
             </UI.PanelHeader>
 
               <UI.Search
@@ -134,13 +134,13 @@ class ListPanel extends Component {
              />
                 {articles.map(function(article, index){
                     let date = thisPanel.getPrettyDate(article.isoDate);
-                      return <UI.Group title={date} className="groupList" key={article.guid}>
+                      return <UI.Group  title={date} className="groupList no-select-gtitle" key={article.guid}>
                         <UI.Div className="listDiv" onClick={thisPanel.goToArticle.bind(thisPanel,article.guid)}>{article.title}</UI.Div>
                       </UI.Group>;
 
                 })}
 
-                <UI.Footer>Всего статей: {articles.length} </UI.Footer>
+                <UI.Footer className="no-select">Всего статей: {articles.length} </UI.Footer>
 
             </UI.Panel>
         );

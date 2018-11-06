@@ -45,6 +45,23 @@ hr {
 .photo-div {
   text-align: center;
 }
+
+.no-select {
+-moz-user-select: none; /* Mozilla Firefox */
+-ms-user-select: none; /* Internet Explorer (не поддерживается) */
+-o-user-select: none; /* Opera Presto (не поддерживается) */
+-webkit-user-select: none; /* Google Chrome, Opera Next, Safari */
+}
+.no-select-gtitle .Header__in {
+  -moz-user-select: none; /* Mozilla Firefox */
+  -ms-user-select: none; /* Internet Explorer (не поддерживается) */
+  -o-user-select: none; /* Opera Presto (не поддерживается) */
+  -webkit-user-select: none; /* Google Chrome, Opera Next, Safari */
+}
+
+button .Tappable__waves  {
+  display: none;
+}
 /*
 .tabItem {
   color:#99A2AD;

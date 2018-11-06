@@ -33,6 +33,7 @@ class App extends Component {
     }
 
     onStoryChange (e) {
+      window.scrollTo(0, 0);
 
       this.setState({ activeStory: e.currentTarget.dataset.story });
       this.props.dispatch(push('/'+e.currentTarget.dataset.story));
