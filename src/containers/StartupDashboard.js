@@ -9,6 +9,8 @@ import Icon24FavoriteOutline from "@vkontakte/icons/dist/24/favorite_outline";
 import Icon24Favorite from "@vkontakte/icons/dist/24/favorite";
 import Icon24BrowserBack from "@vkontakte/icons/dist/24/browser_back";
 import Icon24BrowserForward from "@vkontakte/icons/dist/24/browser_forward";
+import {checkIsFav} from "../utilities/index";
+
 //import '../css/App.css';
 
 class StartupDashboard extends Component {
@@ -54,10 +56,12 @@ class StartupDashboard extends Component {
       );
     }
 
-    let isFav = this.props.isFav || false;
+
     let articles = this.props.articles;
     let article = this.props.currArticle;
     let articleNumber = this.props.articleNumber;
+
+    let isFav = checkIsFav(article.guid, articles);
 
     let last = articleNumber === articles.length - 1;
     let first = articleNumber === 0;

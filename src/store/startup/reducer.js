@@ -141,7 +141,7 @@ export default function reduce(state = initialState, action = {}) {
               }
               let newState = {
                   articles: state.articles,
-                  currArticle:selectedArticle,
+                  currArticle:state.currArticle,
                   selectedArticle:selectedArticle,
                   articleNumber:state.articleNumber,
                   fromMemory:state.fromMemory,
