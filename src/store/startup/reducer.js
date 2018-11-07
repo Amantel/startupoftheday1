@@ -52,12 +52,12 @@ function saveArticlesToStorage(articles) {
 }
 function getArticlesFromStorage() {
   let articles = [];
-  /*
+
   let localStorageArticles = localStorage.getItem('startupOfTheDayArticles');
   if(localStorageArticles!=null)
     articles = JSON.parse(localStorageArticles);
   articles = clearWhiteList(articles);
-  */
+
   return articles;
 }
 
@@ -77,7 +77,8 @@ export default function reduce(state = initialState, action = {}) {
               let articles = getArticlesFromStorage();
               //getArticlesFromMemory
               let isFav = false;
-              if(state.user && state.user.favorites.indexOf(articles[0].guid)!==-1) {
+
+              if(articles[0] && state.user && state.user.favorites.indexOf(articles[0].guid)!==-1) {
                 isFav = true;
               }
               return {
@@ -103,7 +104,7 @@ export default function reduce(state = initialState, action = {}) {
             case types.ARTICLES_FETCHED_FROM_MEMORY: {
               let articles = clearWhiteList(action.articles);
               let isFav = false;
-              if(state.user && state.user.favorites.indexOf(articles[0].guid)!==-1) {
+              if(articles[0] && state.user && state.user.favorites.indexOf(articles[0].guid)!==-1) {
                 isFav = true;
               }
               return {
@@ -162,7 +163,9 @@ export default function reduce(state = initialState, action = {}) {
               let articleNumber = Math.max(state.articleNumber - 1,0);
 
               let isFav = false;
-              if(state.user && state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1) {
+              if(state.articles[articleNumber]
+                && state.user
+                && state.user.favorites.indexOf(state.articles[articleNumber].guid)!==-1) {
                 isFav = true;
               }
               return {
