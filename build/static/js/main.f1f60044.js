@@ -14055,13 +14055,8 @@ function clearStopWords (articles) {
   });
 
 }
-*/function clearWhiteList(articles){return articles.filter(function(article){var isStoped=false;whiteList.forEach(function(stopWord){if(article.content&&article.content.toLowerCase().indexOf(stopWord.toLowerCase())===-1)isStoped=true;});if(isStoped)return false;return true;});}function saveArticlesToStorage(articles){var original=getArticlesFromStorage();var result=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.unionBy(articles,original,"guid");result=clearWhiteList(result);localStorage.setItem('startupOfTheDayArticles',JSON.stringify(result));}function getArticlesFromStorage(){var articles=[];/*
-  let localStorageArticles = localStorage.getItem('startupOfTheDayArticles');
-  if(localStorageArticles!=null)
-    articles = JSON.parse(localStorageArticles);
-  articles = clearWhiteList(articles);
-  */return articles;}function findArticleByGUID(guid,state){if(!state.articles||state.articles.length===0)return undefined;var match=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.find(state.articles,{'guid':guid});return match;}function reduce(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:initialState;var action=arguments.length>1&&arguments[1]!==undefined?arguments[1]:{};switch(action.type){case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["a" /* ARTICLES_FETCHED */]:{if(action.articles)saveArticlesToStorage(action.articles);var articles=getArticlesFromStorage();//getArticlesFromMemory
-var _isFav=false;if(state.user&&state.user.favorites.indexOf(articles[0].guid)!==-1){_isFav=true;}return Object.assign({},state,{articles:articles,currArticle:articles[0],articleNumber:0,fromMemory:false,isFav:_isFav});}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["b" /* ARTICLES_FETCHED_ERROR */]:{var _articles=getArticlesFromStorage();return Object.assign({},state,{articles:_articles,noArticlesFound:_articles.length===0});}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* ARTICLES_FETCHED_FROM_MEMORY */]:{var _articles2=clearWhiteList(action.articles);var _isFav2=false;if(state.user&&state.user.favorites.indexOf(_articles2[0].guid)!==-1){_isFav2=true;}return Object.assign({},state,{articles:_articles2,currArticle:_articles2[0],articleNumber:0,fromMemory:true,isFav:_isFav2/*
+*/function clearWhiteList(articles){return articles.filter(function(article){var isStoped=false;whiteList.forEach(function(stopWord){if(article.content&&article.content.toLowerCase().indexOf(stopWord.toLowerCase())===-1)isStoped=true;});if(isStoped)return false;return true;});}function saveArticlesToStorage(articles){var original=getArticlesFromStorage();var result=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.unionBy(articles,original,"guid");result=clearWhiteList(result);localStorage.setItem('startupOfTheDayArticles',JSON.stringify(result));}function getArticlesFromStorage(){var articles=[];var localStorageArticles=localStorage.getItem('startupOfTheDayArticles');if(localStorageArticles!=null)articles=JSON.parse(localStorageArticles);articles=clearWhiteList(articles);return articles;}function findArticleByGUID(guid,state){if(!state.articles||state.articles.length===0)return undefined;var match=__WEBPACK_IMPORTED_MODULE_2_lodash___default.a.find(state.articles,{'guid':guid});return match;}function reduce(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:initialState;var action=arguments.length>1&&arguments[1]!==undefined?arguments[1]:{};switch(action.type){case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["a" /* ARTICLES_FETCHED */]:{if(action.articles)saveArticlesToStorage(action.articles);var articles=getArticlesFromStorage();//getArticlesFromMemory
+var _isFav=false;if(articles[0]&&state.user&&state.user.favorites.indexOf(articles[0].guid)!==-1){_isFav=true;}return Object.assign({},state,{articles:articles,currArticle:articles[0],articleNumber:0,fromMemory:false,isFav:_isFav});}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["b" /* ARTICLES_FETCHED_ERROR */]:{var _articles=getArticlesFromStorage();return Object.assign({},state,{articles:_articles,noArticlesFound:_articles.length===0});}case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* ARTICLES_FETCHED_FROM_MEMORY */]:{var _articles2=clearWhiteList(action.articles);var _isFav2=false;if(_articles2[0]&&state.user&&state.user.favorites.indexOf(_articles2[0].guid)!==-1){_isFav2=true;}return Object.assign({},state,{articles:_articles2,currArticle:_articles2[0],articleNumber:0,fromMemory:true,isFav:_isFav2/*
               return {
                   articles: articles,
                   currArticle:articles[0],
@@ -14081,7 +14076,7 @@ var _isFav=false;if(state.user&&state.user.favorites.indexOf(articles[0].guid)!=
 
               };
               return newState;
-              */});}case"SEARCH":{return Object.assign({},state,{search:action.search});}case"NEXT":{var _articleNumber=Math.max(state.articleNumber-1,0);var _isFav4=false;if(state.user&&state.user.favorites.indexOf(state.articles[_articleNumber].guid)!==-1){_isFav4=true;}return Object.assign({},state,{articleNumber:_articleNumber,currArticle:state.articles[_articleNumber],isFav:_isFav4/*
+              */});}case"SEARCH":{return Object.assign({},state,{search:action.search});}case"NEXT":{var _articleNumber=Math.max(state.articleNumber-1,0);var _isFav4=false;if(state.articles[_articleNumber]&&state.user&&state.user.favorites.indexOf(state.articles[_articleNumber].guid)!==-1){_isFav4=true;}return Object.assign({},state,{articleNumber:_articleNumber,currArticle:state.articles[_articleNumber],isFav:_isFav4/*
               let newState = {
                   articles: state.articles,
                   currArticle:state.articles[articleNumber],
@@ -64625,4 +64620,4 @@ module.exports = {"0":65533,"128":8364,"130":8218,"131":402,"132":8222,"133":823
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.8a7c218b.js.map
+//# sourceMappingURL=main.f1f60044.js.map
