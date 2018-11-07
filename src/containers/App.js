@@ -90,8 +90,6 @@ class App extends Component {
             localStorage.setItem('startUpisFirstOpen', 1);
 
             this.setState({ isFirst });
-            //this.setState({ activeStory:'intro' });
-                    console.log("isFirst",isFirst);
             this.props.dispatch(push('/intro'));
         }
     }
