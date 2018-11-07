@@ -27,7 +27,7 @@ class App extends Component {
       super(props);
 
       Sentry.init({
-        dsn: "https://49bf82af6c2841ac859c57ab10b9ff38@sentry.io/1317015"
+        dsn: "https://1105bcc9e1684eaa948883d71e07d456@sentry.io/1317630"
       });
 
       this.state = {
@@ -52,7 +52,7 @@ class App extends Component {
         let user =  JSON.parse(localStorage.getItem('startupOfTheDayUser'))
         this.props.dispatch(startupActions.loadUser());
 
- 
+
         if(!this.props.articles) {
           if(!user)
           {
