@@ -105,58 +105,82 @@ class App extends Component {
       if(this.props.pageId === 'list') activeStory = 'list';
       if(this.props.pageId === 'favorite') activeStory = 'favorite';
 
+      const coutner = `<!-- Rating@Mail.ru counter -->
+      <script type="text/javascript">
+      var _tmr = window._tmr || (window._tmr = []);
+      _tmr.push({id: "2923683", type: "pageView", start: (new Date()).getTime()});
+      (function (d, w, id) {
+        if (d.getElementById(id)) return;
+        var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+        ts.src = "https://top-fwz1.mail.ru/js/code.js";
+        var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+        if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+      })(document, window, "topmailru-code");
+      </script><noscript><div>
+      <img src="https://top-fwz1.mail.ru/counter?id=2923683;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
+      </div></noscript>
+      <!-- //Rating@Mail.ru counter -->`;
+
+
+      var _tmr = window._tmr || (window._tmr = []);
+      _tmr.push({ id: "2923683", type: "pageView", url: activeStory });
+
 
       //this.setState({ activeStory: activeStory });
       //console.log(activeStory);
       return (
-        <UI.Epic activeStory={activeStory} tabbar={
-          <UI.Tabbar>
-            <UI.TabbarItem
+        <span>
+          <span dangerouslySetInnerHTML={{ __html: coutner }}    />
+          <UI.Epic activeStory={activeStory} tabbar={
+            <UI.Tabbar>
+              <UI.TabbarItem
+                className = "tabItem"
+                onClick={this.onStoryChange}
+                selected={activeStory === 'feed'}
+                data-story="feed"
+              ><Icon28Newsfeed /></UI.TabbarItem>
+              <UI.TabbarItem
               className = "tabItem"
-              onClick={this.onStoryChange}
-              selected={activeStory === 'feed'}
-              data-story="feed"
-            ><Icon28Newsfeed /></UI.TabbarItem>
-            <UI.TabbarItem
-            className = "tabItem"
-              onClick={this.onStoryChange}
-              selected={this.state.activeStory === 'favorite'}
-              data-story="favorite"
-            ><Icon28Favorite /></UI.TabbarItem>
-            <UI.TabbarItem
-            className = "tabItem"
-              onClick={this.onStoryChange}
-              selected={this.state.activeStory === 'list'}
-              data-story="list"
-            ><Icon28More /></UI.TabbarItem>
-            <UI.TabbarItem
+                onClick={this.onStoryChange}
+                selected={this.state.activeStory === 'favorite'}
+                data-story="favorite"
+              ><Icon28Favorite /></UI.TabbarItem>
+              <UI.TabbarItem
               className = "tabItem"
-              onClick={this.onStoryChange}
-              selected={this.state.activeStory === 'about'}
-              data-story="about"
-            ><Icon28About /></UI.TabbarItem>
-          </UI.Tabbar>
-        }>
-          <UI.View id="feed" activePanel="feed">
-            <MainPanel id="feed" accessToken={this.props.accessToken}/>
-          </UI.View>
-          <UI.View id="favorite" activePanel="favorite">
-            <FavoritesPanel id="favorite"/>
-          </UI.View>
-          <UI.View id="list" activePanel="list">
-            <ListPanel id="list"/>
-          </UI.View>
-          <UI.View id="about" activePanel="about">
-            <AboutPanel id="about"/>
-          </UI.View>
-          <UI.View id="intro" activePanel="intro">
-            <IntroPanel id="intro"/>
-          </UI.View>
-          <UI.View id="article" activePanel="article">
-            <ArticlePanel id="article"/>
-          </UI.View>
+                onClick={this.onStoryChange}
+                selected={this.state.activeStory === 'list'}
+                data-story="list"
+              ><Icon28More /></UI.TabbarItem>
+              <UI.TabbarItem
+                className = "tabItem"
+                onClick={this.onStoryChange}
+                selected={this.state.activeStory === 'about'}
+                data-story="about"
+              ><Icon28About /></UI.TabbarItem>
+            </UI.Tabbar>
+          }>
+            <UI.View id="feed" activePanel="feed">
+              <MainPanel id="feed" accessToken={this.props.accessToken}/>
+            </UI.View>
+            <UI.View id="favorite" activePanel="favorite">
+              <FavoritesPanel id="favorite"/>
+            </UI.View>
+            <UI.View id="list" activePanel="list">
+              <ListPanel id="list"/>
+            </UI.View>
+            <UI.View id="about" activePanel="about">
+              <AboutPanel id="about"/>
+            </UI.View>
+            <UI.View id="intro" activePanel="intro">
+              <IntroPanel id="intro"/>
+            </UI.View>
+            <UI.View id="article" activePanel="article">
+              <ArticlePanel id="article"/>
+            </UI.View>
 
-        </UI.Epic>
+
+          </UI.Epic>
+        </span>
       )
     }
 

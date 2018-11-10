@@ -47,6 +47,8 @@ class AboutPanel extends Component {
 
 
                 </UI.Group>
+                <UI.Footer className="no-select">Версия 1.0.39</UI.Footer>
+
             </UI.Panel>
         );
 

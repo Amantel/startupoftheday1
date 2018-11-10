@@ -24,9 +24,11 @@ const store = createStore(
     applyMiddleware(thunk, routerMiddleware(history), logger)
 );
 
+
+
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <ConnectedRouter history={history}>        
             <div>
                 <Route path='/:pageId(about|intro|content|list|discover|favorite|article|)?' component={(props) => <App pageId={props.match.params.pageId}/>}/>
             </div>
