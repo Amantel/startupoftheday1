@@ -19,12 +19,14 @@ import * as startupActions from '../store/startup/actions';
 import * as startupSelectors from '../store/startup/reducer';
 import '../css/App.css';
 import * as Sentry from '@sentry/browser';
+import ReactGA from 'react-ga';
 
 class App extends Component {
 
 
     constructor (props) {
       super(props);
+      ReactGA.initialize('UA-129032518-1');
 
       Sentry.init({
         dsn: "https://1105bcc9e1684eaa948883d71e07d456@sentry.io/1317630"
@@ -104,33 +106,12 @@ class App extends Component {
       if(this.props.pageId === 'article') activeStory = 'article';
       if(this.props.pageId === 'list') activeStory = 'list';
       if(this.props.pageId === 'favorite') activeStory = 'favorite';
-
-      const coutner = `<!-- Rating@Mail.ru counter -->
-      <script type="text/javascript">
-      var _tmr = window._tmr || (window._tmr = []);
-      _tmr.push({id: "2923683", type: "pageView", start: (new Date()).getTime()});
-      (function (d, w, id) {
-        if (d.getElementById(id)) return;
-        var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
-        ts.src = "https://top-fwz1.mail.ru/js/code.js";
-        var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
-        if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
-      })(document, window, "topmailru-code");
-      </script><noscript><div>
-      <img src="https://top-fwz1.mail.ru/counter?id=2923683;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
-      </div></noscript>
-      <!-- //Rating@Mail.ru counter -->`;
-
-
-      var _tmr = window._tmr || (window._tmr = []);
-      _tmr.push({ id: "2923683", type: "pageView", url: activeStory });
+      ReactGA.pageview(window.location.pathname + window.location.search + window.location.hash);
 
 
       //this.setState({ activeStory: activeStory });
       //console.log(activeStory);
       return (
-        <span>
-          <span dangerouslySetInnerHTML={{ __html: coutner }}    />
           <UI.Epic activeStory={activeStory} tabbar={
             <UI.Tabbar>
               <UI.TabbarItem
@@ -177,10 +158,7 @@ class App extends Component {
             <UI.View id="article" activePanel="article">
               <ArticlePanel id="article"/>
             </UI.View>
-
-
           </UI.Epic>
-        </span>
       )
     }
 
