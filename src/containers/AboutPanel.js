@@ -43,11 +43,8 @@ class AboutPanel extends Component {
                                 startupoftheday.ru
                               </UI.CellButton>
                             </UI.Link>
-
-
-
                 </UI.Group>
-                <UI.Footer className="no-select">Версия 1.0.40</UI.Footer>
+                <UI.Footer className="no-select">Версия 1.0.41</UI.Footer>
 
             </UI.Panel>
         );
