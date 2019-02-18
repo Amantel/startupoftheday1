@@ -20,6 +20,8 @@ import * as startupSelectors from '../store/startup/reducer';
 import '../css/App.css';
 import * as Sentry from '@sentry/browser';
 import ReactGA from 'react-ga';
+import 'core-js/es6/map';
+import 'core-js/es6/set';
 
 class App extends Component {
 
