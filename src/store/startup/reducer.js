@@ -46,6 +46,10 @@ function clearWhiteList (articles) {
 function saveArticlesToStorage(articles) {
   let original = getArticlesFromStorage();
 
+  articles = articles.map(article=>{
+    article.guid = article.title || article.isoDate;
+    return article;
+  });
   let result = _.unionBy(articles, original, "guid");
   result = clearWhiteList(result);
   localStorage.setItem('startupOfTheDayArticles', JSON.stringify(result));

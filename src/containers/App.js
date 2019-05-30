@@ -74,8 +74,10 @@ class App extends Component {
             }
 
             if(!hasChanged && storedArticles.length!==0) {
+              console.log('loading articles from cache');
               this.props.dispatch(startupActions.fetchArticlesFromMemory());
             } else {
+              console.log('loading articles from server');
               this.props.dispatch(startupActions.fetchArticles());
             }
           }
