@@ -8,6 +8,8 @@ import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
 import thunk from 'redux-thunk';
 import {rootReducer} from './store/reducers';
 import registerServiceWorker from './registerServiceWorker';
+import mVKMiniAppsScrollHelper from '@vkontakte/mvk-mini-apps-scroll-helper';
+
 import App from './containers/App';
 
 const history = createHashHistory({
@@ -24,7 +26,10 @@ const store = createStore(
     applyMiddleware(thunk, routerMiddleware(history), logger)
 );
 
-
+const root = document.getElementById('root');
+ 
+// Вызываем хелпер, передавая в аргумент корневой элемент приложения
+mVKMiniAppsScrollHelper(root);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -34,7 +39,7 @@ ReactDOM.render(
             </div>
         </ConnectedRouter>
     </Provider>,
-    document.getElementById('root')
+    root
 );
 
 registerServiceWorker();

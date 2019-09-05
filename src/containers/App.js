@@ -12,7 +12,7 @@ import MainPanel from './MainPanel';
 import ArticlePanel from './ArticlePanel';
 import Icon28Newsfeed from '@vkontakte/icons/dist/28/newsfeed';
 import Icon28Favorite from '@vkontakte/icons/dist/28/favorite';
-import Icon28About from '@vkontakte/icons/dist/28/about_outline';
+import Icon28About from '@vkontakte/icons/dist/28/info_outline';
 import Icon28More from '@vkontakte/icons/dist/28/more';
 import {push} from 'react-router-redux';
 import * as startupActions from '../store/startup/actions';
