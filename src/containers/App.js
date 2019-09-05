@@ -112,11 +112,10 @@ class App extends Component {
       if(this.props.pageId === 'favorite') activeStory = 'favorite';
       ReactGA.pageview(window.location.pathname + window.location.search + window.location.hash);
 
-
       //this.setState({ activeStory: activeStory });
       //console.log(activeStory);
       return (
-          <UI.Epic activeStory={activeStory} tabbar={
+          <UI.Epic  activeStory={activeStory} tabbar={
             <UI.Tabbar>
               <UI.TabbarItem
                 className = "tabItem"

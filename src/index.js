@@ -30,11 +30,13 @@ const root = document.getElementById('root');
  
 // Вызываем хелпер, передавая в аргумент корневой элемент приложения
 mVKMiniAppsScrollHelper(root);
+let isMobileBrowserClass = '';
+if(window.location.href.indexOf("m.vk.com")>-1) isMobileBrowserClass = 'mobile-max-width';
 
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>        
-            <div>
+            <div className={isMobileBrowserClass}>
                 <Route path='/:pageId(about|intro|content|list|discover|favorite|article|)?' component={(props) => <App pageId={props.match.params.pageId}/>}/>
             </div>
         </ConnectedRouter>
